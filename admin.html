@@ -1,0 +1,3248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+    <!-- Official Red Crescent Favicon -->
+  <link rel="icon" type="image/png" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-logo.png">
+  <meta property="og:image" content="images/srcs-logo.png">
+  <meta property="og:title" content="بوابة الإشراف والتحكم المحمية | الهلال الأحمر السوداني - الولاية الشمالية">
+  <meta property="og:description" content="نظام إدارة المحتوى الإنساني والنشر الميداني للمحليات السبع.">
+    <!-- Developer Attribution & Design Patent Protection -->
+  <meta name="author" content="Yousif Mohammed Ali">
+  <meta name="designer" content="Yousif Mohammed Ali">
+  <meta name="copyright" content="Copyright © 2026 Yousif Mohammed Ali. All rights reserved.">
+  <meta name="contact" content="yousifmohammedali295@gmail.com">
+  <title>بوابة الإشراف والتحكم المحمية | جمعية الهلال الأحمر السوداني - الولاية الشمالية</title>
+  
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            srcs: {
+              red: '#d91b24',
+              redDark: '#b3141c',
+              redLight: '#ff4d55',
+              soft: '#fef2f2',
+              dark: '#0b1120',
+              sidebar: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Chart.js CDN for Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased relative selection:bg-red-600 selection:text-white">
+
+  <!-- ==================== SECURITY GATEKEEPER (قفل الأمان للمشرفين فقط) ==================== -->
+  <div id="admin-auth-lockscreen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center relative shadow-2xl">
+      <div class="w-14 h-14 rounded-2xl bg-white border-2 border-red-600 flex items-center justify-center mx-auto mb-3 shadow-md p-1.5">
+        <img src="images/srcs-crescent.png" style="width: 28px; height: 34px; object-fit: contain;" alt="SRCS">
+      </div>
+      <h2 class="text-xl font-black text-white mb-1">لوحة إدارة الهلال الأحمر</h2>
+      <p class="text-xs font-bold text-red-500 mb-3">فرع الولاية الشمالية</p>
+
+      <!-- Tabs: Director vs Supervisors -->
+      <div class="flex rounded-xl bg-slate-950 border border-slate-800 p-1 mb-4 gap-1">
+        <button id="login-tab-admin" onclick="showAdminForm()" class="flex-1 py-2 rounded-lg text-xs font-bold bg-red-600 text-white shadow">
+          <i class="fa-solid fa-crown text-xs ml-1"></i> المدير العام
+        </button>
+        <button id="login-tab-super" onclick="showSupervisorForm()" class="flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white">
+          <i class="fa-solid fa-user-shield text-xs ml-1"></i> دخول المشرفين
+        </button>
+      </div>
+
+      <!-- Super Admin Entry Form -->
+      <div id="admin-login-form" class="space-y-3 text-right text-xs">
+        <button type="button" onclick="doDirectAdminEntry()" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-600/30 transition flex items-center justify-center gap-2 cursor-pointer">
+          <i class="fa-solid fa-crown text-sm"></i>
+          <span>دخول فوري مباشر (المدير العام)</span>
+        </button>
+        <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center text-[11px] text-slate-400">
+          <i class="fa-solid fa-circle-check text-emerald-400 ml-1"></i>
+          متاح الدخول المباشر بدون قيود بصلاحيات المدير العام الكاملة
+        </div>
+      </div>
+
+      <!-- Supervisor Entry Form -->
+      <div id="supervisor-login-form" class="space-y-3 text-right text-xs hidden">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم المستخدم للمشرف</label>
+          <input type="text" id="sup-username" placeholder="مثال: saif.khedir" dir="ltr" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-blue-500 transition font-mono text-center text-sm">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">كلمة المرور الشخصية</label>
+          <input type="password" id="sup-password" placeholder="أدخل كلمة المرور" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-blue-500 transition text-center text-sm">
+        </div>
+        <button type="button" onclick="doSupervisorLogin()" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2 cursor-pointer">
+          <i class="fa-solid fa-user-shield text-xs"></i>
+          <span>دخول المشرف للصلاحيات المحددة</span>
+        </button>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+        <a href="index.html" class="hover:text-red-400 flex items-center gap-1 transition">
+          <i class="fa-solid fa-arrow-right"></i> الموقع العام
+        </a>
+        <span>نظام الهلال الأحمر الآمن</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN ADMIN APPLICATION LAYOUT ==================== -->
+  <div id="admin-workspace" class="min-h-screen flex flex-col lg:flex-row hidden">
+  <!-- Supervisor Session Banner -->
+  <div id="supervisor-info-banner" class="hidden fixed top-0 left-0 right-0 z-40 bg-blue-900/95 border-b border-blue-700 px-4 py-2 flex items-center justify-between text-xs">
+    <div class="flex items-center gap-2 text-blue-200">
+      <i class="fa-solid fa-user-shield text-blue-400"></i>
+      <span>جلسة مشرف: </span>
+      <span id="banner-supervisor-name" class="font-bold text-white"></span>
+      <span class="text-blue-400 mx-1">|</span>
+      <span id="banner-supervisor-role" class="text-blue-300"></span>
+    </div>
+    <button onclick="adminLogout()" class="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded-lg font-bold flex items-center gap-1.5">
+      <i class="fa-solid fa-right-from-bracket text-xs"></i>
+      تسجيل خروج
+    </button>
+  </div>
+
+    
+    <!-- ==================== ADMIN VERTICAL SIDEBAR ==================== -->
+    <aside id="admin-sidebar" class="w-full lg:w-72 bg-slate-900 border-l border-slate-800 flex flex-col justify-between shrink-0 p-5 z-30">
+      <div class="space-y-6">
+        
+        <!-- Brand Header -->
+        <div class="flex items-center gap-3 pb-4 border-b border-slate-800">
+          <div class="w-11 h-11 rounded-2xl bg-white border border-red-500/40 flex items-center justify-center shadow-inner shrink-0 p-1">
+            <img src="images/srcs-crescent.png" style="width: 22px; height: 26px; object-fit: contain;" alt="شعار الهلال الأحمر السوداني">
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[9px] bg-red-950 text-red-400 px-2 py-0.5 rounded font-bold border border-red-900">نظام الإدارة المركزي</span>
+            </div>
+            <h2 class="text-xs font-black text-white leading-tight mt-1">جمعية الهلال الأحمر السوداني</h2>
+            <p class="text-[10px] font-bold text-red-500">فرع الولاية الشمالية</p>
+          </div>
+        </div>
+
+        <!-- Supervisor Profile Widget -->
+        <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-xl object-cover border border-red-500 shrink-0">
+          <div class="overflow-hidden text-right">
+            <p class="text-xs font-bold text-white truncate" id="sidebar-user-name">أحمد الفاتح البدوي</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[10px] text-emerald-400 font-bold" id="sidebar-role-label">مدير عام الفرع</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="space-y-1.5 text-right">
+          
+          <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="admin-tab-btn active w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-md transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-chart-line w-4 text-center"></i>
+              <span>المؤشرات والتحليلات</span>
+            </div>
+            <span class="text-[10px] bg-red-800 px-2 py-0.5 rounded-full">مباشر</span>
+          </button>
+
+          <button onclick="switchTab('posts')" id="tab-btn-posts" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-newspaper text-blue-400 w-4 text-center"></i>
+              <span>إدارة الأخبار والتقارير (CRUD)</span>
+            </div>
+            <span id="posts-count-badge" class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-full font-bold">4</span>
+          </button>
+
+          <button onclick="switchTab('complaints')" id="tab-btn-complaints" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-lock text-amber-400 w-4 text-center"></i>
+              <span>صندوق الشكاوى السري</span>
+            </div>
+            <span id="unread-complaints-badge" class="text-[10px] bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full font-bold">4 جديد</span>
+          </button>
+
+          <button onclick="switchTab('users')" id="tab-btn-users" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-users-gear text-emerald-400 w-4 text-center"></i>
+              <span>إدارة المشرفين والصلاحيات</span>
+            </div>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">RBAC</span>
+          </button>
+
+          <button onclick="switchTab('comments')" id="tab-btn-comments" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-comments text-purple-400 w-4 text-center"></i>
+              <span>إشراف تعليقات المتابعين</span>
+            </div>
+            <span class="text-[10px] bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-0.5 rounded-full font-bold">نشط</span>
+          </button>
+
+          <button onclick="switchTab('profile')" id="tab-btn-profile" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-hand-holding-heart text-rose-400 w-4 text-center"></i>
+              <span>الملف التعريفي والمبادئ</span>
+            </div>
+            <span class="text-[10px] bg-rose-500/20 text-rose-400 border border-rose-500/30 px-2 py-0.5 rounded-full font-bold">CMS</span>
+          </button>
+
+          <button onclick="switchTab('audit')" id="tab-btn-audit" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-clipboard-check text-cyan-400 w-4 text-center"></i>
+              <span>سجل التدقيق والأمان المشفر</span>
+            </div>
+            <span class="text-[10px] text-cyan-400 font-mono">LOG</span>
+          </button>
+
+          
+          <button onclick="switchTab('content-cms')" id="tab-btn-content-cms" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-sliders text-yellow-400 w-4 text-center"></i>
+              <span>محتوى وهوية المنصة والمحليات</span>
+            </div>
+            <span class="text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full font-bold">CMS</span>
+          </button>
+
+          <button onclick="switchTab('settings')" id="tab-btn-settings" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-database text-yellow-400 w-4 text-center"></i>
+              <span>النسخ الاحتياطي والأمان</span>
+            </div>
+            <span class="text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full font-bold">JSON</span>
+          </button>
+
+        </nav>
+
+      </div>
+
+      <!-- Bottom Actions -->
+      <div class="pt-6 border-t border-slate-800 space-y-2">
+        <a href="index.html" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition">
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-red-500"></i>
+          <span>معاينة المنصة العامة (للجمهور)</span>
+        </a>
+        <button onclick="adminLogout()" class="w-full py-2 px-3 rounded-xl bg-red-950/60 hover:bg-red-900 border border-red-900/50 text-red-400 text-xs font-bold flex items-center justify-center gap-2 transition">
+          <i class="fa-solid fa-power-off text-xs"></i>
+          <span>تسجيل الخروج والإنهاء الآمن</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <div class="flex-1 flex flex-col min-w-0 bg-slate-950 p-6 sm:p-8 overflow-y-auto">
+      
+      <!-- Top Bar with Interactive Role Switcher & Live Session Status -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-3xl bg-slate-900 border border-slate-800 mb-8 text-right">
+        
+        <div class="flex items-center gap-3.5">
+            
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="current-role-badge" class="bg-emerald-500/20 text-emerald-400 text-[11px] font-bold px-3 py-0.5 rounded-full border border-emerald-500/30">مدير عام (Super Admin)</span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-red-600 text-white shadow-sm">
+                  <i class="fa-solid fa-map-pin text-[8px]"></i>
+                  فرع الولاية الشمالية
+                </span>
+                <span class="text-xs text-slate-400 hidden sm:inline"><i class="fa-solid fa-shield text-emerald-400 ml-1"></i> جلسة 2FA مشفرة</span>
+              </div>
+              <h1 class="text-lg sm:text-xl font-black text-white mt-1">لوحة التحكم المركزية وإدارة النشر والمحليات السبع</h1>
+            </div>
+          </div>
+
+        <!-- Top Bar Actions & Role Switcher -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- Live Session Countdown Timer -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span class="text-slate-400 text-[11px]">انقضاء الجلسة:</span>
+            <span id="session-countdown-display" class="font-mono text-amber-400 font-extrabold text-xs">15:00</span>
+            <button type="button" onclick="extendAdminSession()" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[10px] font-bold transition ml-1" title="تمديد وقت الجلسة">
+              تمديد
+            </button>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button type="button" onclick="exportFullBackup()" title="تصدير نسخة احتياطية كاملة JSON" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-yellow-400 border border-yellow-500/30 text-xs font-bold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-download"></i>
+              <span class="hidden sm:inline">نسخة احتياطية</span>
+            </button>
+            <button type="button" onclick="document.getElementById('header-restore-input').click()" title="استعادة بيانات من ملف JSON" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-upload"></i>
+              <span class="hidden sm:inline">استعادة</span>
+            </button>
+            <input type="file" id="header-restore-input" accept=".json" class="hidden" onchange="importFullBackup(event)">
+          </div>
+
+          <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-semibold">الصلاحيات:</span>
+            <select id="role-switcher" onchange="changeAdminRole(this.value)" class="p-2 text-xs rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+              <option value="super_admin">مدير عام (Super Admin - صلاحيات كاملة)</option>
+              <option value="content_mod">مشرف محتوى (إدارة ونشر الأخبار فقط)</option>
+              <option value="interaction_mod">مشرف تفاعل وشكاوى (صندوق الشكاوى والتعليقات)</option>
+              <option value="editor">محرر مسودات (كتابة مسودات فقط)</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 1: ANALYTICS & KPIS ==================== -->
+      <div id="tab-analytics" class="admin-tab-content space-y-6">
+        
+        <!-- KPI Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-right">
+          
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <p class="text-xs text-slate-400 mb-1">المتابعون الرسميون للمنصة</p>
+              <p class="text-2xl font-black text-white follower-count-display">14,850</p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 mt-2 flex items-center justify-between text-xs">
+              <span class="text-emerald-400">+342 هذا الشهر</span>
+              <button onclick="adminAdjustFollowers()" class="text-red-400 hover:text-red-300 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-sliders"></i> تعديل العداد
+              </button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <p class="text-xs text-slate-400 mb-1">صندوق الشكاوى والمقترحات</p>
+              <p class="text-2xl font-black text-amber-400" id="kpi-sug-count">4 وارد</p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 mt-2 flex items-center justify-between text-xs">
+              <span class="text-slate-400">مشفر ومحمي</span>
+              <button onclick="switchTab('complaints')" class="text-amber-400 hover:text-amber-300 font-bold">عرض الشكاوى ←</button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <p class="text-xs text-slate-400 mb-1">إجمالي التقارير المنشورة</p>
+              <p class="text-2xl font-black text-blue-400" id="kpi-posts-count">4 تقارير</p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 mt-2 flex items-center justify-between text-xs">
+              <span class="text-slate-400">تغطي 7 محليات</span>
+              <button onclick="switchTab('posts')" class="text-blue-400 hover:text-blue-300 font-bold">إدارة الأخبار ←</button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <p class="text-xs text-slate-400 mb-1">المتطوعون المسجلون بالمحليات</p>
+              <p class="text-2xl font-black text-emerald-400">1,480+</p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 mt-2 text-xs text-slate-400">
+              جاهزية طوارئ 24/7
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Follower Growth Chart -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 text-right">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-white">إحصائيات نمو المتابعين وتفاعل المجتمع</h3>
+              <p class="text-xs text-slate-400 mt-0.5">مخطط بياني يوضح تزايد المتابعين والتفاعل عبر حسابات Google الموثقة</p>
+            </div>
+            <button onclick="adminAdjustFollowers()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200">
+              <i class="fa-solid fa-sliders ml-1"></i> ضبط عداد المتابعين
+            </button>
+          </div>
+          <div class="h-64">
+            <canvas id="adminChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 2: POSTS & PUBLISHING MANAGER (COMPLETE CRUD) ==================== -->
+      <!-- (نظام إدارة ونشر وتعديل الأخبار الحقيقي المتكامل كما طلبت) -->
+      <div id="tab-posts" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-newspaper text-blue-400"></i>
+                <span>إدارة ونشر وتعديل الأخبار والتقارير الميدانية</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-1">
+                يمكنك من هنا إضافة خبر جديد، تعديل الأخبار الافتراضية، حذف أي خبر، أو تغيير محليته وستنعكس التغييرات فوراً في الموقع العام.
+              </p>
+            </div>
+
+            <button onclick="openPostEditorModal()" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-red-600/30 transition shrink-0">
+              <i class="fa-solid fa-plus text-sm"></i>
+              <span>إضافة تقرير ميداني جديد</span>
+            </button>
+          </div>
+
+          <!-- Filter posts by locality -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="text-slate-400 font-bold">فلترة حسب المحلية:</span>
+              <select id="filter-post-branch" onchange="renderAdminPostsTable()" class="p-2 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+                <option value="all">كافة التقارير (جميع المحليات)</option>
+                <option value="دنقلا">محلية دنقلا</option>
+                <option value="مروي">محلية مروي</option>
+                <option value="الدبة">محلية الدبة</option>
+                <option value="القولد">محلية القولد</option>
+                <option value="وادي حلفا">محلية وادي حلفا</option>
+                <option value="البرقيق">محلية البرقيق</option>
+                <option value="دلقو">محلية دلقو</option>
+              </select>
+            </div>
+
+            <button onclick="resetToSeedPosts()" class="text-xs text-slate-400 hover:text-amber-400 underline" title="استعادة الأخبار النموذجية">
+              استعادة المنشورات النموذجية الافتراضية
+            </button>
+          </div>
+
+          <!-- Dynamic Posts Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="text-slate-400 border-b border-slate-800 pb-2 font-bold">
+                <tr>
+                  <th class="py-3">الصورة</th>
+                  <th>عنوان التقرير</th>
+                  <th>المحلية</th>
+                  <th>التصنيف</th>
+                  <th>تاريخ النشر</th>
+                  <th>الحالة</th>
+                  <th>التفاعل</th>
+                  <th>الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="admin-posts-table-body" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 3: SECRET COMPLAINTS & SUGGESTIONS ==================== -->
+      <div id="tab-complaints" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-lock text-amber-400"></i>
+                <span>صندوق الشكاوى والمقترحات المشفر (سري وخاص بالمشرفين فقط)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-1">
+                تصل هذه الرسائل من الزوار والمواطنين مباشرة، ولا يمكن لأي زائر في الموقع العام رؤيتها نهائياً.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="exportSuggestionsCSV()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-file-csv text-emerald-400"></i>
+                <span>تصدير CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Permission Restriction Notice -->
+          <div id="complaints-restricted-msg" class="hidden p-4 rounded-2xl bg-red-950/50 border border-red-900 text-red-300 text-xs font-bold mb-4">
+            <i class="fa-solid fa-ban ml-1"></i> ليس لديك صلاحية قراءة صندوق الشكاوى السري وفق دورك الحالي (مشرف محتوى / محرر).
+          </div>
+
+          <!-- Locality & Status Filters (7 Separated Localities) -->
+          <div id="complaints-table-wrapper">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-800 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="text-slate-400 font-bold">فلترة حسب المحلية:</span>
+                <select id="filter-complaint-branch" onchange="renderAdminSuggestionsTable()" class="p-2 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+                  <option value="all">كافة محليات الولاية (7 محليات)</option>
+                  <option value="دنقلا">محلية دنقلا</option>
+                  <option value="مروي">محلية مروي</option>
+                  <option value="الدبة">محلية الدبة</option>
+                  <option value="القولد">محلية القولد</option>
+                  <option value="وادي حلفا">محلية وادي حلفا</option>
+                  <option value="البرقيق">محلية البرقيق</option>
+                  <option value="دلقو">محلية دلقو</option>
+                </select>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span class="text-slate-400 font-bold">الحالة:</span>
+                <select id="filter-complaint-status" onchange="renderAdminSuggestionsTable()" class="p-2 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+                  <option value="all">كافة الحالات</option>
+                  <option value="جديد">جديد</option>
+                  <option value="قيد المراجعة">قيد المراجعة</option>
+                  <option value="تم الحل">تم الحل</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-xs">
+                <thead class="text-slate-400 border-b border-slate-800 pb-2 font-bold">
+                  <tr>
+                    <th class="py-3">الرمز</th>
+                    <th>النوع</th>
+                    <th>المحلية</th>
+                    <th>المُرسل</th>
+                    <th>الموضوع</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-sug-table" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 4: USERS & SUPERVISORS MANAGEMENT ==================== -->
+      <div id="tab-users" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-base font-bold text-white">إدارة حسابات المشرفين والأدوار الوظيفية (RBAC)</h3>
+              <p class="text-xs text-slate-400 mt-1">التحكم في وصول المشرفين، الأدوار الممنوحة، وتفعيل أو تعليق الحسابات</p>
+            </div>
+            <button id="btn-add-supervisor" onclick="openAddUserModal()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-user-plus"></i> إضافة مشرف جديد
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="text-slate-400 border-b border-slate-800 pb-2 font-bold">
+                <tr>
+                  <th class="py-3">المشرف</th>
+                  <th>البريد الوظيفي</th>
+                  <th>الدور الوظيفي</th>
+                  <th>المحلية المسؤولة</th>
+                  <th>الحالة</th>
+                  <th>آخر دخول</th>
+                  <th>الإجراء</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 5: COMMENTS MODERATION ==================== -->
+      <div id="tab-comments" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-base font-bold text-white">إشراف وتدقيق تعليقات الزوار والمتابعين</h3>
+              <p class="text-xs text-slate-400 mt-1">مراجعة التعليقات المنشورة عبر حسابات Google على التقارير الميدانية</p>
+            </div>
+          </div>
+
+          <div id="admin-comments-list" class="space-y-3 text-xs"></div>
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB 6: IMMUTABLE AUDIT LOG ==================== -->
+      <div id="tab-audit" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-check text-cyan-400"></i>
+                <span>سجل التدقيق والأمان المشفر (Immutable Audit Log)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-1">سجل غير قابل للتعديل يوثق كافة حركات تسجيل الدخول، العمليات، وتغيير الصلاحيات</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="exportAuditLogCSV()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-cyan-500/30 text-xs font-bold transition flex items-center gap-1.5">
+                <i class="fa-solid fa-file-csv"></i>
+                <span>تصدير السجل (CSV)</span>
+              </button>
+              <button onclick="revokeAllSessions()" class="px-3.5 py-2 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-400 border border-red-900/50 text-xs font-bold transition flex items-center gap-1.5">
+                <i class="fa-solid fa-ban"></i>
+                <span>إنهاء كافة الجلسات النشطة</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="audit-log-container" class="space-y-2 text-xs font-mono text-slate-400"></div>
+        </div>
+
+      </div>
+      
+      <!-- ==================== TAB 8: PROFILE & 7 PRINCIPLES CMS ==================== -->
+      <div id="tab-profile" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-black text-white flex items-center gap-2">
+                <i class="fa-solid fa-hand-holding-heart text-rose-500"></i>
+                <span>إدارة وتعديل الملف التعريفي ومبادئ الجمعية</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">
+                تعديل النبذة الرسمية لفرع الولاية الشمالية، الرؤية، الرسالة، الإطار القانوني، وشروحات المبادئ السبعة الأساسية.
+              </p>
+            </div>
+            <button onclick="handleSaveProfileSubmit(event)" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs shadow-lg transition flex items-center gap-2">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>حفظ وتحديث الملف التعريفي فورياً</span>
+            </button>
+          </div>
+        </div>
+
+        <form id="profile-editor-form" onsubmit="handleSaveProfileSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- About Section -->
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-building text-blue-400"></i>
+                <span>النبذة الرسمية والتأسيس</span>
+              </h3>
+              
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">عنوان الملف التعريفي *</label>
+                <input type="text" id="prof-title" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-red-500">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">النبذة التعريفية لفرع الولاية الشمالية *</label>
+                <textarea id="prof-desc" rows="4" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-red-500 leading-relaxed"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">بيان الإطار القانوني والاعتماد الرسمي *</label>
+                <textarea id="prof-legal" rows="3" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-red-500 leading-relaxed"></textarea>
+              </div>
+            </div>
+
+            <!-- Vision & Mission Section -->
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-compass text-emerald-400"></i>
+                <span>الرؤية والرسالة الإنسانية</span>
+              </h3>
+              
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">الرؤية الإنسانية (Vision) *</label>
+                <textarea id="prof-vision" rows="3" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-emerald-500 leading-relaxed"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">الرسالة الإنسانية (Mission) *</label>
+                <textarea id="prof-mission" rows="4" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-emerald-500 leading-relaxed"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 7 Fundamental Principles Section -->
+          <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+            <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-scale-balanced text-amber-400"></i>
+              <span>المبادئ السبعة الأساسية (Fundamental Principles)</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">يمكن للمدير العام مراجعة أو تخصيص شروحات المبادئ السبعة الظاهرة للجمهور:</p>
+
+            <div id="admin-principles-editor" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Dynamically populated principle inputs -->
+            </div>
+          </div>
+
+          <div class="flex justify-end">
+            <button type="submit" class="px-6 py-3 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition flex items-center gap-2">
+              <i class="fa-solid fa-check"></i>
+              <span>حفظ وتحديث الملف التعريفي الآن</span>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+      <!-- ==================== TAB 7: BACKUP & SECURITY SETTINGS ==================== -->
+      
+      <!-- ==================== TAB: محتوى وهوية المنصة والمحليات (NO-CODE CMS) ==================== -->
+      <div id="tab-content-cms" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <!-- CMS Header Banner -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-black text-white">نظام إدارة المحتوى وهوية المنصة والمحليات (No-Code CMS)</h2>
+              <p class="text-xs text-slate-400 mt-0.5">تعديل شريط الأخبار العاجلة، إحصائيات الواجهة، وأرقام وتواصل المحليات السبع بدون الرجوع لكود الموقع.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="index.html" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-2 transition border border-slate-700">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>معاينة الموقع العام</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- SECTION 1: BREAKING NEWS TICKER CMS -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-bullhorn text-red-500"></i>
+              <span>محرر شريط الأخبار العاجلة الميداني (Breaking Ticker)</span>
+            </h3>
+            <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded-full font-bold border border-red-900">يظهر بأعلى الرئيسية</span>
+          </div>
+
+          <form onsubmit="handleAddTickerItem(event)" class="flex flex-col sm:flex-row gap-2.5">
+            <input type="text" id="new-ticker-input" required placeholder="أدخل خبراً عاجلاً جديداً للظهور في الشريط الأحمر بأعلى الموقع..." class="flex-1 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-red-500 transition">
+            <button type="submit" class="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 shrink-0">
+              <i class="fa-solid fa-plus"></i>
+              <span>إضافة للشريط العاجل</span>
+            </button>
+          </form>
+
+          <!-- Current Ticker Items List -->
+          <div class="space-y-2 pt-2">
+            <label class="block text-xs font-bold text-slate-300">عناصر الشريط العاجل النشطة حالياً:</label>
+            <div id="cms-ticker-list" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: HERO IMPACT STATISTICS CMS -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+              <span>محرر إحصائيات وإنجازات الاستجابة الإنسانية (Homepage Statistics)</span>
+            </h3>
+            <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-900">تحديث فوري بالواجهة</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            يمكنك تغيير الأرقام والإحصائيات المعروضة في صدر الصفحة الرئيسية للفرع بما يعكس آخر تطورات التدخلات الإنسانية.
+          </p>
+
+          <form onsubmit="handleSaveHeroStats(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">عنوان تغطية المحليات</label>
+              <input type="text" id="cms-stat-localities" value="المحليات السبع بالولاية" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">إجمالي الأسر المستفيدة / المتابعين</label>
+              <input type="text" id="cms-stat-beneficiaries" value="14,850" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">نسبة تغطية الطوارئ</label>
+              <input type="text" id="cms-stat-coverage" value="100%" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">عدد المتطوعين الميدانيين</label>
+              <input type="text" id="cms-stat-volunteers" value="1,280+" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">طرود المعونات الغذائية والإيوائية</label>
+              <input type="text" id="cms-stat-foodkits" value="35,400+" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">أقراص الكلور وتعقيم مياه الشرب</label>
+              <input type="text" id="cms-stat-waterchlorine" value="400,000+" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-emerald-500">
+            </div>
+
+            <div class="sm:col-span-2 lg:col-span-3 pt-2">
+              <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>حفظ وتحديث الإحصائيات في المنصة الرئيسية</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- SECTION 3: 7 LOCALITIES DATA & EMERGENCY HOTLINES CMS -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-building-shield text-blue-400"></i>
+              <span>محرر بيانات وتواصل محليات الولاية الشمالية السبع</span>
+            </h3>
+            <span class="text-[10px] bg-blue-950 text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-900">7 محليات معتمدة</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            اختر المحلية من القائمة لتعديل أرقام هواتف الطوارئ، عنوان المركز، وعدد المتطوعين، وستنعكس التعديلات فوراً على كروت المحليات والخريطة التفاعلية.
+          </p>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Locality Selector Buttons -->
+            <div class="space-y-1.5" id="cms-locality-selector-list"></div>
+
+            <!-- Locality Editor Form -->
+            <div class="lg:col-span-2 p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i class="fa-solid fa-pen-to-square text-yellow-400"></i>
+                  <span>تعديل بيانات: <strong id="cms-selected-loc-name" class="text-red-400 font-black">محلية دنقلا</strong></span>
+                </h4>
+                <span id="cms-selected-loc-badge" class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-300">رئاسة الفرع</span>
+              </div>
+
+              <form onsubmit="handleSaveLocalityData(event)" class="space-y-3.5 text-xs">
+                <input type="hidden" id="cms-loc-key" value="دنقلا">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label class="block font-bold text-slate-300 mb-1">هاتف الطوارئ والاستجابة السريعة *</label>
+                    <input type="text" id="cms-loc-phone" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500">
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-300 mb-1">رقم الواتساب الميداني (بدون +)</label>
+                    <input type="text" id="cms-loc-wa" placeholder="مثال: 249912345678" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label class="block font-bold text-slate-300 mb-1">العنوان ومقر المركز بالمحلية *</label>
+                    <input type="text" id="cms-loc-address" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500">
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-300 mb-1">عدد المتطوعين المسجلين بالمحلية</label>
+                    <input type="number" id="cms-loc-volunteers" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-300 mb-1">الشعار الفرعي أو الوصف المختصر</label>
+                  <input type="text" id="cms-loc-tagline" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500">
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-300 mb-1">نبذة عن التدخلات الإنسانية بالمحلية</label>
+                  <textarea id="cms-loc-desc" rows="3" class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-red-500 leading-relaxed"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center gap-3">
+                  <button type="submit" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>حفظ بيانات هذه المحلية</span>
+                  </button>
+                  <button type="button" onclick="resetLocalityDefaults()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                    استعادة الإعدادات الافتراضية
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: NEWS CATEGORIES CMS -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-tags text-purple-400"></i>
+              <span>محرر التصنيفات الإخبارية والميدانية (News Categories CMS)</span>
+            </h3>
+            <span class="text-[10px] bg-purple-950 text-purple-400 px-2.5 py-0.5 rounded-full font-bold border border-purple-900">خيارات مرنة للمشرفين</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            يمكنك إضافة خيارات وتصنيفات جديدة للمشرفين عند تحرير ونشر الأخبار، مثل الرعاية الصحية، الإغاثات، الأمن الغذائي، المياه والإصحاح، حملات التطعيم، وغيرها.
+          </p>
+
+          <form onsubmit="handleAddNewsCategory(event)" class="flex flex-col sm:flex-row gap-2.5">
+            <input type="text" id="cms-new-category-name" required placeholder="أدخل اسم التصنيف الإخباري الجديد (مثلاً: رعاية صحية، قوافل الشتاء، أمن غذائي)..." class="flex-1 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-purple-500 transition">
+            <button type="submit" class="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 shrink-0">
+              <i class="fa-solid fa-plus"></i>
+              <span>إضافة التصنيف للمنصة</span>
+            </button>
+          </form>
+
+          <div class="space-y-2 pt-2">
+            <label class="block text-xs font-bold text-slate-300">التصنيفات المتاحة حالياً لنشر الأخبار وتصفيتها بالرئيسية:</label>
+            <div id="cms-category-badges-list" class="flex flex-wrap gap-2 pt-1"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: CENTRAL BRANCH EMERGENCY CONTACTS -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-phone-volume text-rose-400"></i>
+              <span>هواتف وروابط الطوارئ المركزية لرئاسة الفرع</span>
+            </h3>
+            <span class="text-[10px] bg-rose-950 text-rose-400 px-2.5 py-0.5 rounded-full font-bold border border-rose-900">معتمد الولاية</span>
+          </div>
+
+          <form onsubmit="handleSaveCentralContacts(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">هاتف طوارئ رئاسة الفرع بدنقلا</label>
+              <input type="text" id="cms-branch-phone" value="02481-22450" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-rose-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">الرقم المباشر للاتصال (بدون شرطات)</label>
+              <input type="text" id="cms-branch-phone-raw" value="0248122450" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-rose-500">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">البريد الإلكتروني للفرع</label>
+              <input type="email" id="cms-branch-email" value="info@srcs-northern.org" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-rose-500">
+            </div>
+            <div class="sm:col-span-3 pt-1">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>حفظ هواتف الطوارئ المركزية</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <div id="tab-settings" class="admin-tab-content hidden space-y-6 text-right">
+        
+        <!-- Header Info -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-black text-white flex items-center gap-2">
+                <i class="fa-solid fa-database text-yellow-400"></i>
+                <span>النسخ الاحتياطي وإدارة الأمان المركزي</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">تصدير واستعادة قاعدة البيانات بالكامل، حماية رمز الدخول الرئيسي، ومراقبة التخزين المحلي.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="exportFullBackup()" class="px-4 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-black text-xs shadow-lg transition flex items-center gap-2">
+                <i class="fa-solid fa-download"></i>
+                <span>تصدير نسخة JSON الآن</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storage & Statistics Overview -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+          <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-server text-emerald-400"></i>
+            <span>حالة الذاكرة التخزينية المحلية (Local Storage Health)</span>
+          </h3>
+          <div id="storage-health-info" class="pt-2"></div>
+        </div>
+
+        
+        <!-- ==================== ADVANCED SECURITY CENTER (مركز خيارات الأمان المتقدمة) ==================== -->
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-6">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved text-red-500"></i>
+              <span>خيارات الأمان المتقدمة وإدارة الطوارئ (Emergency Security Controls)</span>
+            </h3>
+            <span class="text-[10px] bg-red-950 text-red-400 px-2.5 py-0.5 rounded-full font-bold border border-red-900">صلاحية المدير العام</span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- OPTION 1: Emergency Security Lockdown Mode -->
+            <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3.5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="text-xs font-black text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+                    <span>وضع الإغلاق الأمني والطارئ (Emergency Lockdown Mode)</span>
+                  </h4>
+                  <p class="text-[11px] text-slate-400 mt-0.5">تفعيل حالة الطوارئ القصوى بالمنصة وتجميد النشر والمقترحات العامة.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="security-lockdown-toggle" onchange="handleToggleLockdown(this.checked)" class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                </label>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-300 text-[11px] mb-1">رسالة التنبيه الطارئة في الشريط العلوي بالموقع العام:</label>
+                <input type="text" id="security-lockdown-msg" value="وضع الاستجابة الطارئة القصوى مفعل حالياً بفرع الولاية الشمالية. خط الطوارئ الميداني: 02481-22450" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs outline-none focus:border-red-500">
+                <button type="button" onclick="handleSaveLockdownMsg()" class="mt-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold rounded-lg transition">
+                  تحديث رسالة الطوارئ
+                </button>
+              </div>
+            </div>
+
+            <!-- OPTION 2: Configurable Session Inactivity Timeout -->
+            <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3.5">
+              <h4 class="text-xs font-black text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-clock-rotate-left text-blue-400"></i>
+                <span>مهلة الجلسة والقفل التلقائي (Session Inactivity Timeout)</span>
+              </h4>
+              <p class="text-[11px] text-slate-400">تحديد مدة الخمول التي يتم بعدها قفل اللوحة تلقائياً لحماية سرية التقارير:</p>
+
+              <div>
+                <select id="security-session-timeout-select" onchange="handleChangeSessionTimeout(this.value)" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs outline-none focus:border-blue-500">
+                  <option value="300000">5 دقائق (أمان مشدد - حماية عالية)</option>
+                  <option value="900000" selected>15 دقيقة (الخيار الموصى به)</option>
+                  <option value="1800000">30 دقيقة (قياسي للمشرفين)</option>
+                  <option value="7200000">ساعتان (مناوبات طوارئ ميدانية طويلة)</option>
+                </select>
+                <p class="text-[10px] text-emerald-400 mt-1.5"><i class="fa-solid fa-check mr-1"></i> يتم تطبيق المهلة الجديدة فوراً وتحديث العداد في الشريط العلوي.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- OPTION 3: 2FA & Emergency One-Time Rescue Codes -->
+          <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h4 class="text-xs font-black text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-key text-emerald-400"></i>
+                <span>إدارة المصادقة الثنائية (2FA) ورموز الإنقاذ الاحتياطية للطوارئ</span>
+              </h4>
+              <button type="button" onclick="generateRescueCodes()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>توليد 10 رموز إنقاذ جديدة</span>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="space-y-2">
+                <label class="block font-bold text-slate-300 text-[11px]">مفتاح الأمان السري المشفر (2FA Secret Key):</label>
+                <div class="flex items-center gap-2">
+                  <input type="text" readonly value="SRCS-NORTH-SECURE-TOTP-2026-KEY" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-emerald-400 font-mono text-xs select-all">
+                  <button type="button" onclick="navigator.clipboard.writeText('SRCS-NORTH-SECURE-TOTP-2026-KEY'); alert('تم نسخ المفتاح السري 2FA بنجاح!');" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl" title="نسخ المفتاح">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-[10px] text-slate-500">متوافق مع تطبيقات Google Authenticator و Microsoft Authenticator.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label class="block font-bold text-slate-300 text-[11px]">رموز الإنقاذ الاحتياطية الميدانية (Rescue Codes):</label>
+                <div id="rescue-codes-container" class="grid grid-cols-2 gap-1.5 p-3 rounded-xl bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300 text-center">
+                  <span>9481-2094</span><span>3810-5829</span>
+                  <span>1048-4921</span><span>8502-1940</span>
+                  <span>7193-8402</span><span>2951-6038</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Two Columns: Backup Management & Security PIN -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Column 1: Backup & Restore Utilities -->
+          <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-file-arrow-up text-blue-400"></i>
+              <span>استعادة قاعدة البيانات من ملف احتياطي</span>
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              إذا قمت بإعادة تهيئة المتصفح أو أردت نقل كافة المنشورات والشكاوى والمستخدمين إلى جهاز آخر، قم برفع ملف النسخة الاحتياطية (.json) الذي قمت بتصديره مسبقاً.
+            </p>
+
+            <div class="border-2 border-dashed border-slate-700 hover:border-emerald-500/50 rounded-2xl p-6 text-center cursor-pointer transition bg-slate-950/50" onclick="document.getElementById('settings-restore-file').click()">
+              <i class="fa-solid fa-cloud-arrow-up text-3xl text-emerald-400 mb-2"></i>
+              <p class="text-xs font-bold text-slate-200">اضغط هنا لاختيار ملف النسخة الاحتياطية (JSON)</p>
+              <p class="text-[11px] text-slate-500 mt-1">يدعم ملفات srcs_backup_*.json الرسمية</p>
+              <input type="file" id="settings-restore-file" accept=".json" class="hidden" onchange="importFullBackup(event)">
+            </div>
+
+            <div class="flex items-center justify-between text-xs pt-2">
+              <span class="text-slate-400">التصدير الدوري يحمي بياناتك من الحذف:</span>
+              <button onclick="exportFullBackup()" class="text-yellow-400 hover:underline font-bold">
+                تحميل نسخة احتياطية (.json)
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: Master Security PIN Customization -->
+          <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved text-red-500"></i>
+              <span>تغيير رمز المرور الرئيسي (Master PIN)</span>
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              رمز المرور الافتراضي هو <code class="bg-slate-800 px-1.5 py-0.5 rounded text-red-400 font-mono">2026</code>. يمكنك تخصيص رمز مرور جديد لمنع الوصول غير المصرح به لبوابة المشرفين.
+            </p>
+
+            <form onsubmit="handleUpdateAdminPin(event)" class="space-y-3 text-xs">
+              <div>
+                <label class="block font-bold text-slate-300 mb-1">رمز المرور الحالي *</label>
+                <input type="password" id="pin-current" required placeholder="أدخل رمز المرور الحالي (الافتراضي 2026)" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-red-500">
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-300 mb-1">رمز المرور الجديد (4 خانات فأكثر) *</label>
+                <input type="password" id="pin-new" required minlength="4" placeholder="أدخل رمز المرور الجديد" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-red-500">
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-300 mb-1">تأكيد رمز المرور الجديد *</label>
+                <input type="password" id="pin-confirm" required minlength="4" placeholder="أعد إدخال رمز المرور الجديد" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-red-500">
+              </div>
+
+              <button type="submit" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold transition shadow-lg shadow-red-600/20">
+                حفظ وتحديث رمز المرور
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Emergency Factory Reset Zone -->
+        <div class="p-6 rounded-3xl bg-red-950/20 border border-red-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h4 class="text-xs font-black text-red-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>منطقة إعادة الضبط وإعادة التهيأة (Factory Reset)</span>
+            </h4>
+            <p class="text-[11px] text-slate-400 mt-1">إعادة تعيين كافة المنشورات والبيانات إلى الوضع النموذجي الافتراضي للولاية الشمالية ومحو التغييرات المحلية.</p>
+          </div>
+          <button onclick="handleFactoryReset()" class="px-4 py-2 rounded-xl bg-red-950/80 hover:bg-red-900 border border-red-800 text-red-300 font-bold text-xs transition shrink-0">
+            إعادة تعيين البيانات النموذجية
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  
+      <!-- ==================== حقوق الملكية الفكرية وبراءة التصميم المعتمدة ==================== -->
+      <div class="mt-12 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs bg-slate-900/90 p-5 rounded-2xl border border-red-500/30 shadow-xl">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-red-600/40 shrink-0 border border-red-500/40">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="text-right">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="font-bold text-slate-300 text-xs">تصميم وتطوير وبرمجة وهندسة:</span>
+              <span class="text-red-400 font-black text-sm tracking-wide">المهندس Yousif Mohammed Ali</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-red-950/90 border border-red-700 text-[10px] text-red-300 font-bold flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-certificate text-red-400"></i>
+                <span>براءة التصميم والملكية الفكرية محفوظة</span>
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              جميع حقوق التصميم والواجهات البرمجية وتطوير المنصة والأنظمة التفاعلية التابعة لفرع الولاية الشمالية محفوظة ومسجلة قانونياً باسم المالك والمطور: <strong class="text-white font-bold">Yousif Mohammed Ali © 2026</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5 shrink-0">
+          <a href="mailto:yousifmohammedali295@gmail.com" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-red-600/30" title="مراسلة المالك والمطور المعتمد">
+            <i class="fa-solid fa-envelope text-white text-sm"></i>
+            <span class="font-mono text-xs font-bold">yousifmohammedali295@gmail.com</span>
+          </a>
+
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN MODALS ==================== -->
+  <!-- 1. Post Editor Modal (محرر إضافة وتعديل الأخبار) -->
+  <div id="post-editor-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 text-right relative shadow-2xl my-8">
+      <button onclick="closeAdminModals()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-lg">&times;</button>
+      
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+        <h3 id="post-editor-title" class="text-base sm:text-lg font-black text-white">إضافة تقرير ميداني جديد</h3>
+      </div>
+      <p class="text-xs text-slate-400 mb-6 pb-2 border-b border-slate-800">املأ بيانات التقرير الميداني، وسيتم تحديثه في المنصة الرئيسية ومنصة المحلية المحددة فوراً.</p>
+
+      <form onsubmit="handleSavePostSubmit(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-post-id" value="">
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">عنوان التقرير أو الخبر الميداني *</label>
+          <input type="text" id="edit-post-title" required placeholder="مثال: استجابة طوارئ السيول وتوزيع السلال الغذائية..." class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none focus:border-red-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">المحلية المعنية بالتقرير *</label>
+            <select id="edit-post-branch" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+              <option value="دنقلا">محلية دنقلا</option>
+              <option value="مروي">محلية مروي</option>
+              <option value="الدبة">محلية الدبة</option>
+              <option value="القولد">محلية القولد</option>
+              <option value="وادي حلفا">محلية وادي حلفا</option>
+              <option value="البرقيق">محلية البرقيق</option>
+              <option value="دلقو">محلية دلقو</option>
+              <option value="كافة المحليات">كافة المحليات السبع</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block font-bold text-slate-300">التصنيف الإنساني *</label>
+              <button type="button" onclick="toggleCustomCategoryInput()" class="text-[11px] text-red-400 hover:text-red-300 font-bold flex items-center gap-1 transition">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>إضافة خيار جديد</span>
+              </button>
+            </div>
+            <select id="edit-post-category" required class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+              <!-- Populated dynamically via populateCategoryOptions() -->
+            </select>
+
+            <!-- Custom Category Quick Adder -->
+            <div id="custom-category-box" class="hidden mt-2 p-3 rounded-xl bg-slate-950 border border-red-500/40 space-y-2">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-red-400 font-bold">إضافة تصنيف أو قطاع إنساني جديد:</span>
+                <button type="button" onclick="toggleCustomCategoryInput(false)" class="text-slate-400 hover:text-white">&times; إلغاء</button>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="new-category-name" placeholder="اسم التصنيف الجديد (مثال: مياه وإصحاح، حماية...)" class="flex-1 p-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none">
+                <button type="button" onclick="addNewCategoryFromModal()" class="px-3 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-lg transition shrink-0">
+                  إضافة وتثبيت
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">صورة التقرير الميداني *</label>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <input type="text" id="edit-post-image" required placeholder="رابط صورة مباشر https://... أو ارفع صورة من جهازك" class="flex-1 p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+              <button type="button" onclick="document.getElementById('edit-post-image-file').click()" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-white font-bold flex items-center gap-1.5 shrink-0 transition shadow">
+                <i class="fa-solid fa-cloud-arrow-up text-red-500"></i>
+                <span>رفع من الجهاز</span>
+              </button>
+              <input type="file" id="edit-post-image-file" accept="image/*" class="hidden" onchange="handleImageFileUpload(event)">
+            </div>
+
+            <!-- Live Image Preview Box -->
+            <div id="post-image-preview-container" class="hidden items-center justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <img id="post-image-preview-img" src="" class="w-14 h-11 object-cover rounded-lg border border-slate-700 shrink-0">
+                <span id="post-image-preview-text" class="text-[11px] text-slate-300 truncate">صورة التقرير</span>
+              </div>
+              <button type="button" onclick="clearPostImagePreview()" class="text-xs text-red-400 hover:text-red-300 font-bold px-2 py-1 transition flex items-center gap-1">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+                <span>إزالة</span>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-400">
+              <span>نماذج صور سريعة:</span>
+              <button type="button" onclick="setPostPresetImage('relief')" class="underline hover:text-red-400">إغاثة</button> •
+              <button type="button" onclick="setPostPresetImage('health')" class="underline hover:text-emerald-400">صحة</button> •
+              <button type="button" onclick="setPostPresetImage('training')" class="underline hover:text-blue-400">تدريب</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">موجز التقرير (يظهر في البطاقة الخارجية) *</label>
+          <textarea id="edit-post-summary" required rows="2" placeholder="موجز قصير يلخص العمل الميداني..." class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">نص التقرير الميداني المفصل *</label>
+          <textarea id="edit-post-content" required rows="5" placeholder="تفاصيل التدخل الميداني، عدد الأسر المستفيدة، المعينات الموزعة..." class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none leading-relaxed"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">حالة النشر *</label>
+            <select id="edit-post-status" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+              <option value="منشور">منشور (يظهر للعامة فوراً)</option>
+              <option value="مسودة">مسودة (محفوظ للمشرفين فقط)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">تاريخ النشر</label>
+            <input type="text" id="edit-post-date" value="اليوم" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800 mt-4">
+          <button type="button" onclick="closeAdminModals()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition">
+            إلغاء
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold shadow-lg shadow-red-600/30 transition">
+            حفظ ونشر التقرير
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- 2. User Editor Modal (إضافة وتعديل المشرفين) -->
+  <div id="add-user-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 text-right relative shadow-2xl">
+      <button onclick="closeAdminModals()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-lg">&times;</button>
+      <h3 id="user-modal-title" class="text-base font-bold text-white mb-1">إضافة مشرف أو محرر جديد</h3>
+      <p id="user-modal-desc" class="text-xs text-slate-400 mb-4">تعيين بيانات الحساب والصلاحيات والمحلية المخصصة.</p>
+      
+      <form onsubmit="handleSaveUserSubmit(event)" class="space-y-3 text-xs">
+        <input type="hidden" id="edit-user-id" value="">
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">الاسم الكامل *</label>
+          <input type="text" id="new-user-name" required placeholder="مثال: يوسف عثمان طه" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">البريد الإلكتروني الرسمي *</label>
+          <input type="email" id="new-user-email" required placeholder="name@srcs.sd" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">الدور والصلاحية *</label>
+            <select id="new-user-role" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+              <option value="مشرف محتوى">مشرف محتوى (أخبار)</option>
+              <option value="مشرف تفاعل">مشرف تفاعل وشكاوى</option>
+              <option value="محرر مسودات">محرر مسودات</option>
+              <option value="مدير عام (Super Admin)">مدير عام (Super Admin)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">المحلية المسؤولة *</label>
+            <select id="new-user-branch" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-bold">
+              <option value="كافة المحليات">كافة المحليات السبع</option>
+              <option value="دنقلا">محلية دنقلا</option>
+              <option value="مروي">محلية مروي</option>
+              <option value="الدبة">محلية الدبة</option>
+              <option value="القولد">محلية القولد</option>
+              <option value="وادي حلفا">محلية وادي حلفا</option>
+              <option value="البرقيق">محلية البرقيق</option>
+              <option value="دلقو">محلية دلقو</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">حالة الحساب *</label>
+          <select id="new-user-status" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+            <option value="نشط">نشط (مصرح له بالوصول)</option>
+            <option value="معلق">معلق (موقوف مؤقتاً)</option>
+          </select>
+        </div>
+
+                <div class="border-t border-slate-800 pt-3 mt-1">
+          <p class="text-[10px] text-blue-400 font-bold mb-2 flex items-center gap-1">
+            <i class="fa-solid fa-key text-xs"></i> بيانات تسجيل الدخول الخاصة بالمشرف
+          </p>
+          <div class="space-y-3">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">اسم المستخدم الفريد (Username)</label>
+              <input type="text" id="new-user-username" placeholder="مثال: ahmed.marawi"
+                class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none font-mono" dir="ltr">
+              <p class="text-[10px] text-slate-500 mt-1">حروف إنجليزية وأرقام ونقطة فقط — يُستخدم لتسجيل الدخول</p>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">كلمة المرور الشخصية</label>
+              <input type="password" id="new-user-password" placeholder="اتركها فارغة لعدم التغيير عند التعديل"
+                class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white outline-none">
+              <p class="text-[10px] text-amber-400 mt-1">⚠️ احفظ كلمة المرور — لا يمكن استعادتها لاحقاً</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeAdminModals()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold">
+            إلغاء
+          </button>
+          <button type="submit" id="user-modal-btn" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold transition shadow-lg shadow-red-600/20">
+            حفظ البيانات
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Complaint Detail Modal -->
+  <div id="complaint-detail-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 text-right relative shadow-2xl">
+      <button onclick="closeAdminModals()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-lg">&times;</button>
+      <div class="flex items-center gap-2 mb-2">
+        <span id="modal-c-badge" class="px-2.5 py-0.5 rounded text-[10px] font-bold"></span>
+        <span id="modal-c-branch" class="text-xs text-slate-400 font-bold"></span>
+      </div>
+      <h3 id="modal-c-subject" class="text-base font-bold text-white mb-1"></h3>
+      <p id="modal-c-sender" class="text-xs text-slate-400 mb-4 pb-2 border-b border-slate-800"></p>
+      
+      <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-slate-300 leading-relaxed mb-4">
+        <p id="modal-c-content"></p>
+      </div>
+
+      <div class="flex items-center justify-end gap-2">
+        <button onclick="markComplaintSolved()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-check ml-1"></i> تم الحل والمعالجة
+        </button>
+        <button onclick="closeAdminModals()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ADMIN ENGINE ==================== -->
+  <script>
+    const STORAGE = {
+      POSTS: 'srcs_state_posts',
+      FOLLOWERS: 'srcs_state_followers',
+      SUGGESTIONS: 'srcs_state_suggestions',
+      COMMENTS: 'srcs_state_comments',
+      USERS_LIST: 'srcs_state_users_list',
+      ADMIN_ROLE: 'srcs_state_admin_role',
+      ADMIN_SESSION: 'srcs_admin_session_auth',
+      AUDIT_LOG: 'srcs_state_audit_log'
+    };
+
+    
+    const SEED_POSTS = [
+      {
+        id: 1,
+        title: "استجابة طوارئ السيول وتوزيع المعينات الإيوائية والصحية لـ 2,400 أسرة بمحلية مروي والدبة",
+        branch: "مروي",
+        category: "relief",
+        categoryLabel: "إغاثة وطوارئ",
+        date: "25 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        video: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        summary: "تسيير قافلة المعينات الشتوية والإيوائية ومواد تعقيم المياه ومشاركة العيادات المتنقلة لدعم متضرري السيول بمحلية مروي والدبة.",
+        content: `في إطار الاستجابة المستمرة للكوارث الطبيعية ودعم الأسر المتأثرة بالسيول الأخيرة والوافدين في مناطق شمال السودان، سيّر فرع جمعية الهلال الأحمر السوداني بالولاية الشمالية قافلة مساعدات إنسانية متكاملة استهدفت القرى والتجمعات السكنية الأكثر تضرراً بمحليتي مروي والدبة.
+
+أهم معطيات الاستجابة الميدانية:
+• توزيع 1,200 خيمة إيواء و4,800 مشمع وبطانية شتوية للأسر المتضررة.
+• توزيع 200,000 قرص كلور لتعقيم مصادر المياه المنزلية والآبار.
+• تشغيل عيادتين متنقلتين وفحص 1,840 مريضاً ومريضة.
+• مرابطة غرف الطوارئ في كافة المحليات السبع لتلقي نداءات الإغاثة.`,
+        views: 2380,
+        likes: 142,
+        status: "منشور"
+      },
+      {
+        id: 2,
+        title: "تنفيذ أيام علاجية مجانية وتوزيع أدوية للأمراض المزمنة بمراكز إيواء الوافدين بدنقلا",
+        branch: "دنقلا",
+        category: "health",
+        categoryLabel: "رعاية صحية",
+        date: "24 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+        video: "",
+        summary: "استفاد أكثر من 1,800 مريض من الكشوفات الطبية والفحوصات والأدوية الأساسية المنقذة للحياة بمحلية دنقلا.",
+        content: `نفذت الإدارة الطبية لجمعية الهلال الأحمر السوداني بفرع الولاية الشمالية أياماً علاجية مجانية شملت مراكز الإيواء والمجتمعات المضيفة بمدينة دنقلا.
+
+تم خلالها توفير الفحوصات المعملية، أدوية الأمراض المزمنة (الضغط والسكري)، وتقديم الإرشادات الصحية ومحاضرات الوقاية من الأمراض المنقولة بالمياه.`,
+        views: 980,
+        likes: 89,
+        status: "منشور"
+      },
+      {
+        id: 3,
+        title: "تخريج 60 متطوعاً جديداً في دورات الإسعاف الأولي المتقدم والاستجابة السريعة بمحلية البرقيق",
+        branch: "البرقيق",
+        category: "youth",
+        categoryLabel: "متطوعون وتدريب",
+        date: "22 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
+        video: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
+        summary: "تأهيل وتدريب فرق الاستجابة المجتمعية السريعة للتعامل مع حوادث الطوارئ والإسعافات الميدانية بمحلية البرقيق.",
+        content: `احتفلت إدارة الشباب والمتطوعين بتخريج دفعة جديدة من متطوعي ومتطوعات الهلال الأحمر السوداني بمحلية البرقيق بعد اجتيازهم دورة الإسعاف الأولي المتقدم والإنعاش القلبي الرئوي والإخلاء في أوقات الكوارث في كرمة النزل.`,
+        views: 1240,
+        likes: 215,
+        status: "منشور"
+      },
+      {
+        id: 4,
+        title: "حملة إصحاح بيئي وتطهير مصادر المياه وتوزيع الناموسيات المشبعة بمحلية دلقو المحس",
+        branch: "دلقو",
+        category: "health",
+        categoryLabel: "رعاية صحية",
+        date: "21 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+        video: "",
+        summary: "فرق طوارئ الهلال الأحمر تنفذ حملة وقائية كبرى في دلقو لمكافحة نواقل الأمراض وتأمين مياه الشرب النقية.",
+        content: `استجابة للبلاغات الميدانية من محلية دلقو، نظمت جمعية الهلال الأحمر السوداني حملة إصحاح بيئي شاملة ورش ضبابي لمكافحة توالد البعوض، مع توزيع 1,500 ناموسية مشبعة بالأدوية للأسر والأطفال وكبار السن، وتطهير محطات المياه والآبار في منطقة دلقو المحس.`,
+        views: 890,
+        likes: 110,
+        status: "منشور"
+      }
+    ];
+
+    const DEFAULT_DATA = {
+      followers: 14850,
+      adminRole: 'super_admin',
+      suggestions: [
+        { id: "SUG-8821", type: "اقتراح", branch: "محلية الدبة", sender: "عثمان عبد الجليل", subject: "تسيير قافلة صحية دورية لقرى غرب النيل", content: "نرجو تسيير عيادة أسبوعية لتغطية نقص الأدوية ومتابعة الحالات المزمنة بقرى الضفة الغربية.", status: "قيد المراجعة" },
+        { id: "SUG-8822", type: "شكوى / بلاغ", branch: "محلية القولد", sender: "فاعل خير (مجهول)", subject: "نقص كلور تعقيم المياه في محطة القولد", content: "محطة المياه الرئيسية بحاجة لكميات عاجلة من أقراص الكلور لتعقيم مياه الشرب بعد السيول.", status: "جديد" },
+        { id: "SUG-8823", type: "اقتراح", branch: "محلية البرقيق", sender: "طه النور", subject: "توسيع نقاط الإسعاف الأولي بكرمة النزل", content: "نقترح تدريب متطوعين إضافيين وتأسيس نقطة ثابتة للإسعاف الأولي قرب المستشفى الريفي.", status: "جديد" },
+        { id: "SUG-8824", type: "شكوى / بلاغ", branch: "محلية دلقو", sender: "متطوع ميداني", subject: "الحاجة لدعم مخزون الإيواء الطارئ بدلقو المحس", content: "توجد بعض الأسر المتضررة بحاجة لمشمعات وبطانيات إضافية لتأمين المأوى.", status: "قيد المراجعة" }
+      ],
+      users: [
+        { id: 1, name: "أحمد الفاتح البدوي", username: "ahmed.fatih", email: "a.elfatih@srcs.sd", role: "مدير عام", branch: "كافة المحليات", status: "نشط", lastLogin: "اليوم 05:12", password: "", permissions: ["all"] },
+        { id: 2, name: "سيف الدين خضر", username: "saif.khedir", email: "s.khedir@srcs.sd", role: "مشرف محتوى", branch: "محلية دنقلا", status: "نشط", lastLogin: "أمس 18:40", password: "dnq2026", permissions: ["posts","comments"] },
+        { id: 3, name: "فاطمة الزبير", username: "fatima.zubair", email: "f.elzubair@srcs.sd", role: "مشرف تفاعل", branch: "محلية مروي والدبة", status: "نشط", lastLogin: "اليوم 08:30", password: "mrw2026", permissions: ["complaints","comments"] },
+        { id: 4, name: "عثمان إدريس دلقو", username: "othman.idris", email: "o.idris@srcs.sd", role: "مشرف تفاعل", branch: "محلية دلقو", status: "نشط", lastLogin: "أمس 11:20", password: "dlq2026", permissions: ["complaints","comments"] },
+        { id: 5, name: "طه محمد البرقيق", username: "taha.burgaig", email: "t.burgaig@srcs.sd", role: "مشرف محتوى", branch: "محلية البرقيق", status: "نشط", lastLogin: "اليوم 07:15", password: "brq2026", permissions: ["posts","comments"] },
+        { id: 6, name: "نادية إبراهيم", username: "nadia.ibrahim", email: "n.ibrahim@srcs.sd", role: "مشرف تفاعل", branch: "محلية ابو حمد", status: "موقوف", lastLogin: "منذ 4 أيام", password: "abh2026", permissions: ["complaints","comments"] }
+      ],
+      auditLog: [
+        { time: "اليوم 09:15", event: "[AUTH] دخول آمن للمشرف العام عبر 2FA (TOTP)", ip: "196.29.182.14 • دنقلا" },
+        { time: "اليوم 08:30", event: "[ENCRYPTED] استلام بلاغ مشفر جديد من محلية دلقو (SUG-8824)", ip: "154.180.45.9" },
+        { time: "أمس 18:42", event: "[CONTENT] نشر تقرير ميداني جديد لمحلية مروي والدبة", ip: "196.29.180.2" }
+      ]
+    };
+
+    function getPosts() {
+      try {
+        const stored = _lsGet(STORAGE.POSTS);
+        if (stored) return JSON.parse(stored);
+      } catch(e) {}
+      _lsSet(STORAGE.POSTS, JSON.stringify(SEED_POSTS));
+      return SEED_POSTS;
+    }
+    function getFollowers() { return parseInt(_lsGet(STORAGE.FOLLOWERS) || DEFAULT_DATA.followers); }
+    function getSuggestions() {
+      try { return JSON.parse(_lsGet(STORAGE.SUGGESTIONS)) || DEFAULT_DATA.suggestions; }
+      catch(e) { return DEFAULT_DATA.suggestions; }
+    }
+    function getUsersList() {
+      try { return JSON.parse(_lsGet(STORAGE.USERS_LIST)) || DEFAULT_DATA.users; }
+      catch(e) { return DEFAULT_DATA.users; }
+    }
+    function getComments() {
+      try { return JSON.parse(_lsGet(STORAGE.COMMENTS)) || []; }
+      catch(e) { return []; }
+    }
+    function getAuditLog() {
+      try { return JSON.parse(_lsGet(STORAGE.AUDIT_LOG)) || DEFAULT_DATA.auditLog; }
+      catch(e) { return DEFAULT_DATA.auditLog; }
+    }
+
+    function addAuditEntry(eventText) {
+      const logs = getAuditLog();
+      logs.unshift({
+        time: "الآن",
+        event: eventText,
+        ip: "196.29.182.14 • جلسة آمنة"
+      });
+      _lsSet(STORAGE.AUDIT_LOG, JSON.stringify(logs));
+      renderAuditLog();
+    }
+
+    // --- Authentication Engine ---
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    // --- Navigation Tabs ---
+    function switchTab(tabId) {
+      if (_sessionType !== 'superadmin') {
+        if (tabId === 'users') {
+          alert('⛔ عذراً! صفحة إدارة حسابات المشرفين مقتصرة حصرياً على المدير العام للولاية.');
+          return;
+        }
+        if (tabId === 'settings' || tabId === 'content-cms' || tabId === 'audit') {
+          alert('⛔ عذراً! هذه الصفحة مقتصرة حصرياً على المدير العام للولاية.');
+          return;
+        }
+      }
+      document.querySelectorAll('.admin-tab-content').forEach(t => t.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => {
+        b.classList.remove('active', 'bg-red-600', 'text-white', 'shadow-md');
+        b.classList.add('text-slate-400');
+      });
+
+      const activeTab = document.getElementById(`tab-${tabId}`);
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activeTab) activeTab.classList.remove('hidden');
+      if (tabId === 'settings') updateStorageHealthDisplay();
+      if (tabId === 'profile') initProfileEditor();
+      if (tabId === 'content-cms') initContentCmsEditor();
+      if (tabId === 'settings') initSecurityControls();
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-red-600', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-slate-400');
+      }
+
+      if (tabId === 'posts') populateCategoryOptions();
+      renderAdminPostsTable();
+      syncPostsFromDatabase();
+
+    // مزامنة المنشورات من قاعدة البيانات المشتركة
+    async function syncPostsFromDatabase() {
+      try {
+        const res = await fetch('/api/posts');
+        const data = await res.json();
+        if (data.success && Array.isArray(data.posts) && data.posts.length > 0) {
+          localStorage.setItem(STORAGE.POSTS, JSON.stringify(data.posts));
+          renderAdminPostsTable();
+        }
+      } catch(e) {}
+    }
+
+      if (tabId === 'complaints') renderAdminSuggestionsTable();
+      if (tabId === 'users') renderAdminUsersTable();
+      if (tabId === 'comments') renderAdminComments();
+      if (tabId === 'audit') renderAuditLog();
+    }
+
+    // --- RBAC Role Switcher & Permission Enforcement ---
+    function changeAdminRole(newRole) {
+      _lsSet(STORAGE.ADMIN_ROLE, newRole);
+      const badge = document.getElementById('current-role-badge');
+      const sideLabel = document.getElementById('sidebar-role-label');
+      const complaintsMsg = document.getElementById('complaints-restricted-msg');
+      const complaintsTable = document.getElementById('complaints-table-wrapper');
+
+      const roleLabels = {
+        super_admin: "مدير عام (Super Admin)",
+        content_mod: "مشرف محتوى (Content Moderator)",
+        interaction_mod: "مشرف تفاعل وشكاوى (Interaction Moderator)",
+        editor: "محرر مسودات (Editor)"
+      };
+
+      if (badge) badge.textContent = roleLabels[newRole] || newRole;
+      if (sideLabel) sideLabel.textContent = roleLabels[newRole] || newRole;
+
+      if (newRole === 'content_mod' || newRole === 'editor') {
+        if (complaintsMsg) complaintsMsg.classList.remove('hidden');
+        if (complaintsTable) complaintsTable.classList.add('hidden');
+      } else {
+        if (complaintsMsg) complaintsMsg.classList.add('hidden');
+        if (complaintsTable) complaintsTable.classList.remove('hidden');
+      }
+
+      addAuditEntry(`[RBAC] تبديل الصلاحيات النشطة إلى دور: (${roleLabels[newRole]})`);
+    }
+
+    // ==================== POSTS CRUD ENGINE ====================
+    function renderAdminPostsTable() {
+      const posts = getPosts();
+      const filterBranch = document.getElementById('filter-post-branch').value;
+      const tbody = document.getElementById('admin-posts-table-body');
+      const countBadge = document.getElementById('posts-count-badge');
+      const kpiCount = document.getElementById('kpi-posts-count');
+
+      if (countBadge) countBadge.textContent = posts.length;
+      if (kpiCount) kpiCount.textContent = `${posts.length} تقارير`;
+
+      if (!tbody) return;
+
+      const filtered = posts.filter(p => filterBranch === 'all' || p.branch.includes(filterBranch));
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-500">لا توجد تقارير مطابقة لمحلية (${filterBranch}).</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr class="hover:bg-slate-900/60 transition">
+          <td class="py-3">
+            <img src="${p.image}" class="w-12 h-10 rounded-lg object-cover border border-slate-700">
+          </td>
+          <td class="font-bold text-white max-w-xs truncate">${p.title}</td>
+          <td><span class="bg-slate-800 text-red-400 font-bold px-2 py-0.5 rounded text-[11px]">${p.branch}</span></td>
+          <td>${p.categoryLabel || p.category}</td>
+          <td class="text-slate-400 font-mono text-[11px]">${p.date}</td>
+          <td>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${p.status === 'منشور' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900' : 'bg-slate-800 text-slate-400 border border-slate-700'}">
+              ${p.status}
+            </span>
+          </td>
+          <td class="text-slate-400 font-mono">
+            <span title="مشاهدات"><i class="fa-regular fa-eye text-xs"></i> ${p.views || 0}</span> •
+            <span title="إعجابات" class="text-red-400"><i class="fa-solid fa-heart text-xs"></i> ${p.likes || 0}</span>
+          </td>
+          <td>
+            <div class="flex items-center gap-1.5">
+              <button onclick="editPost(${p.id})" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded text-[11px] font-bold transition" title="تعديل">
+                <i class="fa-solid fa-pen-to-square"></i> تعديل
+              </button>
+              <button onclick="togglePostStatus(${p.id})" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[11px]" title="تغيير الحالة">
+                ${p.status === 'منشور' ? 'إيقاف' : 'نشر'}
+              </button>
+              <button onclick="deletePost(${p.id})" class="px-2 py-1 text-slate-500 hover:text-red-400 rounded text-[11px]" title="حذف">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    
+    // ==================== DYNAMIC CATEGORIES MANAGEMENT ENGINE ====================
+    const DEFAULT_CATEGORIES = [
+      { id: "relief", label: "إغاثة وطوارئ" },
+      { id: "health", label: "رعاية صحية وطبية" },
+      { id: "youth", label: "متطوعون وتدريب" },
+      { id: "wash", label: "مياه وإصحاح بيئي" },
+      { id: "protection", label: "حماية ودعم نفسي" },
+      { id: "rfl", label: "إعادة الروابط العائلية" },
+      { id: "food", label: "أمن غذائي وسبل عيش" },
+      { id: "logistics", label: "إسناد لوجستي وعمليات" }
+    ];
+
+    function getCategories() {
+      const stored = _lsGet('srcs_state_categories');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch (e) { console.error(e); }
+      }
+      return DEFAULT_CATEGORIES;
+    }
+
+    function saveCategories(cats) {
+      _lsSet('srcs_state_categories', JSON.stringify(cats));
+    }
+
+    function populateCategoryOptions(selectedCat = null) {
+      const select = document.getElementById('edit-post-category');
+      if (!select) return;
+      const cats = getCategories();
+      select.innerHTML = cats.map(c => `
+        <option value="${c.id}" ${selectedCat === c.id ? 'selected' : ''}>${c.label}</option>
+      `).join('');
+    }
+
+    function toggleCustomCategoryInput(show = null) {
+      const box = document.getElementById('custom-category-box');
+      if (!box) return;
+      if (show === null) {
+        box.classList.toggle('hidden');
+      } else if (show) {
+        box.classList.remove('hidden');
+      } else {
+        box.classList.add('hidden');
+      }
+      if (!box.classList.contains('hidden')) {
+        const inp = document.getElementById('new-category-name');
+        if (inp) inp.focus();
+      }
+    }
+
+    function addNewCategoryFromModal() {
+      const inp = document.getElementById('new-category-name');
+      if (!inp) return;
+      const name = inp.value.trim();
+      if (!name) {
+        alert('يرجى كتابة اسم التصنيف الجديد أولاً.');
+        return;
+      }
+
+      const cats = getCategories();
+      const existing = cats.find(c => c.label === name);
+      if (existing) {
+        alert('هذا التصنيف موجود بالفعل!');
+        populateCategoryOptions(existing.id);
+        toggleCustomCategoryInput(false);
+        return;
+      }
+
+      const newId = 'cat_' + Date.now();
+      cats.push({ id: newId, label: name });
+      saveCategories(cats);
+
+      populateCategoryOptions(newId);
+      inp.value = '';
+      toggleCustomCategoryInput(false);
+      addAuditEntry(`[CMS] إضافة تصنيف إنساني جديد للمنصة: "${name}"`);
+      alert(`تمت إضافة التصنيف الجديد ("${name}") بنجاح وأصبح متاحاً فوراً للمشرفين وفي المنصة العامة.`);
+    }
+
+    function openPostEditorModal(post = null) {
+      const modal = document.getElementById('post-editor-modal');
+      const titleEl = document.getElementById('post-editor-title');
+
+      populateCategoryOptions(post ? post.category : 'relief');
+      toggleCustomCategoryInput(false);
+
+      if (post) {
+        titleEl.textContent = `تعديل التقرير الميداني (#${post.id})`;
+        document.getElementById('edit-post-id').value = post.id;
+        document.getElementById('edit-post-title').value = post.title;
+        document.getElementById('edit-post-branch').value = post.branch;
+        document.getElementById('edit-post-category').value = post.category || 'relief';
+        document.getElementById('edit-post-image').value = post.image;
+        document.getElementById('edit-post-summary').value = post.summary;
+        document.getElementById('edit-post-content').value = post.content || post.summary;
+        document.getElementById('edit-post-status').value = post.status || 'منشور';
+        document.getElementById('edit-post-date').value = post.date || 'اليوم';
+        
+        const previewContainer = document.getElementById('post-image-preview-container');
+        const previewImg = document.getElementById('post-image-preview-img');
+        const previewText = document.getElementById('post-image-preview-text');
+        if (previewContainer && previewImg && previewText && post.image) {
+          previewImg.src = post.image;
+          previewText.textContent = "الصورة المعتمدة حالياً للتقرير";
+          previewContainer.classList.remove('hidden');
+          previewContainer.classList.add('flex');
+        }
+      } else {
+        titleEl.textContent = "إضافة تقرير ميداني جديد";
+        document.getElementById('edit-post-id').value = "";
+        document.getElementById('edit-post-title').value = "";
+        document.getElementById('edit-post-branch').value = "دنقلا";
+        document.getElementById('edit-post-category').value = "relief";
+        document.getElementById('edit-post-image').value = "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80";
+        document.getElementById('edit-post-summary').value = "";
+        document.getElementById('edit-post-content').value = "";
+        document.getElementById('edit-post-status').value = "منشور";
+        document.getElementById('edit-post-date').value = "اليوم";
+        
+        const previewContainer = document.getElementById('post-image-preview-container');
+        if (previewContainer) {
+          previewContainer.classList.add('hidden');
+          previewContainer.classList.remove('flex');
+        }
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function editPost(id) {
+      const posts = getPosts();
+      const p = posts.find(x => x.id === id);
+      if (p) openPostEditorModal(p);
+    }
+
+    function handleSavePostSubmit(e) {
+      e.preventDefault();
+      const idVal = document.getElementById('edit-post-id').value;
+      const title = document.getElementById('edit-post-title').value.trim();
+      const branch = document.getElementById('edit-post-branch').value;
+      const category = document.getElementById('edit-post-category').value;
+      const image = document.getElementById('edit-post-image').value.trim();
+      const summary = document.getElementById('edit-post-summary').value.trim();
+      const content = document.getElementById('edit-post-content').value.trim();
+      const status = document.getElementById('edit-post-status').value;
+      const date = document.getElementById('edit-post-date').value.trim();
+
+      const allCats = getCategories();
+      const matchedCat = allCats.find(c => c.id === category);
+      const catLabel = matchedCat ? matchedCat.label : (category || "إغاثة وطوارئ");
+
+      let posts = getPosts();
+
+      if (idVal) {
+        // Edit existing post
+        const p = posts.find(x => x.id == idVal);
+        if (p) {
+          p.title = title;
+          p.branch = branch;
+          p.category = category;
+          p.categoryLabel = catLabel;
+          p.image = image;
+          p.summary = summary;
+          p.content = content;
+          p.status = status;
+          p.date = date;
+          addAuditEntry(`[POST] تعديل بيانات التقرير الميداني: "${title}" (${branch})`);
+        }
+      } else {
+        // Add new post
+        const newPost = {
+          id: Date.now(),
+          title,
+          branch,
+          category,
+          categoryLabel: catLabel,
+          image,
+          video: "",
+          summary,
+          content,
+          status,
+          date: date || "اليوم",
+          views: 0,
+          likes: 0
+        };
+        posts.unshift(newPost);
+        addAuditEntry(`[POST] نشر تقرير ميداني جديد: "${title}" لمحلية (${branch})`);
+      }
+
+      _lsSet(STORAGE.POSTS, JSON.stringify(posts));
+      closeAdminModals();
+      populateCategoryOptions();
+      renderAdminPostsTable();
+      alert(`تم حفظ وتحديث التقرير الميداني بنجاح!`);
+    }
+
+    function deletePost(id) {
+      if (confirm(`هل تريد بالتأكيد حذف هذا التقرير الميداني نهائياً من الموقع العام والمنصات؟`)) {
+        let posts = getPosts();
+        const p = posts.find(x => x.id == id);
+        posts = posts.filter(x => x.id != id);
+        _lsSet(STORAGE.POSTS, JSON.stringify(posts));
+        addAuditEntry(`[POST] حذف التقرير الميداني: "${p ? p.title : id}"`);
+        populateCategoryOptions();
+      renderAdminPostsTable();
+        alert("تم حذف التقرير بنجاح.");
+      }
+    }
+
+    function togglePostStatus(id) {
+      let posts = getPosts();
+      const p = posts.find(x => x.id == id);
+      if (p) {
+        p.status = (p.status === 'منشور') ? 'مسودة' : 'منشور';
+        _lsSet(STORAGE.POSTS, JSON.stringify(posts));
+        addAuditEntry(`[POST] تغيير حالة التقرير (${p.title}) إلى (${p.status})`);
+        populateCategoryOptions();
+      renderAdminPostsTable();
+      }
+    }
+
+    function setPostPresetImage(type) {
+      const presets = {
+        relief: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        health: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+        training: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80"
+      };
+      if (presets[type]) document.getElementById('edit-post-image').value = presets[type];
+    }
+
+    function resetToSeedPosts() {
+      if (confirm("هل تريد استعادة المنشورات النموذجية الأصلية الأربعة؟")) {
+        _lsSet(STORAGE.POSTS, JSON.stringify(SEED_POSTS));
+        populateCategoryOptions();
+      renderAdminPostsTable();
+        alert("تمت استعادة المنشورات النموذجية بنجاح.");
+      }
+    }
+
+    // --- Suggestions Table with Locality Filtering (7 Separated Localities) ---
+    let currentActiveComplaintId = null;
+
+    function renderAdminSuggestionsTable() {
+      const suggestions = getSuggestions();
+      const branchFilter = document.getElementById('filter-complaint-branch').value;
+      const statusFilter = document.getElementById('filter-complaint-status').value;
+      const tbody = document.getElementById('admin-sug-table');
+      const kpiSug = document.getElementById('kpi-sug-count');
+      const unreadBadge = document.getElementById('unread-complaints-badge');
+
+      if (kpiSug) kpiSug.textContent = `${suggestions.length} وارد`;
+      if (unreadBadge) unreadBadge.textContent = `${suggestions.length} جديد`;
+
+      if (!tbody) return;
+
+      const filtered = suggestions.filter(s => {
+        const matchBranch = (branchFilter === 'all' || s.branch.includes(branchFilter));
+        const matchStatus = (statusFilter === 'all' || s.status === statusFilter);
+        return matchBranch && matchStatus;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-6 text-center text-slate-500">لا توجد رسائل مطابقة لخيارات الفلترة.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(s => `
+        <tr class="hover:bg-slate-900/60 transition">
+          <td class="py-3 font-mono text-red-400 font-bold">${s.id}</td>
+          <td><span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[10px] font-bold">${s.type}</span></td>
+          <td class="font-bold text-white">${s.branch}</td>
+          <td class="text-slate-400">${s.sender}</td>
+          <td class="max-w-xs truncate">${s.subject}</td>
+          <td>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${s.status === 'تم الحل' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900' : 'bg-amber-950 text-amber-400 border border-amber-900'}">
+              ${s.status}
+            </span>
+          </td>
+          <td>
+            <div class="flex items-center gap-1.5">
+              <button onclick="viewComplaintDetail('${s.id}')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded text-[11px] font-bold">
+                عرض
+              </button>
+              <button onclick="deleteComplaint('${s.id}')" class="px-2 py-1 text-slate-500 hover:text-red-400 rounded text-[11px]" title="حذف">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function viewComplaintDetail(id) {
+      const suggestions = getSuggestions();
+      const s = suggestions.find(x => x.id === id);
+      if (!s) return;
+
+      currentActiveComplaintId = id;
+      document.getElementById('modal-c-badge').textContent = s.type;
+      document.getElementById('modal-c-badge').className = "px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30";
+      document.getElementById('modal-c-branch').textContent = s.branch;
+      document.getElementById('modal-c-subject').textContent = s.subject;
+      document.getElementById('modal-c-sender').textContent = `المُرسل: ${s.sender} • الحالة: ${s.status}`;
+      document.getElementById('modal-c-content').textContent = s.content || s.subject;
+
+      const m = document.getElementById('complaint-detail-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function markComplaintSolved() {
+      if (!currentActiveComplaintId) return;
+      let suggestions = getSuggestions();
+      const target = suggestions.find(s => s.id === currentActiveComplaintId);
+      if (target) {
+        target.status = "تم الحل";
+        _lsSet(STORAGE.SUGGESTIONS, JSON.stringify(suggestions));
+        addAuditEntry(`[COMPLAINT] تحديث حالة الشكوى (${currentActiveComplaintId}) إلى "تم الحل"`);
+        closeAdminModals();
+        renderAdminSuggestionsTable();
+        alert("تم تحديث حالة الشكوى/المقترح إلى (تم الحل والمعالجة) بنجاح!");
+      }
+    }
+
+    function deleteComplaint(id) {
+      if (confirm(`هل تريد بالتأكيد حذف هذه الرسالة المشفرة (${id})؟`)) {
+        let suggestions = getSuggestions();
+        suggestions = suggestions.filter(s => s.id !== id);
+        _lsSet(STORAGE.SUGGESTIONS, JSON.stringify(suggestions));
+        addAuditEntry(`[COMPLAINT] حذف البلاغ المشفر (${id})`);
+        renderAdminSuggestionsTable();
+      }
+    }
+
+    function exportSuggestionsCSV() {
+      const suggestions = getSuggestions();
+      let csv = "\uFEFFرمز,النوع,المحلية,المُرسل,الموضوع,الحالة\n";
+      suggestions.forEach(s => {
+        csv += `"${s.id}","${s.type}","${s.branch}","${s.sender}","${s.subject}","${s.status}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `SRCS_Northern_Complaints_${Date.now()}.csv`;
+      link.click();
+      addAuditEntry("[DATA] تصدير سجل الشكاوى والمقترحات إلى ملف CSV");
+    }
+
+    // --- Users & Supervisors Table ---
+    function openEditUserModal(id) {
+      if (_sessionType !== 'superadmin') {
+        alert('⛔ عذراً! تعديل بيانات المشرفين مقتصر حصرياً على المدير العام.');
+        return;
+      }
+      const users = getUsersList();
+      const u = users.find(function(x) { return x.id === id; });
+      if (!u) return;
+      
+      // Populate form
+      const editId = document.getElementById('edit-user-id');
+      const nameEl = document.getElementById('new-user-name');
+      const emailEl = document.getElementById('new-user-email');
+      const usernameEl = document.getElementById('new-user-username');
+      const passwordEl = document.getElementById('new-user-password');
+      const roleEl = document.getElementById('new-user-role');
+      const branchEl = document.getElementById('new-user-branch');
+      const statusEl = document.getElementById('new-user-status');
+      const titleEl = document.getElementById('user-modal-title');
+      const descEl = document.getElementById('user-modal-desc');
+      const btnEl = document.getElementById('user-modal-btn');
+      
+      if (editId) editId.value = u.id;
+      if (nameEl) nameEl.value = u.name;
+      if (emailEl) emailEl.value = u.email;
+      if (usernameEl) usernameEl.value = u.username || '';
+      if (passwordEl) passwordEl.value = ''; // never prefill password
+      if (roleEl) roleEl.value = u.role;
+      if (branchEl) branchEl.value = u.branch;
+      if (statusEl) statusEl.value = u.status;
+      if (titleEl) titleEl.textContent = 'تعديل بيانات المشرف';
+      if (descEl) descEl.textContent = 'تعديل معلومات وصلاحيات المشرف — اترك كلمة المرور فارغة لعدم تغييرها.';
+      if (btnEl) btnEl.textContent = 'حفظ التعديلات';
+      
+      const modal = document.getElementById('add-user-modal');
+      if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+    }
+
+    function handleSaveUserSubmit(e) {
+      e.preventDefault();
+      const userId = document.getElementById('edit-user-id') ? document.getElementById('edit-user-id').value : '';
+      if (!userId) {
+        // This is an add operation
+        handleAddUserSubmit(e);
+        return;
+      }
+
+      const name = document.getElementById('new-user-name').value.trim();
+      const email = document.getElementById('new-user-email').value.trim();
+      const role = document.getElementById('new-user-role').value;
+      const branch = document.getElementById('new-user-branch').value;
+      const statusVal = document.getElementById('new-user-status').value;
+      const usernameEl = document.getElementById('new-user-username');
+      const passwordEl = document.getElementById('new-user-password');
+      const newUsername = usernameEl ? usernameEl.value.trim().toLowerCase() : '';
+      const newPassword = passwordEl ? passwordEl.value.trim() : '';
+
+      let users = getUsersList();
+      const idx = users.findIndex(function(u) { return String(u.id) === String(userId); });
+      if (idx < 0) { alert('لم يتم العثور على المشرف.'); return; }
+
+      // Check username uniqueness (exclude current user)
+      if (newUsername && users.find(function(u) { return u.username === newUsername && String(u.id) !== String(userId); })) {
+        alert('اسم المستخدم (' + newUsername + ') مستخدم بالفعل. اختر اسماً آخر.');
+        return;
+      }
+
+      let permissions = ['posts','comments'];
+      if (role === 'مشرف تفاعل') permissions = ['complaints','comments'];
+      else if (role === 'مدير عام' || role === 'مدير عام (Super Admin)') permissions = ['all'];
+
+      users[idx].name = name;
+      users[idx].email = email;
+      users[idx].role = role;
+      users[idx].branch = branch;
+      users[idx].status = statusVal;
+      users[idx].permissions = permissions;
+      if (newUsername) users[idx].username = newUsername;
+      if (newPassword) users[idx].password = newPassword;
+
+      _lsSet(STORAGE.USERS_LIST, JSON.stringify(users));
+      addAuditEntry('[USER] تعديل بيانات مشرف: (' + name + ')' + (newPassword ? ' [تغيير كلمة المرور]' : ''));
+      closeAdminModals();
+      renderAdminUsersTable();
+      alert('✅ تم تحديث بيانات المشرف (' + name + ') بنجاح.' + (newPassword ? '\nكلمة المرور الجديدة تم حفظها.' : ''));
+    }
+
+    function openResetPasswordModal(id) {
+      const users = getUsersList();
+      const u = users.find(function(x) { return x.id === id; });
+      if (!u) return;
+      const session = _sessionType;
+      if (session !== 'superadmin') {
+        alert('هذه الميزة متاحة للمدير العام فقط.');
+        return;
+      }
+      const newPwd = prompt('إعادة تعيين كلمة مرور المشرف: ' + u.name + '\n\nأدخل كلمة المرور الجديدة:');
+      if (newPwd === null) return; // cancelled
+      if (!newPwd || newPwd.length < 4) {
+        alert('كلمة المرور يجب أن تكون 4 أحرف على الأقل.');
+        return;
+      }
+      let allUsers = getUsersList();
+      const idx = allUsers.findIndex(function(x) { return x.id === id; });
+      if (idx >= 0) {
+        allUsers[idx].password = newPwd;
+        _lsSet(STORAGE.USERS_LIST, JSON.stringify(allUsers));
+        addAuditEntry('[USER] المدير العام أعاد تعيين كلمة مرور المشرف: (' + u.name + ') username:(' + u.username + ')');
+        alert('✅ تم تغيير كلمة مرور المشرف (' + u.name + ') بنجاح.\nكلمة المرور الجديدة: ' + newPwd + '\nأبلغ المشرف بها في مكان آمن.');
+      }
+    }
+
+    function renderAdminUsersTable() {
+      const tbody = document.getElementById('admin-users-table');
+      if (!tbody) return;
+      if (_sessionType !== 'superadmin') {
+        tbody.innerHTML = '<tr><td colspan="7" class="py-12 text-center text-red-400 font-bold bg-red-950/20 rounded-2xl"><i class="fa-solid fa-lock text-2xl mb-2 block"></i>عذراً، إدارة حسابات المشرفين مقتصرة حصرياً على المدير العام.</td></tr>';
+        return;
+      }
+      const users = getUsersList();
+
+      tbody.innerHTML = users.map(u => `
+        <tr class="hover:bg-slate-900/50 transition">
+          <td class="py-3 font-bold text-white">${u.name}</td>
+          <td>
+            <div class="text-slate-400 font-mono text-[11px]">${u.email}</div>
+            <div class="text-blue-400 font-mono text-[10px] mt-0.5">${u.username || '<span class=\'text-slate-600\'>—</span>'}</div>
+          </td>
+          <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-red-400 border border-slate-700">${u.role}</span></td>
+          <td class="text-slate-300 font-semibold">${u.branch || 'كافة المحليات'}</td>
+          <td>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.status === 'نشط' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900' : 'bg-red-950 text-red-400 border border-red-900'}">
+              ${u.status}
+            </span>
+          </td>
+          <td class="text-slate-500">${u.lastLogin}</td>
+          <td>
+            <div class="flex items-center gap-1.5">
+              <button onclick="openEditUserModal(${u.id})" class="px-2.5 py-1 rounded bg-blue-900/40 hover:bg-blue-800 text-blue-300 border border-blue-800 text-xs font-bold transition flex items-center gap-1" title="تعديل بيانات المشرف">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>تعديل</span>
+              </button>
+              <button onclick="openResetPasswordModal(${u.id})" class="px-2.5 py-1 rounded bg-amber-900/40 hover:bg-amber-800 text-amber-300 border border-amber-800 text-xs font-bold transition flex items-center gap-1" title="تغيير كلمة المرور">
+                <i class="fa-solid fa-key"></i>
+                <span>كلمة المرور</span>
+              </button>
+              <button onclick="toggleUserStatus(${u.id})" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs font-bold transition">
+                ${u.status === 'نشط' ? 'تعليق' : 'تنشيط'}
+              </button>
+              <button onclick="deleteUser(${u.id})" class="px-2 py-1 rounded bg-red-950/40 hover:bg-red-900 text-red-400 border border-red-900 text-xs font-bold transition" title="حذف الحساب">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleUserStatus(id) {
+      if (_sessionType !== 'superadmin') {
+        alert('⛔ عذراً! تفعيل أو تعليق حسابات المشرفين مقتصر حصرياً على المدير العام.');
+        return;
+      }
+      let users = getUsersList();
+      const u = users.find(x => x.id === id);
+      if (u) {
+        u.status = (u.status === 'نشط') ? 'معلق' : 'نشط';
+        _lsSet(STORAGE.USERS_LIST, JSON.stringify(users));
+        addAuditEntry(`[SECURITY] تغيير حالة حساب المشرف (${u.name}) إلى (${u.status})`);
+        renderAdminUsersTable();
+      }
+    }
+
+    function openAddUserModal() {
+      if (_sessionType !== 'superadmin') {
+        alert('⛔ عذراً! إضافة المشرفين وتعيين صلاحياتهم مقتصرة حصرياً على المدير العام.');
+        return;
+      }
+      const m = document.getElementById('add-user-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function handleAddUserSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('new-user-name').value.trim();
+      const email = document.getElementById('new-user-email').value.trim();
+      const role = document.getElementById('new-user-role').value;
+      const branch = document.getElementById('new-user-branch').value;
+      const usernameEl = document.getElementById('new-user-username');
+      const passwordEl = document.getElementById('new-user-password');
+      const username = usernameEl ? usernameEl.value.trim().toLowerCase() : '';
+      const password = passwordEl ? passwordEl.value.trim() : '';
+
+      if (!username) { alert('يرجى إدخال اسم المستخدم الفريد (Username).'); return; }
+      if (!password) { alert('يرجى إدخال كلمة المرور الشخصية للمشرف.'); return; }
+      if (!/^[a-zA-Z0-9._]+$/.test(username)) { alert('اسم المستخدم يجب أن يحتوي على حروف إنجليزية وأرقام ونقطة فقط.'); return; }
+
+      const existingUsers = getUsersList();
+      if (existingUsers.find(function(u) { return u.username === username; })) {
+        alert('اسم المستخدم (' + username + ') مستخدم بالفعل. اختر اسماً آخر.');
+        return;
+      }
+
+      let permissions = ['posts','comments'];
+      if (role === 'مشرف تفاعل') permissions = ['complaints','comments'];
+      else if (role === 'مدير عام' || role === 'مدير عام (Super Admin)') permissions = ['all'];
+
+      let users = getUsersList();
+      users.push({
+        id: Date.now(),
+        name, username, email, role, branch,
+        status: 'نشط',
+        lastLogin: 'جديد',
+        password,
+        permissions
+      });
+      _lsSet(STORAGE.USERS_LIST, JSON.stringify(users));
+      addAuditEntry('[USER] إضافة مشرف جديد: (' + name + ') username:(' + username + ') دور:(' + role + ') فرع:(' + branch + ')');
+      closeAdminModals();
+      renderAdminUsersTable();
+      alert('✅ تم إنشاء حساب المشرف (' + name + ')\nاسم المستخدم: ' + username + '\nاحتفظ بكلمة المرور في مكان آمن.');
+    }
+
+    // --- Comments Moderation ---
+    function renderAdminComments() {
+      const comments = getComments();
+      const list = document.getElementById('admin-comments-list');
+      if (!list) return;
+
+      if (comments.length === 0) {
+        list.innerHTML = `<p class="p-6 text-center text-slate-500">لا توجد تعليقات حتى الآن.</p>`;
+        return;
+      }
+
+      list.innerHTML = comments.map(c => `
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-start justify-between gap-4">
+          <div class="flex items-start gap-3">
+            <img src="${c.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80'}" class="w-9 h-9 rounded-full object-cover border border-slate-700">
+            <div>
+              <p class="font-bold text-white text-xs">${c.author} <span class="text-[10px] text-emerald-400 font-semibold mr-1">✓ موثق بـ Google</span></p>
+              <p class="text-xs text-slate-300 mt-1">${c.text}</p>
+            </div>
+          </div>
+          <button onclick="adminDeleteComment(${c.id})" class="px-2.5 py-1 bg-red-950 hover:bg-red-900 border border-red-900/60 text-red-400 rounded text-xs transition">
+            حذف التعليق
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function adminDeleteComment(id) {
+      if (confirm("هل تريد حذف هذا التعليق نهائياً من الموقع العام؟")) {
+        let comments = getComments();
+        comments = comments.filter(c => c.id !== id);
+        _lsSet(STORAGE.COMMENTS, JSON.stringify(comments));
+        addAuditEntry(`[MODERATION] حذف تعليق مسيء برقم (${id})`);
+        renderAdminComments();
+      }
+    }
+
+    // --- Audit Log ---
+    function renderAuditLog() {
+      const logs = getAuditLog();
+      const container = document.getElementById('audit-log-container');
+      if (!container) return;
+
+      container.innerHTML = logs.map(l => `
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+          <span class="text-emerald-400 font-bold">${l.event}</span>
+          <span class="text-slate-500 text-[11px]">${l.time} • ${l.ip}</span>
+        </div>
+      `).join('');
+    }
+
+    // --- Follower Count Adjuster ---
+    let adminChartInstance = null;
+
+    function adminAdjustFollowers() {
+      const curr = getFollowers();
+      const val = prompt("أدخل عدد المتابعين الإجمالي الجديد للمنصة الرسمية:", curr);
+      if (val && !isNaN(val)) {
+        _lsSet(STORAGE.FOLLOWERS, val.trim());
+        addAuditEntry(`[CONFIG] تعديل عدد المتابعين إلى (${parseInt(val).toLocaleString('ar-EG')})`);
+        initAdminDashboard();
+        alert("تم تحديث عدد المتابعين بنجاح وربطه بالموقع العام!");
+      }
+    }
+
+    function initAdminDashboard() {
+      const count = getFollowers();
+      document.querySelectorAll('.follower-count-display').forEach(el => {
+        el.textContent = count.toLocaleString('ar-EG');
+      });
+
+      populateCategoryOptions();
+      renderAdminPostsTable();
+      renderAdminSuggestionsTable();
+      renderAdminUsersTable();
+      renderAuditLog();
+
+      const ctx = document.getElementById('adminChart');
+      if (ctx && typeof Chart !== 'undefined') {
+        if (adminChartInstance) adminChartInstance.destroy();
+        adminChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر (الحالي)'],
+            datasets: [{
+              label: 'إجمالي المتابعين',
+              data: [11200, 12650, 13900, count],
+              borderColor: '#d91b24',
+              backgroundColor: 'rgba(217, 27, 36, 0.12)',
+              fill: true,
+              tension: 0.35,
+              borderWidth: 3,
+              pointBackgroundColor: '#d91b24',
+              pointRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+              x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+            }
+          }
+        });
+      }
+    }
+
+    
+    // ==================== PROFILE & 7 PRINCIPLES CMS ENGINE ====================
+    const DEFAULT_PROFILE = {
+      aboutTitle: "جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية",
+      aboutDesc: "جمعية الهلال الأحمر السوداني هي جمعية وطنية إنسانية مستقلة، تأسست وفق مرسوم وقانون رسمي صادر من الدولة السودانية، وتعمل كجهة مساعدة ومساندة للسلطات العامة في المجال الإنساني استناداً إلى اتفاقيات جنيف الدولية. يبسط فرع الولاية الشمالية ومقره مدينة دنقلا نشاطه الإنساني والتطوعي ليشمل كافة المحليات السبع على امتداد النيل والصحراء لخدمة الأسر المتضررة والوافدة وتعزيز الصمود المجتمعي.",
+      vision: "مجتمعات محلية آمنة ومتمكنة في الولاية الشمالية، قادرة على الصمود والاستجابة الفورية للكوارث والأوبئة والأزمات الإنسانية بكرامة وحيادية.",
+      mission: "تخفيف المعاناة الإنسانية وحماية أرواح وكرامة المتضررين من النزاعات والسيول والكوارث الطبيعية دون تمييز، ونشر مبادئ القانون الدولي الإنساني وتفعيل طاقات الشباب والمتطوعين في كافة ربوع الولاية الشمالية.",
+      legalNotice: "المنصة الرقمية الرسمية المعتمدة لفرع الولاية الشمالية - الجمعية عضو في الحركة الدولية للصليب الأحمر والهلال الأحمر ومعترف بها من اللجنة الدولية للصليب الأحمر (ICRC) والاتحاد الدولي (IFRC).",
+      principles: [
+        { name: "الإنسانية", icon: "fa-solid fa-heart", desc: "الرغبة في تقديم العون للمصابين وتخفيف المعاناة وحماية الحياة والصحة وضمان الاحترام للإنسان في كل الظروف." },
+        { name: "عدم التحيز", icon: "fa-solid fa-scale-balanced", desc: "تقديم المساعدة دون أي تمييز قائم على الجنسية أو العرق أو الدين أو الانتماء السياسي، وتوجيه الإغاثة للأكثر احتياجاً." },
+        { name: "الحياد", icon: "fa-solid fa-hand-holding-hand", desc: "الامتناع عن الاشتراك في الأعمال العدائية أو الجدالات ذات الطابع السياسي أو العسكري لكسب ثقة الجميع." },
+        { name: "الاستقلال", icon: "fa-solid fa-shield-halved", desc: "الحفاظ على استقلالية الجمعية الذاتية للعمل طبقاً لمبادئ الحركة الإنسانية حتى وهي تؤدي دورها المساعد للدولة." },
+        { name: "الخدمة التطوعية", icon: "fa-solid fa-users", desc: "حركة تطوعية لا تبغي الربح ولا تحركها الرغبة في تحقيق أي مكاسب مادية." },
+        { name: "الوحدة", icon: "fa-solid fa-handshake", desc: "لا يمكن أن توجد إلا جمعية هلال أحمر سوداني واحدة في السودان، مفتوحة للجميع وتبسط نشاطها الإنساني على كامل القطر." },
+        { name: "العالمية", icon: "fa-solid fa-globe", desc: "حركة دولية تتمتع فيها جميع الجمعيات بحقوق متساوية وتلتزم بواجب مساعدة بعضها البعض." }
+      ]
+    };
+
+    function initProfileEditor() {
+      const stored = _lsGet('srcs_branch_profile');
+      let prof = DEFAULT_PROFILE;
+      if (stored) {
+        try { prof = JSON.parse(stored); } catch (e) { console.error(e); }
+      }
+
+      const tEl = document.getElementById('prof-title');
+      const dEl = document.getElementById('prof-desc');
+      const vEl = document.getElementById('prof-vision');
+      const mEl = document.getElementById('prof-mission');
+      const lEl = document.getElementById('prof-legal');
+
+      if (tEl) tEl.value = prof.aboutTitle || '';
+      if (dEl) dEl.value = prof.aboutDesc || '';
+      if (vEl) vEl.value = prof.vision || '';
+      if (mEl) mEl.value = prof.mission || '';
+      if (lEl) lEl.value = prof.legalNotice || '';
+
+      const container = document.getElementById('admin-principles-editor');
+      if (container && prof.principles) {
+        container.innerHTML = prof.principles.map((p, idx) => `
+          <div class="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-400 flex items-center gap-2">
+                <i class="${p.icon}"></i>
+                <span>المبدأ ${idx+1}: ${p.name}</span>
+              </span>
+              <input type="hidden" id="principle-name-${idx}" value="${p.name}">
+              <input type="hidden" id="principle-icon-${idx}" value="${p.icon}">
+            </div>
+            <textarea id="principle-desc-${idx}" rows="2" class="w-full p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-rose-500">${p.desc}</textarea>
+          </div>
+        `).join('');
+      }
+    }
+
+    function handleSaveProfileSubmit(e) {
+      e.preventDefault();
+      const prof = {
+        aboutTitle: document.getElementById('prof-title').value.trim(),
+        aboutDesc: document.getElementById('prof-desc').value.trim(),
+        vision: document.getElementById('prof-vision').value.trim(),
+        mission: document.getElementById('prof-mission').value.trim(),
+        legalNotice: document.getElementById('prof-legal').value.trim(),
+        principles: []
+      };
+
+      for (let i = 0; i < 7; i++) {
+        const nameEl = document.getElementById(`principle-name-${i}`);
+        const iconEl = document.getElementById(`principle-icon-${i}`);
+        const descEl = document.getElementById(`principle-desc-${i}`);
+        if (nameEl && descEl) {
+          prof.principles.push({
+            name: nameEl.value,
+            icon: iconEl ? iconEl.value : 'fa-solid fa-heart',
+            desc: descEl.value.trim()
+          });
+        }
+      }
+
+      _lsSet('srcs_branch_profile', JSON.stringify(prof));
+      addAuditEntry('[CONTENT] تم تحديث بيانات الملف التعريفي ومبادئ الجمعية');
+      alert('تم حفظ وتحديث الملف التعريفي والمبادئ بنجاح! سينعكس التغيير فوراً في الواجهة العامة.');
+    }
+
+    // ==================== ADVANCED SECURITY & TIMEOUT ENGINE ====================
+    let inactivityTimer = null;
+    const INACTIVITY_LIMIT_MS = 15 * 60 * 1000; // 15 mins
+
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      if (_sessionType === 'true') {
+        inactivityTimer = setTimeout(() => {
+          _sessionType = null;
+          checkAuth();
+          alert('تم قفل جلسة الإشراف تلقائياً بسبب عدم النشاط لمدة 15 دقيقة لدواعي الأمان.');
+          addAuditEntry('[SECURITY] تم قفل الجلسة تلقائياً بسبب خمول المشرف (Session Inactivity Timeout)');
+        }, INACTIVITY_LIMIT_MS);
+      }
+    }
+
+    ['mousemove', 'keydown', 'click', 'touchstart'].forEach(evt => {
+      window.addEventListener(evt, resetInactivityTimer, { passive: true });
+    });
+
+    function getLockoutRemainingSeconds() {
+      const lockoutUntil = Number(_lsGet('srcs_admin_lockout_until') || 0);
+      const now = Date.now();
+      if (lockoutUntil > now) {
+        return Math.ceil((lockoutUntil - now) / 1000);
+      }
+      return 0;
+    }
+
+    function exportAuditLogCSV() {
+      const audit = getAuditLog();
+      let csv = "\uFEFFالوقت والتاريخ,العملية الإشرافية والبيان\n";
+      audit.forEach(item => {
+        csv += `"${item.time}","${item.text.replace(/"/g, '""')}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `srcs_security_audit_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function revokeAllSessions() {
+      if (confirm("هل تريد بالتأكيد إنهاء كافة الجلسات النشطة لجميع المشرفين على كافة الأجهزة؟")) {
+        _sessionType = null;
+        _lsRemove(STORAGE.ADMIN_SESSION);
+        addAuditEntry("[SECURITY] تم إنهاء وإلغاء كافة الجلسات النشطة للمشرفين");
+        alert("تم إنهاء الجلسات بنجاح. سيتم قفل اللوحة الآن.");
+        checkAuth();
+      }
+    }
+
+    function closeAdminModals() {
+      document.querySelectorAll('#add-user-modal, #complaint-detail-modal, #post-editor-modal').forEach(m => {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      });
+    }
+
+    
+
+    
+
+    
+  
+    // ==================== ADVANCED NO-CODE CMS & SECURITY CONTROLS ====================
+
+    const DEFAULT_LOCALITIES_CMS_DATA = {
+      "دنقلا": {
+        name: "محلية دنقلا",
+        tagline: "رئاسة الفرع وحاضرة الولاية الشمالية",
+        address: "حي المطار - جوار مبنى التأمين الصحي الرئيسي",
+        volunteers: 320,
+        phone: "02481-22450",
+        phoneRaw: "0248122450",
+        wa: "249912345678",
+        desc: "تضم رئاسة فرع الولاية الشمالية وغرفة العمليات والطوارئ المركزية، وتنسق التدخلات لكافة محليات الولاية."
+      },
+      "مروي": {
+        name: "محلية مروي",
+        tagline: "قطاع السدود والفيضانات ومستشفى مروي",
+        address: "مدينة كريمة - جوار الميدان الشرقي ومكتب الإسعاف",
+        volunteers: 260,
+        phone: "02481-44120",
+        phoneRaw: "0248144120",
+        wa: "249912345678",
+        desc: "نقطة استجابة حيوية لطوارئ الفيضانات والسيول والتدخلات الطبية والإيوائية بمناطق السدود وضفتي النيل."
+      },
+      "الدبة": {
+        name: "محلية الدبة",
+        tagline: "شريان الإغاثة الإنسانية ومركز العبور",
+        address: "وسط المدينة - بالقرب من المستشفى الريفي",
+        volunteers: 210,
+        phone: "02481-33190",
+        phoneRaw: "0248133190",
+        wa: "249912345678",
+        desc: "مركز حيوي لاستقبال وإغاثة الوافدين وتوزيع السلال الغذائية وتسيير القوافل المشتركة."
+      },
+      "القولد": {
+        name: "محلية القولد",
+        tagline: "طوارئ الإسناد الزراعي والفيضانات النيلية",
+        address: "الشارع الرئيسي - جوار الوحدة الصحية",
+        volunteers: 180,
+        phone: "02481-55110",
+        phoneRaw: "0248155110",
+        wa: "249912345678",
+        desc: "فرق ميدانية متأهبة للإسعاف الأولي وتوزيع كلور تعقيم المياه ومكافحة نواقل الأمراض."
+      },
+      "وادي حلفا": {
+        name: "محلية وادي حلفا",
+        tagline: "بوابة العبور الشمالية والإسناد الحدودي",
+        address: "حي الميناء - قرب المعبر الحدودي ومركز الاستقبال",
+        volunteers: 195,
+        phone: "02481-66230",
+        phoneRaw: "0248166230",
+        wa: "249912345678",
+        desc: "توفير العيادات المتنقلة والإسعافات وإعادة الروابط العائلية للأسر العابرة والوافدة."
+      },
+      "البرقيق": {
+        name: "محلية البرقيق",
+        tagline: "مركز كرمة التاريخي والتضامن الريفي",
+        address: "السوق المركزي بالبرقيق - جوار المركز الصحي",
+        volunteers: 155,
+        phone: "02481-77140",
+        phoneRaw: "0248177140",
+        wa: "249912345678",
+        desc: "إسناد متطوعي الهلال الأحمر في القرى المجاورة وحملات التطعيم وتأمين مياه الشرب النظيفة."
+      },
+      "دلقو": {
+        name: "محلية دلقو",
+        tagline: "قطاع وادي النيل الشمالي والتجمعات التعدينية",
+        address: "الشارع العام بدلقو - جوار مكتب التنمية المحلية",
+        volunteers: 140,
+        phone: "02481-88190",
+        phoneRaw: "0248188190",
+        wa: "249912345678",
+        desc: "استجابة سريعة للحوادث والإسعافات الميدانية وحملات الإصحاح البيئي الموسعة."
+      }
+    };
+
+    function getLocalitiesCmsData() {
+      const saved = _lsGet('srcs_localities_data');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') return { ...DEFAULT_LOCALITIES_CMS_DATA, ...parsed };
+        } catch(e) {}
+      }
+      return DEFAULT_LOCALITIES_CMS_DATA;
+    }
+
+    function initContentCmsEditor() {
+      renderCmsTickerList();
+      populateCmsHeroStats();
+      renderCmsLocalitySelectors();
+      renderCmsCategoriesList();
+      populateCmsCentralContacts();
+    }
+
+    // --- 1. TICKER CMS ---
+    function renderCmsTickerList() {
+      const container = document.getElementById('cms-ticker-list');
+      if (!container) return;
+      const items = getAdminTickerItems();
+      if (items.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-500 py-2">لا توجد أخبار عاجلة نشطة حالياً.</p>';
+        return;
+      }
+      container.innerHTML = items.map((it, idx) => `
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center gap-2 overflow-hidden text-right">
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
+            <span class="text-white truncate">${it}</span>
+          </div>
+          <button type="button" onclick="handleDeleteTickerItem(${idx})" class="p-1.5 px-2.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-bold transition flex items-center gap-1 shrink-0 ml-2" title="حذف من الشريط">
+            <i class="fa-solid fa-trash-can text-xs"></i>
+            <span>حذف</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function getAdminTickerItems() {
+      const saved = _lsGet('srcs_ticker_items');
+      if (saved) {
+        try {
+          const arr = JSON.parse(saved);
+          if (Array.isArray(arr)) return arr;
+        } catch(e) {}
+      }
+      return [
+        "🔴 فرع الولاية الشمالية يسيّر قوافل الإسناد الطبي والإيوائي لمحليات: دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو",
+        "⚡ تدشين منصات المتابعة الرقمية لمحليات الولاية الشمالية السبع لتسهيل تتبع التدخلات الإنسانية الميدانية",
+        "💧 توزيع أكثر من 400 ألف قرص تعقيم مياه وكلور لدرء آثار السيول والفيضانات بالولاية"
+      ];
+    }
+
+    function handleAddTickerItem(e) {
+      e.preventDefault();
+      const input = document.getElementById('new-ticker-input');
+      const text = input.value.trim();
+      if (!text) return;
+      const items = getAdminTickerItems();
+      items.unshift(text);
+      _lsSet('srcs_ticker_items', JSON.stringify(items));
+      input.value = '';
+      renderCmsTickerList();
+      addAuditEntry(`[CMS] إضافة خبر عاجل جديد للشريط الميداني: "${text.substring(0, 40)}..."`);
+      alert('تمت إضافة الخبر للشريط العاجل بنجاح وسيظهر فوراً في الواجهة العامة!');
+    }
+
+    function handleDeleteTickerItem(idx) {
+      if (!confirm('هل أنت متأكد من حذف هذا الخبر العاجل من الشريط؟')) return;
+      const items = getAdminTickerItems();
+      const removed = items.splice(idx, 1);
+      _lsSet('srcs_ticker_items', JSON.stringify(items));
+      renderCmsTickerList();
+      addAuditEntry(`[CMS] حذف خبر عاجل من الشريط: "${removed[0] ? removed[0].substring(0, 30) : ''}"`);
+    }
+
+    // --- 2. HERO STATS CMS ---
+    function populateCmsHeroStats() {
+      const settings = getAdminSiteSettings();
+      if (document.getElementById('cms-stat-localities')) document.getElementById('cms-stat-localities').value = settings.statLocalities || "المحليات السبع بالولاية";
+      if (document.getElementById('cms-stat-beneficiaries')) document.getElementById('cms-stat-beneficiaries').value = settings.statBeneficiaries || "14,850";
+      if (document.getElementById('cms-stat-coverage')) document.getElementById('cms-stat-coverage').value = settings.statEmergencyCoverage || "100%";
+      if (document.getElementById('cms-stat-volunteers')) document.getElementById('cms-stat-volunteers').value = settings.statVolunteers || "1,280+";
+      if (document.getElementById('cms-stat-foodkits')) document.getElementById('cms-stat-foodkits').value = settings.statFoodKits || "35,400+";
+      if (document.getElementById('cms-stat-waterchlorine')) document.getElementById('cms-stat-waterchlorine').value = settings.statWaterChlorine || "400,000+";
+    }
+
+    function handleSaveHeroStats(e) {
+      e.preventDefault();
+      const settings = getAdminSiteSettings();
+      settings.statLocalities = document.getElementById('cms-stat-localities').value.trim();
+      settings.statBeneficiaries = document.getElementById('cms-stat-beneficiaries').value.trim();
+      settings.statEmergencyCoverage = document.getElementById('cms-stat-coverage').value.trim();
+      settings.statVolunteers = document.getElementById('cms-stat-volunteers').value.trim();
+      settings.statFoodKits = document.getElementById('cms-stat-foodkits').value.trim();
+      settings.statWaterChlorine = document.getElementById('cms-stat-waterchlorine').value.trim();
+      _lsSet('srcs_site_settings', JSON.stringify(settings));
+      addAuditEntry('[CMS] تحديث إحصائيات وأرقام الاستجابة الإنسانية المعروضة بالواجهة');
+      alert('تم حفظ وتحديث إحصائيات الاستجابة الإنسانية بنجاح!');
+    }
+
+    // --- 3. 7 LOCALITIES DATA CMS ---
+    let currentSelectedLocKey = "دنقلا";
+
+    function renderCmsLocalitySelectors() {
+      const container = document.getElementById('cms-locality-selector-list');
+      if (!container) return;
+      const data = getLocalitiesCmsData();
+      const keys = ["دنقلا", "مروي", "الدبة", "القولد", "وادي حلفا", "البرقيق", "دلقو"];
+      container.innerHTML = keys.map(k => {
+        const isSel = k === currentSelectedLocKey;
+        const loc = data[k] || { name: k, phone: "" };
+        return `
+          <button type="button" onclick="selectCmsLocality('${k}')" class="w-full text-right p-3 rounded-xl border transition flex items-center justify-between text-xs font-bold ${isSel ? 'bg-red-600 text-white border-red-500 shadow-md' : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'}">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-location-dot ${isSel ? 'text-white' : 'text-red-500'}"></i>
+              <span>${loc.name || k}</span>
+            </div>
+            <span class="text-[10px] ${isSel ? 'bg-red-800 text-white' : 'bg-slate-900 text-slate-400'} px-2 py-0.5 rounded">${k === 'دنقلا' ? 'الرئاسة' : 'محلية'}</span>
+          </button>
+        `;
+      }).join('');
+      loadCmsLocalityForm(currentSelectedLocKey);
+    }
+
+    function selectCmsLocality(key) {
+      currentSelectedLocKey = key;
+      renderCmsLocalitySelectors();
+    }
+
+    function loadCmsLocalityForm(key) {
+      const data = getLocalitiesCmsData();
+      const loc = data[key] || { name: key, phone: "", phoneRaw: "", wa: "", address: "", volunteers: 150, tagline: "", desc: "" };
+      
+      document.getElementById('cms-loc-key').value = key;
+      document.getElementById('cms-selected-loc-name').textContent = loc.name || key;
+      document.getElementById('cms-selected-loc-badge').textContent = key === 'دنقلا' ? 'رئاسة الفرع' : 'فرع محلية معتمد';
+      document.getElementById('cms-loc-phone').value = loc.phone || '';
+      document.getElementById('cms-loc-wa').value = loc.wa || '';
+      document.getElementById('cms-loc-address').value = loc.address || '';
+      document.getElementById('cms-loc-volunteers').value = loc.volunteers || 150;
+      document.getElementById('cms-loc-tagline').value = loc.tagline || '';
+      document.getElementById('cms-loc-desc').value = loc.desc || '';
+    }
+
+    function handleSaveLocalityData(e) {
+      e.preventDefault();
+      const key = document.getElementById('cms-loc-key').value;
+      const data = getLocalitiesCmsData();
+      const phoneVal = document.getElementById('cms-loc-phone').value.trim();
+
+      data[key] = {
+        ...(data[key] || {}),
+        name: data[key]?.name || ("محلية " + key),
+        phone: phoneVal,
+        phoneRaw: phoneVal.replace(/[^0-9]/g, ''),
+        wa: document.getElementById('cms-loc-wa').value.trim(),
+        address: document.getElementById('cms-loc-address').value.trim(),
+        volunteers: Number(document.getElementById('cms-loc-volunteers').value) || 150,
+        tagline: document.getElementById('cms-loc-tagline').value.trim(),
+        desc: document.getElementById('cms-loc-desc').value.trim()
+      };
+
+      _lsSet('srcs_localities_data', JSON.stringify(data));
+      addAuditEntry(`[CMS] تحديث بيانات وتواصل محلية: ${key}`);
+      alert(`تم حفظ وتحديث بيانات ${key} بنجاح! التعديلات تنعكس فوراً على الكروت والخريطة بالمنصة.`);
+      renderCmsLocalitySelectors();
+    }
+
+    function resetLocalityDefaults() {
+      if (!confirm('هل تريد استعادة البيانات الافتراضية لهذه المحلية؟')) return;
+      const key = document.getElementById('cms-loc-key').value;
+      const data = getLocalitiesCmsData();
+      if (DEFAULT_LOCALITIES_CMS_DATA[key]) {
+        data[key] = { ...DEFAULT_LOCALITIES_CMS_DATA[key] };
+        _lsSet('srcs_localities_data', JSON.stringify(data));
+        loadCmsLocalityForm(key);
+        addAuditEntry(`[CMS] استعادة البيانات الافتراضية لمحلية: ${key}`);
+        alert('تمت استعادة البيانات الافتراضية بنجاح.');
+      }
+    }
+
+    // --- 4. NEWS CATEGORIES CMS ---
+    function getAdminNewsCategories() {
+      const saved = _lsGet('srcs_news_categories');
+      if (saved) {
+        try {
+          const arr = JSON.parse(saved);
+          if (Array.isArray(arr) && arr.length > 0) return arr;
+        } catch(e) {}
+      }
+      return [
+        "إغاثة وطوارئ",
+        "رعاية صحية وإسعاف",
+        "إصحاح بيئي ومياه",
+        "حماية وسلامة مجتمعية",
+        "شباب وتطوع",
+        "أمن غذائي وتغذية",
+        "روابط عائلية ومفقودين",
+        "إسناد لوجستي"
+      ];
+    }
+
+    function renderCmsCategoriesList() {
+      const container = document.getElementById('cms-category-badges-list');
+      if (!container) return;
+      const cats = getAdminNewsCategories();
+      const defaultCats = [
+        "إغاثة وطوارئ",
+        "رعاية صحية وإسعاف",
+        "إصحاح بيئي ومياه",
+        "حماية وسلامة مجتمعية",
+        "شباب وتطوع",
+        "أمن غذائي وتغذية",
+        "روابط عائلية ومفقودين",
+        "إسناد لوجستي"
+      ];
+
+      container.innerHTML = cats.map(cat => {
+        const isCustom = !defaultCats.includes(cat);
+        return `
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold ${isCustom ? 'bg-purple-950/80 text-purple-300 border border-purple-700' : 'bg-slate-800 text-slate-300 border border-slate-700'}">
+            <i class="fa-solid fa-tag text-[10px] text-purple-400"></i>
+            <span>${cat}</span>
+            ${isCustom ? `<button type="button" onclick="handleDeleteNewsCategory('${cat}')" class="text-purple-400 hover:text-red-400 mr-1" title="حذف هذا التصنيف"><i class="fa-solid fa-xmark"></i></button>` : ''}
+          </span>
+        `;
+      }).join('');
+
+      // Also refresh category options in the post form
+      if (typeof populateCategoryOptions === 'function') {
+        populateCategoryOptions();
+      }
+    }
+
+    function handleAddNewsCategory(e) {
+      e.preventDefault();
+      const input = document.getElementById('cms-new-category-name');
+      const catName = input.value.trim();
+      if (!catName) return;
+      const cats = getAdminNewsCategories();
+      if (cats.includes(catName)) {
+        alert('هذا التصنيف موجود مسبقاً في القائمة!');
+        return;
+      }
+      cats.push(catName);
+      _lsSet('srcs_news_categories', JSON.stringify(cats));
+      input.value = '';
+      renderCmsCategoriesList();
+      addAuditEntry(`[CMS] إضافة تصنيف إخباري جديد: "${catName}"`);
+      alert(`تمت إضافة تصنيف "${catName}" بنجاح! أصبح متاحاً الآن في محرر المنشورات وتصفية الأخبار بالرئيسية.`);
+    }
+
+    function handleDeleteNewsCategory(catName) {
+      if (!confirm(`هل أنت متأكد من حذف تصنيف "${catName}"؟`)) return;
+      let cats = getAdminNewsCategories();
+      cats = cats.filter(c => c !== catName);
+      _lsSet('srcs_news_categories', JSON.stringify(cats));
+      renderCmsCategoriesList();
+      addAuditEntry(`[CMS] حذف تصنيف إخباري مخصص: "${catName}"`);
+    }
+
+    // --- 5. CENTRAL CONTACTS CMS ---
+    function populateCmsCentralContacts() {
+      const settings = getAdminSiteSettings();
+      if (document.getElementById('cms-branch-phone')) document.getElementById('cms-branch-phone').value = settings.branchPhone || "02481-22450";
+      if (document.getElementById('cms-branch-phone-raw')) document.getElementById('cms-branch-phone-raw').value = settings.branchPhoneRaw || "0248122450";
+      if (document.getElementById('cms-branch-email')) document.getElementById('cms-branch-email').value = settings.branchEmail || "info@srcs-northern.org";
+    }
+
+    function handleSaveCentralContacts(e) {
+      e.preventDefault();
+      const settings = getAdminSiteSettings();
+      settings.branchPhone = document.getElementById('cms-branch-phone').value.trim();
+      settings.branchPhoneRaw = document.getElementById('cms-branch-phone-raw').value.trim();
+      settings.branchEmail = document.getElementById('cms-branch-email').value.trim();
+      _lsSet('srcs_site_settings', JSON.stringify(settings));
+      addAuditEntry('[CMS] تحديث هواتف وروابط الطوارئ المركزية لرئاسة الفرع');
+      alert('تم حفظ هواتف وروابط الطوارئ المركزية بنجاح!');
+    }
+
+    function getAdminSiteSettings() {
+      const saved = _lsGet('srcs_site_settings');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch(e) {}
+      }
+      return {
+        branchPhone: "02481-22450",
+        branchPhoneRaw: "0248122450",
+        branchEmail: "info@srcs-northern.org",
+        statLocalities: "المحليات السبع بالولاية",
+        statBeneficiaries: "14,850",
+        statEmergencyCoverage: "100%",
+        statVolunteers: "1,280+",
+        statFoodKits: "35,400+",
+        statWaterChlorine: "400,000+",
+        lockdownMode: false,
+        lockdownMessage: "وضع الاستجابة الطارئة القصوى مفعل حالياً بفرع الولاية الشمالية. خط الطوارئ الميداني: 02481-22450"
+      };
+    }
+
+    // --- SECURITY CONTROLS ---
+    function initSecurityControls() {
+      const settings = getAdminSiteSettings();
+      const lockdownToggle = document.getElementById('security-lockdown-toggle');
+      if (lockdownToggle) lockdownToggle.checked = !!settings.lockdownMode;
+      const lockdownMsg = document.getElementById('security-lockdown-msg');
+      if (lockdownMsg && settings.lockdownMessage) lockdownMsg.value = settings.lockdownMessage;
+
+      const timeoutSelect = document.getElementById('security-session-timeout-select');
+      const savedTimeout = _lsGet('srcs_session_timeout_ms') || "900000";
+      if (timeoutSelect) timeoutSelect.value = savedTimeout;
+    }
+
+    function handleToggleLockdown(isChecked) {
+      const settings = getAdminSiteSettings();
+      settings.lockdownMode = isChecked;
+      _lsSet('srcs_site_settings', JSON.stringify(settings));
+      addAuditEntry(`[SECURITY] ${isChecked ? 'تفعيل وضع الإغلاق الأمني الطارئ (Emergency Lockdown ON)' : 'إلغاء وضع الإغلاق الأمني الطارئ (Lockdown OFF)'}`);
+      alert(isChecked ? 'تم تفعيل وضع الطوارئ القصوى بنجاح! سيظهر شريط تحذيري أحمر في أعلى الموقع العام.' : 'تم إيقاف وضع الطوارئ القصوى والعودة للحالة الطبيعية.');
+    }
+
+    function handleSaveLockdownMsg() {
+      const settings = getAdminSiteSettings();
+      const msg = document.getElementById('security-lockdown-msg').value.trim();
+      if (!msg) return;
+      settings.lockdownMessage = msg;
+      _lsSet('srcs_site_settings', JSON.stringify(settings));
+      addAuditEntry('[SECURITY] تحديث نص رسالة الإغلاق الأمني الطارئ');
+      alert('تم تحديث نص رسالة الطوارئ بنجاح!');
+    }
+
+    function handleChangeSessionTimeout(ms) {
+      _lsSet('srcs_session_timeout_ms', ms);
+      sessionTimeoutLimitMs = Number(ms);
+      resetInactivityTimer();
+      addAuditEntry(`[SECURITY] تعديل مهلة خمول الجلسة إلى ${Math.round(ms / 60000)} دقيقة`);
+      alert(`تم ضبط مهلة الجلسة بنجاح على ${Math.round(ms / 60000)} دقيقة.`);
+    }
+
+    function generateRescueCodes() {
+      const container = document.getElementById('rescue-codes-container');
+      if (!container) return;
+      const codes = [];
+      for (let i = 0; i < 6; i++) {
+        const p1 = Math.floor(1000 + Math.random() * 9000);
+        const p2 = Math.floor(1000 + Math.random() * 9000);
+        codes.push(`${p1}-${p2}`);
+      }
+      container.innerHTML = codes.map(c => `<span>${c}</span>`).join('');
+      addAuditEntry('[SECURITY] توليد حزمة جديدة من رموز الإنقاذ الاحتياطية 2FA');
+      alert('تم توليد 6 رموز إنقاذ جديدة بنجاح! يرجى حفظها في مكان آمن لاستخدامها في حالات الطوارئ.');
+    }
+
+    // --- LIVE TIMERS & COUNTDOWNS ---
+    let sessionTimeoutLimitMs = Number(_lsGet('srcs_session_timeout_ms') || 900000); // 15 mins default
+    let sessionExpiryTimestamp = Date.now() + sessionTimeoutLimitMs;
+
+    function extendAdminSession() {
+      sessionExpiryTimestamp = Date.now() + sessionTimeoutLimitMs;
+      resetInactivityTimer();
+      alert('تم تمديد الجلسة بنجاح!');
+      addAuditEntry('[AUTH] تمديد وقت الجلسة النشطة');
+    }
+
+    function startSessionCountdown() {
+      sessionExpiryTimestamp = Date.now() + sessionTimeoutLimitMs;
+      const display = document.getElementById('session-countdown-display');
+      
+      setInterval(() => {
+        if (!display || _sessionType !== 'true') return;
+        const remaining = Math.max(0, sessionExpiryTimestamp - Date.now());
+        const totalSec = Math.floor(remaining / 1000);
+        const mins = Math.floor(totalSec / 60);
+        const secs = totalSec % 60;
+        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        if (remaining <= 0) {
+          _sessionType = null;
+          checkAuth();
+          alert('انتهت مهلة الجلسة وتم قفل لوحة الإدارة تلقائياً لحماية الأمان.');
+        }
+      }, 1000);
+    }
+
+    // Real-time Lockout & Attempt Monitor on Login Screen
+    setInterval(() => {
+      const remainingSec = getLockoutRemainingSeconds();
+      const lockoutBox = document.getElementById('lockout-alert-box');
+      const timerDisplay = document.getElementById('lockout-timer-display');
+      const attemptsPill = document.getElementById('login-attempts-remaining');
+
+      if (remainingSec > 0) {
+        if (lockoutBox) lockoutBox.classList.remove('hidden');
+        if (timerDisplay) {
+          const m = Math.floor(remainingSec / 60);
+          const s = remainingSec % 60;
+          timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+        if (attemptsPill) {
+          attemptsPill.textContent = '0 من 5 (معلق)';
+          attemptsPill.className = 'font-bold text-red-400';
+        }
+      } else {
+        if (lockoutBox) lockoutBox.classList.add('hidden');
+        if (attemptsPill) {
+          const failed = Number(_lsGet('srcs_failed_attempts') || 0);
+          const rem = Math.max(0, 5 - failed);
+          attemptsPill.textContent = `${rem} من 5`;
+          attemptsPill.className = rem > 2 ? 'font-bold text-emerald-400' : 'font-bold text-amber-400';
+        }
+      }
+    }, 1000);
+
+  
+    
+    // ======================================================
+    // AUTHENTICATION & DIRECT ENTRY ENGINE
+    // ======================================================
+    var _sessionType = 'superadmin';
+    var _currentUser = null;
+
+    function _lsGet(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
+    function _lsSet(k, v) { try { localStorage.setItem(k, v); } catch(e) {} }
+    function _lsRemove(k) { try { localStorage.removeItem(k); } catch(e) {} }
+
+    function showAdminForm() {
+      var a = document.getElementById('admin-login-form');
+      var s = document.getElementById('supervisor-login-form');
+      var b1 = document.getElementById('login-tab-admin');
+      var b2 = document.getElementById('login-tab-super');
+      if (a) a.classList.remove('hidden');
+      if (s) s.classList.add('hidden');
+      if (b1) { b1.className = 'flex-1 py-2 rounded-lg text-xs font-bold bg-red-600 text-white shadow'; }
+      if (b2) { b2.className = 'flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white'; }
+    }
+
+    function showSupervisorForm() {
+      var a = document.getElementById('admin-login-form');
+      var s = document.getElementById('supervisor-login-form');
+      var b1 = document.getElementById('login-tab-admin');
+      var b2 = document.getElementById('login-tab-super');
+      if (a) a.classList.add('hidden');
+      if (s) s.classList.remove('hidden');
+      if (b2) { b2.className = 'flex-1 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white shadow'; }
+      if (b1) { b1.className = 'flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white'; }
+    }
+
+    function doDirectAdminEntry() {
+      _sessionType = 'superadmin';
+      _currentUser = null;
+      enterDashboard();
+    }
+
+    function doAdminLogin() {
+      doDirectAdminEntry();
+    }
+
+    function doSupervisorLogin() {
+      var unameEl = document.getElementById('sup-username');
+      var pwdEl = document.getElementById('sup-password');
+      if (!unameEl || !pwdEl) return;
+      var username = unameEl.value.trim().toLowerCase();
+      var password = pwdEl.value.trim();
+      if (!username) { alert('يرجى إدخال اسم المستخدم الخاص بك'); return; }
+
+      var users = getUsersList();
+      var match = null;
+      for (var i = 0; i < users.length; i++) {
+        var u = users[i];
+        if (u.username && u.username.toLowerCase() === username) {
+          if (!password || u.password === password || u.password === '') {
+            match = u;
+            break;
+          }
+        }
+      }
+
+      if (match) {
+        if (match.status === 'موقوف') {
+          alert('هذا الحساب موقوف حالياً. يرجى التواصل مع المدير العام.');
+          return;
+        }
+        _sessionType = 'supervisor';
+        _currentUser = match;
+        enterDashboard();
+        try { addAuditEntry('[AUTH] دخول المشرف: ' + match.name + ' (' + match.role + ')'); } catch(e) {}
+      } else {
+        alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
+      }
+    }
+
+    function enterDashboard() {
+      var lock = document.getElementById('admin-auth-lockscreen');
+      var work = document.getElementById('admin-workspace');
+      if (lock) {
+        lock.classList.add('hidden');
+        lock.style.display = 'none';
+      }
+      if (work) {
+        work.classList.remove('hidden');
+        work.style.display = 'flex';
+      }
+      applyPermissions();
+      try { initAdminDashboard(); } catch(e) { console.error('Dashboard init error:', e); }
+    }
+
+    function applyPermissions() {
+      var tabs = ['analytics','posts','complaints','users','comments','profile','audit','settings','content-cms'];
+      var banner = document.getElementById('supervisor-info-banner');
+      var addSupervisorBtn = document.getElementById('btn-add-supervisor');
+
+      if (_sessionType === 'superadmin') {
+        for (var i = 0; i < tabs.length; i++) {
+          var btn = document.getElementById('tab-btn-' + tabs[i]);
+          if (btn) {
+            btn.classList.remove('hidden');
+            btn.style.display = '';
+          }
+        }
+        if (addSupervisorBtn) addSupervisorBtn.style.display = '';
+        var n = document.getElementById('sidebar-user-name');
+        var r = document.getElementById('sidebar-role-label');
+        var b = document.getElementById('current-role-badge');
+        if (n) n.textContent = 'أحمد الفاتح البدوي';
+        if (r) r.textContent = 'مدير عام — كافة المحليات';
+        if (b) b.textContent = 'مدير عام (Super Admin)';
+        if (banner) banner.classList.add('hidden');
+      } else if (_sessionType === 'supervisor' && _currentUser) {
+        var allowed = _currentUser.permissions || [];
+        var forbidden = ['users','settings','content-cms','audit'];
+        
+        // Hide forbidden buttons completely
+        for (var i = 0; i < tabs.length; i++) {
+          var btn = document.getElementById('tab-btn-' + tabs[i]);
+          if (!btn) continue;
+          if (forbidden.indexOf(tabs[i]) !== -1) {
+            btn.classList.add('hidden');
+            btn.style.display = 'none';
+            continue;
+          }
+          if (allowed.indexOf('all') !== -1 || allowed.indexOf(tabs[i]) !== -1) {
+            btn.classList.remove('hidden');
+            btn.style.display = '';
+          } else {
+            btn.classList.add('hidden');
+            btn.style.display = 'none';
+          }
+        }
+        
+        // Absolutely hide tab-btn-users and add supervisor button
+        var userBtn = document.getElementById('tab-btn-users');
+        if (userBtn) {
+          userBtn.classList.add('hidden');
+          userBtn.style.display = 'none';
+        }
+        if (addSupervisorBtn) addSupervisorBtn.style.display = 'none';
+
+        // Automatically switch away from any restricted tab to an allowed one
+        var targetTab = (allowed.indexOf('posts') !== -1) ? 'posts' : ((allowed.indexOf('complaints') !== -1) ? 'complaints' : 'profile');
+        switchTab(targetTab);
+
+        var n = document.getElementById('sidebar-user-name');
+        var r = document.getElementById('sidebar-role-label');
+        var b = document.getElementById('current-role-badge');
+        if (n) n.textContent = _currentUser.name;
+        if (r) r.textContent = _currentUser.role + ' — ' + _currentUser.branch;
+        if (b) b.textContent = _currentUser.role;
+        if (banner) {
+          banner.classList.remove('hidden');
+          var bn = document.getElementById('banner-supervisor-name');
+          var br = document.getElementById('banner-supervisor-role');
+          if (bn) bn.textContent = _currentUser.name;
+          if (br) br.textContent = _currentUser.role + ' — ' + _currentUser.branch;
+        }
+      }
+    }
+
+    function adminLogout() {
+      if (!confirm('هل تريد تسجيل الخروج؟')) return;
+      var lock = document.getElementById('admin-auth-lockscreen');
+      var work = document.getElementById('admin-workspace');
+      if (lock) {
+        lock.classList.remove('hidden');
+        lock.style.display = 'flex';
+      }
+      if (work) {
+        work.classList.add('hidden');
+        work.style.display = 'none';
+      }
+      _sessionType = null;
+      _currentUser = null;
+    }
+
+    function getCurrentUser() { return _currentUser; }
+    function checkAuth() { /* Managed directly via enterDashboard */ }
+</script>

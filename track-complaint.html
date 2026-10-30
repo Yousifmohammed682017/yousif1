@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متابعة البلاغات والشكاوى | جمعية الهلال الأحمر السوداني - الولاية الشمالية</title>
+  <link rel="icon" type="image/png" href="images/srcs-crescent.png">
+  
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { font-family: 'Cairo', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-red-600 selection:text-white">
+
+  <!-- Top Bar -->
+  <header class="bg-slate-900 border-b border-slate-800 py-3.5 px-4 sticky top-0 z-30 shadow-md">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white border border-red-500/40 flex items-center justify-center p-1 shadow-sm">
+          <img src="images/srcs-crescent.png" style="width: 22px; height: 26px; object-fit: contain;" alt="شعار الهلال الأحمر">
+        </div>
+        <div>
+          <h1 class="text-sm font-black text-white leading-tight">جمعية الهلال الأحمر السوداني</h1>
+          <p class="text-[11px] font-bold text-red-500">فرع الولاية الشمالية — نافذة متابعة البلاغات</p>
+        </div>
+      </div>
+      <a href="index.html" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+    
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      <div class="absolute -top-12 -left-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl"></div>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-red-950/60 border border-red-800 text-red-400 flex items-center justify-center mx-auto mb-3 shadow-inner text-xl">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+        <h2 class="text-lg font-black text-white mb-1">الاستعلام عن حالة البلاغ أو الشكوى</h2>
+        <p class="text-xs text-slate-400">أدخل رقم المتابعة المستلم عند إرسال البلاغ لمتابعة الإجراءات المتخذة</p>
+      </div>
+
+      <form onsubmit="handleTrackSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block font-bold text-slate-300 text-xs mb-1.5 text-right">رقم المتابعة *</label>
+          <div class="relative">
+            <input type="text" id="track-input" required placeholder="مثال: SRCS-8821 أو SUG-8821" 
+              class="w-full pl-3 pr-10 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono text-center text-sm outline-none focus:border-red-500 uppercase tracking-widest transition">
+            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3.5 text-slate-500 text-sm"></i>
+          </div>
+        </div>
+
+        <button type="submit" id="track-btn" class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-search"></i>
+          <span>استعلام فوري</span>
+        </button>
+      </form>
+
+      <!-- Results Area -->
+      <div id="track-result" class="mt-6 hidden"></div>
+
+    </div>
+
+    <!-- Security Note -->
+    <div class="text-center mt-6 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
+      <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+      <span>نظام استعلام محمي وآمن مشفر ولا يكشف أي بيانات شخصية</span>
+    </div>
+
+  </main>
+
+  <script>
+    async function handleTrackSubmit(e) {
+      e.preventDefault();
+      const num = document.getElementById('track-input').value.trim();
+      const resDiv = document.getElementById('track-result');
+      const btn = document.getElementById('track-btn');
+
+      if (!num) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>جاري البحث...</span>';
+
+      try {
+        const response = await fetch(`/api/suggestions/track/${encodeURIComponent(num)}`);
+        const data = await response.json();
+
+        resDiv.classList.remove('hidden');
+
+        if (data.success && data.complaint) {
+          const c = data.complaint;
+          const statusColors = {
+            'جديد': 'bg-blue-950 text-blue-400 border-blue-800',
+            'قيد المعالجة': 'bg-amber-950 text-amber-400 border-amber-800',
+            'مكتمل': 'bg-emerald-950 text-emerald-400 border-emerald-800'
+          };
+          const badgeClass = statusColors[c.status] || 'bg-slate-800 text-slate-300 border-slate-700';
+
+          resDiv.innerHTML = `
+            <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 text-right">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${badgeClass}">
+                  ${c.status}
+                </span>
+                <span class="text-xs font-mono text-slate-400 font-bold">${c.tracking_number}</span>
+              </div>
+              
+              <div>
+                <p class="text-[10px] text-slate-500">محلية الاختصاص والنوع:</p>
+                <p class="text-xs font-bold text-white">${c.type} • محلية ${c.branch}</p>
+              </div>
+
+              <div>
+                <p class="text-[10px] text-slate-500">موضوع البلاغ:</p>
+                <p class="text-xs font-bold text-slate-200">${c.subject}</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800/80 mt-2">
+                <p class="text-[10px] text-red-400 font-bold mb-1 flex items-center gap-1">
+                  <i class="fa-solid fa-reply"></i>
+                  <span>إفادة إدارة الفرع / فريق الاستجابة:</span>
+                </p>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                  ${c.official_response ? c.official_response : 'تم تسجيل البلاغ وهو قيد المتابعة من قبل غرفة الطوارئ بالمحلية.'}
+                </p>
+                ${c.response_by ? `<p class="text-[10px] text-slate-500 mt-2">المسؤول: ${c.response_by} • ${c.response_at || ''}</p>` : ''}
+              </div>
+            </div>
+          `;
+        } else {
+          resDiv.innerHTML = `
+            <div class="p-4 rounded-2xl bg-red-950/40 border border-red-800 text-center text-xs text-red-300">
+              <i class="fa-solid fa-circle-exclamation text-base mb-1 block"></i>
+              <span>${data.message || 'لم يتم العثور على أي بلاغ مسجل بهذا الرقم. يرجى التأكد من الرقم والمحاولة ثانية.'}</span>
+            </div>
+          `;
+        }
+      } catch (err) {
+        resDiv.classList.remove('hidden');
+        resDiv.innerHTML = `
+          <div class="p-4 rounded-2xl bg-amber-950/40 border border-amber-800 text-center text-xs text-amber-300">
+            <span>تعذر الاتصال بالخادم المركزي حالياً. يرجى المحاولة بعد قليل.</span>
+          </div>
+        `;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-search"></i> <span>استعلام فوري</span>';
+      }
+    }
+  </script>
+
+</body>
+</html>

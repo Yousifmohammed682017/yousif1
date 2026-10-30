@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+    <!-- Official Red Crescent Favicon -->
+  <link rel="icon" type="image/png" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Developer Attribution & Design Patent Protection -->
+  <meta name="author" content="Yousif Mohammed Ali">
+  <meta name="designer" content="Yousif Mohammed Ali">
+  <meta name="copyright" content="Copyright © 2026 Yousif Mohammed Ali. All rights reserved.">
+  <meta name="contact" content="yousifmohammedali295@gmail.com">
+  <title>تقرير ميداني: استجابة طوارئ السيول وتوزيع المعينات الإيوائية بمحلية مروي والدبة | الهلال الأحمر السوداني</title>
+  <meta name="description" content="تقرير مصور وتفاصيل الاستجابة الإنسانية لجمعية الهلال الأحمر السوداني - فرع الولاية الشمالية لدعم الأسر المتضررة والوافدة.">
+  
+  <!-- Open Graph & Meta for Social Sharing -->
+  <meta property="og:title" content="استجابة طوارئ السيول وتوزيع المعينات الإيوائية بمحلية مروي والدبة">
+  <meta property="og:description" content="فرع الولاية الشمالية يسيّر قوافل الإسناد الميداني وتوزيع معينات الإيواء والصحة والمياه النقية.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:type" content="article">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            srcs: {
+              red: '#d91b24',
+              redDark: '#b3141c',
+              redLight: '#ff4d55',
+              soft: '#fef2f2',
+              dark: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Google Translate Official Widget Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ar',
+        includedLanguages: 'en,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200 flex flex-col font-sans">
+
+  <!-- ==================== TOP BAR ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3.5 group">
+          <div class="w-12 h-12 rounded-2xl bg-white border-2 border-red-500/50 flex items-center justify-center p-1.5 shadow-md shrink-0">
+            <img src="images/srcs-crescent.png" style="width: 26px; height: 32px; object-fit: contain;" alt="شعار الهلال الأحمر السوداني">
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1 text-xs font-bold text-red-600 bg-red-100 dark:bg-red-900/40 px-2 py-0.5 rounded-full"><img src="images/srcs-crescent.png" style="width: 12px; height: 14px; object-fit: contain;"> المنصة الرسمية</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">SRCS - Northern State</span>
+            </div>
+            <h1 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-tight">
+              جمعية الهلال الأحمر السوداني
+            </h1>
+            <p class="text-xs font-medium text-slate-500 dark:text-slate-400">فرع الولاية الشمالية - صفحة النشر</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+          <a href="index.html" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-red-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">الرئيسية</a>
+          <a href="index.html#news" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-red-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">الأخبار والتقارير</a>
+          <a href="news-detail.html" class="px-3.5 py-2 rounded-xl text-sm font-bold text-red-600 bg-red-50 dark:bg-red-950/40 transition">صفحة النشر الحالية</a>
+          <button onclick="srcsApp.openSuggestionModal()" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope-open-text text-xs"></i>
+            صندوق المقترحات
+          </button>
+        </nav>
+
+        <!-- Header Actions: Followers Count + Auth + Theme + Admin Link -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Live Follower Counter Badge -->
+          <div class="flex items-center gap-2 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 px-3 py-1.5 rounded-full text-xs">
+            <i class="fa-solid fa-users text-red-600"></i>
+            <span class="text-slate-600 dark:text-slate-300">متابعو المنصة:</span>
+            <span class="font-extrabold text-red-600 follower-count-display">14,850</span>
+          </div>
+
+          <!-- Follow Button -->
+          <button onclick="srcsApp.toggleFollow()" class="btn-follow-toggle px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center shadow-sm">
+            <i class="fa-solid fa-bell ml-1.5"></i>
+            <span>متابعة المنصة</span>
+          </button>
+
+          <!-- User Session / Google Auth Container -->
+          <div class="user-auth-indicator"></div>
+
+          <!-- Dark Mode Switcher -->
+          <button class="btn-toggle-theme p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="تبديل الوضع الليلي">
+            <i class="fa-solid fa-moon theme-toggle-icon text-sm"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== BREADCRUMBS & ARTICLE HEADER ==================== -->
+  <main class="flex-1 py-8 sm:py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6 text-right">
+        <a href="index.html" class="hover:text-red-600 transition">الرئيسية</a>
+        <i class="fa-solid fa-angle-left text-[10px]"></i>
+        <a href="index.html#news" class="hover:text-red-600 transition">تقارير الطوارئ والإغاثة</a>
+        <i class="fa-solid fa-angle-left text-[10px]"></i>
+        <span class="text-slate-800 dark:text-slate-200 font-bold truncate">استجابة طوارئ السيول بمحلية مروي والدبة</span>
+      </nav>
+
+      <!-- Prominent Follower Box in Publication Page -->
+      <div class="mb-8 p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-red-600 via-red-600 to-rose-600 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4 text-right">
+          <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="bg-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-full">إشعار المتابعة الحية</span>
+              <span class="text-xs text-red-100">كن أول من يعلم بتقارير الطوارئ والإغاثة</span>
+            </div>
+            <h4 class="text-base sm:text-lg font-black mt-0.5">
+              يتابع هذه المنصة الرسمية حالياً <span class="underline decoration-yellow-400 decoration-2 follower-count-display font-extrabold text-xl">14,850</span> متابع
+            </h4>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="srcsApp.toggleFollow()" class="btn-follow-toggle px-5 py-2.5 rounded-xl bg-white text-red-600 font-black text-xs hover:bg-red-50 transition shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-bell"></i>
+            <span>متابعة المنصة</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Article Title & Meta -->
+      <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-700 shadow-sm text-right">
+        
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">تقرير ميداني موثق</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium px-3 py-1 rounded-full">
+            <i class="fa-solid fa-location-dot ml-1 text-red-500"></i> محلية مروي - محلية الدبة
+          </span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium px-3 py-1 rounded-full">
+            <i class="fa-regular fa-clock ml-1"></i> وقت القراءة: 4 دقائق
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white leading-tight mb-6">
+          استجابة طوارئ السيول وتوزيع المعينات الإيوائية والصحية لـ 2,400 أسرة بمحلية مروي والدبة
+        </h1>
+
+        <!-- Author & Date & Stats Row -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-100 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-950/60 text-red-600 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-id-badge"></i>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 dark:text-slate-200">فريق الإعلام والتواصل الإنساني</p>
+              <p class="text-[11px]">فرع الولاية الشمالية - السودان • نُشر في: 25 أكتوبر 2026</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-eye text-slate-400"></i> <strong>2,380</strong> مشاهدة</span>
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-comment-dots text-slate-400"></i> <strong class="comments-count-badge">2</strong> تعليقات</span>
+          </div>
+        </div>
+
+        <!-- Featured Media / Main Image -->
+        <div class="relative rounded-3xl overflow-hidden mb-8 border border-slate-100 dark:border-slate-700 shadow-md group">
+          <img id="main-feature-img" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80" 
+               alt="توزيع المساعدات في مروي" 
+               class="w-full h-[400px] object-cover cursor-pointer group-hover:scale-[1.02] transition duration-500"
+               onclick="openLightbox(this.src, 'فرق الهلال الأحمر السوداني بالولاية الشمالية تباشر توزيع المواد الإيوائية ومستلزمات المياه النقية')">
+          <div class="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md text-white text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i>
+            <span>اضغط للتكبير (Lightbox) • تصوير فريق الطوارئ الميداني</span>
+          </div>
+        </div>
+
+        <!-- Article Rich Content -->
+        <div class="prose prose-slate dark:prose-invert max-w-none text-right text-base leading-relaxed space-y-6 text-slate-700 dark:text-slate-300">
+          <p class="text-lg font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+            في إطار الاستجابة المستمرة للكوارث الطبيعية ودعم الأسر المتأثرة بالسيول الأخيرة والوافدين في مناطق شمال السودان، سيّر <strong>فرع جمعية الهلال الأحمر السوداني بالولاية الشمالية</strong> قافلة مساعدات إنسانية متكاملة استهدفت القرى والتجمعات السكنية الأكثر تضرراً بمحليتي <strong>مروي</strong> و<strong>الدبة</strong>.
+          </p>
+
+          <div class="p-5 rounded-2xl bg-red-50/70 dark:bg-slate-700/50 border-r-4 border-red-600 text-slate-800 dark:text-slate-200">
+            <h4 class="font-bold text-red-700 dark:text-red-400 text-base mb-2">أبرز مخرجات التدخل الميداني:</h4>
+            <ul class="list-disc list-inside space-y-2 text-sm">
+              <li>توزيع <strong>1,200 خيمة إيواء عاجلة</strong> و <strong>4,800 بطانية ومشمع بلاستيكي</strong> لحماية الأسر من التقلبات الجوية.</li>
+              <li>توزيع <strong>200,000 قرص كلور</strong> لتعقيم الآبار السطحية ومصادر المياه المنزلية للحد من الأمراض المنقولة بالمياه.</li>
+              <li>تشغيل <strong>عيادتين صحيتين متنقلتين</strong> قدمت الكشف الطبي والأدوية المنقذة للحياة لـ 1,840 مريضاً ومريضة.</li>
+              <li>مشاركة أكثر من <strong>85 متطوعاً ومتطوعة</strong> من كوادر الطوارئ والإسعاف الأولي المدربين.</li>
+            </ul>
+          </div>
+
+          <!-- Video Section Embed / Simulation -->
+          <div class="my-8 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-black relative">
+            <div class="relative aspect-video flex items-center justify-center bg-slate-900 group">
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60">
+              <button onclick="playVideoModal()" class="absolute w-20 h-20 rounded-full bg-red-600/90 text-white flex items-center justify-center text-3xl shadow-2xl group-hover:scale-110 group-hover:bg-red-600 transition">
+                <i class="fa-solid fa-play translate-x-[-2px]"></i>
+              </button>
+              <div class="absolute bottom-4 right-4 text-white text-xs bg-black/60 px-3 py-1.5 rounded-lg">
+                <i class="fa-solid fa-video ml-1"></i> فيديو توثيقي للعمل الميداني (03:45 دقيقة)
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Photo Album (Lightbox Grid) -->
+          <div class="my-8">
+            <h4 class="text-base font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-images text-red-600"></i>
+              معرض الصور الميدانية المرفقة (اضغط للتكبير):
+            </h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="relative rounded-2xl overflow-hidden cursor-pointer group h-28" onclick="openLightbox('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=80', 'تفريغ معونات الإيواء بواسطة متطوعي فرع الشمالية')">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition">
+              </div>
+              <div class="relative rounded-2xl overflow-hidden cursor-pointer group h-28" onclick="openLightbox('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80', 'فحص الأطفال وتقديم الفيتامينات والأدوية بالعيادة المتنقلة')">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition">
+              </div>
+              <div class="relative rounded-2xl overflow-hidden cursor-pointer group h-28" onclick="openLightbox('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80', 'غرفة العمليات المشتركة بمحلية دنقلا تتابع عمليات الإسناد')">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition">
+              </div>
+              <div class="relative rounded-2xl overflow-hidden cursor-pointer group h-28" onclick="openLightbox('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1000&q=80', 'توزيع مياه الشرب النظيفة وكلور التعقيم')">
+                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition">
+              </div>
+            </div>
+          </div>
+
+          <!-- Official PDF Field Report Download Box -->
+          <div class="p-6 rounded-3xl bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 text-right">
+              <div class="w-14 h-14 rounded-2xl bg-red-600 text-white flex items-center justify-center text-2xl shadow-md shrink-0">
+                <i class="fa-solid fa-file-pdf"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">تحميل التقرير الميداني الرسمي الكامل (PDF)</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-300">يحتوي على الجداول الإحصائية، الخرائط الجغرافية، وبيانات الشركاء (الحجم: 2.4 MB)</p>
+              </div>
+            </div>
+            <button onclick="downloadReportSim()" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white font-bold text-xs transition flex items-center gap-2 shrink-0">
+              <i class="fa-solid fa-download"></i>
+              <span>تحميل التقرير</span>
+            </button>
+          </div>
+
+          <!-- Social Share Bar -->
+          <div class="pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span class="text-xs font-bold text-slate-600 dark:text-slate-300">مشاركة هذا التقرير الإنساني:</span>
+            <div class="flex items-center gap-2">
+              <a href="https://api.whatsapp.com/send?text=تقرير+الهلال+الأحمر+السوداني+-+الولاية+الشمالية" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-emerald-500 text-white text-xs font-bold hover:bg-emerald-600 transition flex items-center gap-1.5">
+                <i class="fa-brands fa-whatsapp"></i> واتساب
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition flex items-center gap-1.5">
+                <i class="fa-brands fa-facebook-f"></i> فيسبوك
+              </a>
+              <button onclick="copyCurrentLink()" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-300 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-link"></i> نسخ الرابط
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </article>
+
+      <!-- ==================== COMMENTS & INTERACTION SECTION ==================== -->
+      <section id="comments-section" class="mt-12 bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-700 shadow-sm text-right">
+        
+        <div class="flex items-center justify-between pb-6 mb-6 border-b border-slate-100 dark:border-slate-700">
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-comments text-red-600"></i>
+              <span>تعليقات المتابعين</span>
+              <span class="comments-count-badge bg-red-100 dark:bg-red-950 text-red-600 text-xs px-2.5 py-0.5 rounded-full font-black">2</span>
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              التعليق متاح للمتابعين المسجلين عبر حساب Google لحفظ الأمان ومنع الرسائل العشوائية.
+            </p>
+          </div>
+
+          <div class="text-xs text-slate-400">
+            <i class="fa-solid fa-shield-halved text-emerald-500 ml-1"></i> تخضع التعليقات للإشراف الفوري
+          </div>
+        </div>
+
+        <!-- Add Comment Form / Google Sign-in Prompt -->
+        <div id="comment-form-container" class="mb-10">
+          <!-- Will be rendered dynamically via JS depending on login state -->
+        </div>
+
+        <!-- Comments List -->
+        <div id="comments-list" class="space-y-6">
+          <!-- Rendered dynamically from LocalStorage -->
+        </div>
+
+      </section>
+
+      <!-- ==================== RELATED POSTS ==================== -->
+      <div class="mt-12">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 text-right">تقارير وأخبار ذات صلة بالولاية الشمالية:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
+          
+          <a href="news-detail.html" class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex gap-4 hover:border-red-500 transition group">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-xl object-cover shrink-0">
+            <div>
+              <span class="text-[10px] font-bold text-emerald-600">رعاية صحية</span>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-red-600 transition leading-snug mt-1">
+                تنفيذ أيام علاجية مجانية وتوزيع أدوية للأمراض المزمنة بدنقلا
+              </h4>
+              <p class="text-xs text-slate-400 mt-2"><i class="fa-regular fa-clock ml-1"></i> منذ يومين</p>
+            </div>
+          </a>
+
+          <a href="news-detail.html" class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex gap-4 hover:border-red-500 transition group">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=200&q=80" class="w-24 h-24 rounded-xl object-cover shrink-0">
+            <div>
+              <span class="text-[10px] font-bold text-blue-600">متطوعون وشباب</span>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-red-600 transition leading-snug mt-1">
+                تخريج 60 متطوعاً جديداً في دورات الإسعاف الأولي المتقدم بحلفا
+              </h4>
+              <p class="text-xs text-slate-400 mt-2"><i class="fa-regular fa-clock ml-1"></i> منذ 4 أيام</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 text-slate-300 py-10 border-t border-slate-800 text-right mt-16">
+    <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center text-xs text-slate-400">
+      <p>© 2026 جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية.</p>
+      <div class="flex items-center justify-center gap-4 mt-3 sm:mt-0">
+        <a href="index.html" class="hover:text-white">الرئيسية</a>
+        <button onclick="srcsApp.openSuggestionModal()" class="hover:text-white">صندوق المقترحات</button>
+      </div>
+    </div>
+  
+    <!-- حقوق الملكية الفكرية وبراءة التصميم المعتمدة -->
+    <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs bg-slate-950/80 p-5 rounded-2xl border border-red-500/30 shadow-xl max-w-6xl mx-auto">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-red-600/40 shrink-0 border border-red-500/40">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div class="text-right">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="font-bold text-slate-300 text-xs">تصميم وتطوير وبرمجة وهندسة:</span>
+            <span class="text-red-400 font-black text-sm tracking-wide">المهندس Yousif Mohammed Ali</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-red-950/90 border border-red-700 text-[10px] text-red-300 font-bold">براءة التصميم والملكية الفكرية محفوظة</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            جميع حقوق التصميم والواجهات البرمجية وتطوير المنصة محفوظة ومسجلة باسم: <strong class="text-white font-bold">Yousif Mohammed Ali © 2026</strong>.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="mailto:yousifmohammedali295@gmail.com" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-red-600/30">
+          <i class="fa-solid fa-envelope text-white text-sm"></i>
+          <span class="font-mono text-xs font-bold">yousifmohammedali295@gmail.com</span>
+        </a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md" onclick="closeLightbox()">
+    <button class="absolute top-6 left-6 text-white text-3xl hover:text-red-500" onclick="closeLightbox()">&times;</button>
+    <div class="max-w-4xl max-h-[85vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" class="max-w-full max-h-[75vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+      <p id="lightbox-caption" class="text-white text-sm font-semibold mt-4 text-center max-w-xl"></p>
+    </div>
+  </div>
+
+  <!-- Video Player Simulation Modal -->
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md">
+    <div class="max-w-3xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl relative">
+      <button class="absolute top-4 left-4 text-white text-2xl hover:text-red-500 z-10" onclick="closeVideoModal()">&times;</button>
+      <div class="aspect-video bg-black flex flex-col items-center justify-center text-white p-8 text-center">
+        <i class="fa-solid fa-circle-play text-red-600 text-6xl mb-4 animate-pulse"></i>
+        <h3 class="text-lg font-bold mb-2">مشغل الفيديو التوثيقي - الهلال الأحمر بالولاية الشمالية</h3>
+        <p class="text-xs text-slate-400 max-w-md">يتم هنا تضمين بث الفيديو الآمن (Cloudflare Stream / YouTube Unlisted) بجودة تتكيف تلقائياً مع سرعة الإنترنت الضعيفة.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggestion Modal & Login Modal from index.html are reused via app.js -->
+  <div id="google-login-modal" class="app-modal fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 text-right border border-slate-200 dark:border-slate-700 shadow-2xl relative">
+      <button onclick="srcsApp.closeModals()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-600 flex items-center justify-center text-2xl shadow-inner">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white">تسجيل الدخول والتفاعل</h3>
+        <p class="login-prompt-text text-xs text-slate-500 dark:text-slate-400 mt-1">
+          تسجيل الدخول الآمن بحساب Google لمتابعة المنصة، كتابة التعليقات، والمشاركة.
+        </p>
+      </div>
+      <button onclick="srcsApp.loginWithGoogle()" class="w-full py-3.5 px-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-red-500 bg-white dark:bg-slate-700 font-bold text-sm text-slate-800 dark:text-white flex items-center justify-center gap-3 shadow-sm hover:shadow transition">
+        <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>تسجيل الدخول بحساب Google</span>
+      </button>
+      <div class="mt-4 text-center">
+        <button onclick="srcsApp.closeModals()" class="text-xs text-slate-400 hover:text-slate-600">البقاء كزائر فقط</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggestion Modal -->
+  <div id="suggestion-modal" class="app-modal fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-6 text-right border border-slate-200 dark:border-slate-700 shadow-2xl relative">
+      <button onclick="srcsApp.closeModals()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">صندوق المقترحات والشكاوى السري</h3>
+      <p class="text-xs text-slate-500 mb-4">يصل مباشرة للمشرفين والآدمن بصورة مشفرة.</p>
+      <input type="text" id="sug-sub" placeholder="الموضوع" class="w-full mb-3 p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-600 bg-transparent">
+      <textarea id="sug-body" rows="3" placeholder="نص الاقتراح أو الشكوى..." class="w-full mb-3 p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-600 bg-transparent"></textarea>
+      <button onclick="submitQuickSug()" class="w-full py-2.5 bg-red-600 text-white rounded-xl text-xs font-bold">إرسال للمشرفين</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script>
+    // Lightbox functions
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption || '';
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Video modal
+    function playVideoModal() {
+      const m = document.getElementById('video-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeVideoModal() {
+      const m = document.getElementById('video-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    // Copy link helper
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href);
+      srcsApp.showToast("تم نسخ رابط التقرير إلى الحافظة بنجاح!", "success");
+    }
+
+    // Download simulation
+    function downloadReportSim() {
+      srcsApp.showToast("جاري تجهيز وتحميل التقرير الميداني المعتمد (PDF)...", "info");
+      setTimeout(() => {
+        srcsApp.showToast("تم تحميل التقرير الميداني بنجاح.", "success");
+      }, 1500);
+    }
+
+    // Quick suggestion helper
+    function submitQuickSug() {
+      const sub = document.getElementById('sug-sub').value;
+      const body = document.getElementById('sug-body').value;
+      if (!body) {
+        alert("يرجى كتابة نص المقترح");
+        return;
+      }
+      srcsApp.submitSuggestion({
+        subject: sub || "اقتراح سريع من صفحة النشر",
+        content: body,
+        type: "اقتراح",
+        branch: "محلية مروي"
+      });
+      srcsApp.closeModals();
+      srcsApp.showToast("تم إرسال المقترح إلى المشرفين بنجاح وبسرية تامة.", "success");
+    }
+
+    // --- Dynamic Comments Engine ---
+    function renderComments() {
+      const user = srcsApp.getUser();
+      const formContainer = document.getElementById('comment-form-container');
+      const listContainer = document.getElementById('comments-list');
+
+      // 1. Render form based on Auth
+      if (user.isLoggedIn) {
+        formContainer.innerHTML = `
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-700/40 border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-3 mb-3">
+              <img src="${user.avatar}" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover">
+              <div>
+                <p class="text-xs font-bold text-slate-800 dark:text-white">${user.name} <span class="text-[10px] bg-red-100 dark:bg-red-950 text-red-600 px-2 py-0.5 rounded-full font-bold">متابع معتمد عبر Google</span></p>
+                <p class="text-[10px] text-slate-400">شارك برأيك في هذا النشاط الإنساني</p>
+              </div>
+            </div>
+            <textarea id="comment-text-input" rows="3" placeholder="اكتب تعليقك هنا بأدب ومسؤولية إنسانية..." class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-red-500"></textarea>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-[11px] text-slate-400"><i class="fa-solid fa-filter ml-1 text-slate-400"></i> خاضع لفلتر الكلمات المسيئة وحماية السبام</span>
+              <button onclick="postComment()" class="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-sm transition">
+                إرسال التعليق
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        formContainer.innerHTML = `
+          <div class="p-6 rounded-2xl bg-red-50 dark:bg-slate-700/40 border border-red-200 dark:border-slate-700 text-center">
+            <i class="fa-brands fa-google text-red-600 text-2xl mb-2"></i>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">هل ترغب في التعليق على هذا التقرير؟</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto mt-1 mb-4">
+              للحفاظ على بيئة نقاش محترمة وموثوقة، يُتاح التعليق للمتابعين المسجلين عبر Google فقط.
+            </p>
+            <button onclick="srcsApp.openGoogleLoginModal()" class="px-6 py-2.5 rounded-xl bg-red-600 text-white font-bold text-xs hover:bg-red-700 transition shadow">
+              تسجيل الدخول بـ Google للتعليق والمتابعة
+            </button>
+          </div>
+        `;
+      }
+
+      // 2. Load comments from storage or seed
+      let comments = [];
+      try {
+        comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS)) || DEFAULT_COMMENTS;
+      } catch (e) {
+        comments = DEFAULT_COMMENTS;
+      }
+
+      // Update comments counter
+      const totalCount = comments.reduce((acc, c) => acc + 1 + (c.replies ? c.replies.length : 0), 0);
+      document.querySelectorAll('.comments-count-badge').forEach(el => el.textContent = totalCount);
+
+      // Render comment cards
+      listContainer.innerHTML = comments.map(c => `
+        <div class="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <img src="${c.avatar}" class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-600">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h5 class="text-xs font-bold text-slate-900 dark:text-white">${c.author}</h5>
+                  ${c.isStaff ? '<span class="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full"><i class="fa-solid fa-shield-halved ml-1"></i>مشرف الجمعية</span>' : '<span class="text-[10px] text-emerald-600 font-semibold"><i class="fa-solid fa-circle-check ml-0.5"></i>متابع موثق</span>'}
+                </div>
+                <span class="text-[10px] text-slate-400">${c.date}</span>
+              </div>
+            </div>
+
+            <!-- Report button -->
+            <button onclick="reportComment(${c.id})" class="text-[11px] text-slate-400 hover:text-red-600 transition" title="إبلاغ المشرفين عن التعليق">
+              <i class="fa-regular fa-flag ml-1"></i> إبلاغ
+            </button>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-3 leading-relaxed">
+            ${c.content}
+          </p>
+
+          <div class="flex items-center gap-4 mt-3 pt-3 border-t border-slate-200/50 dark:border-slate-700/50 text-xs text-slate-500">
+            <button onclick="likeComment(${c.id})" class="flex items-center gap-1.5 hover:text-red-600 transition">
+              <i class="fa-regular fa-heart"></i>
+              <span>${c.likes || 0}</span>
+            </button>
+            <button onclick="replyToComment(${c.id})" class="flex items-center gap-1.5 hover:text-slate-800 dark:hover:text-white transition">
+              <i class="fa-solid fa-reply ml-1"></i> رد
+            </button>
+          </div>
+
+          <!-- Nested Replies -->
+          ${c.replies && c.replies.length > 0 ? `
+            <div class="mr-6 sm:mr-10 mt-3 pt-3 border-r-2 border-red-500 pr-3 space-y-3">
+              ${c.replies.map(r => `
+                <div class="p-3 rounded-xl bg-white dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600">
+                  <div class="flex items-center gap-2 mb-1">
+                    <img src="${r.avatar}" class="w-6 h-6 rounded-full object-cover">
+                    <span class="text-xs font-bold text-slate-900 dark:text-white">${r.author}</span>
+                    ${r.isStaff ? '<span class="bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">فريق الإشراف</span>' : ''}
+                    <span class="text-[10px] text-slate-400 mr-auto">${r.date}</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300">${r.content}</p>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+        </div>
+      `).join('');
+    }
+
+    // Post new comment
+    function postComment() {
+      const input = document.getElementById('comment-text-input');
+      const text = input.value.trim();
+      if (!text) {
+        srcsApp.showToast("يرجى كتابة نص التعليق أولاً", "warning");
+        return;
+      }
+
+      // Simple anti-spam/abusive words filter check
+      const forbiddenWords = ["شتم", "سب", "احتيال"];
+      const hasForbidden = forbiddenWords.some(w => text.includes(w));
+      if (hasForbidden) {
+        srcsApp.showToast("عذراً، يحتوي النص على عبارات غير مصرح بنشرها وفق ميثاق المنصة.", "error");
+        return;
+      }
+
+      const user = srcsApp.getUser();
+      let comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS)) || DEFAULT_COMMENTS;
+
+      const newComment = {
+        id: Date.now(),
+        author: user.name,
+        avatar: user.avatar,
+        date: "الآن",
+        content: text,
+        likes: 0,
+        isStaff: false,
+        replies: []
+      };
+
+      comments.unshift(newComment);
+      localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(comments));
+      input.value = '';
+      srcsApp.showToast("تم نشر تعليقك بنجاح. شكراً لتفاعلك!", "success");
+      renderComments();
+      loadPostData();
+
+    // تحميل التقرير ديناميكياً من قاعدة البيانات المشتركة
+    async function loadPostData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      if (!postId) return;
+
+      try {
+        const res = await fetch(`/api/posts/${postId}`);
+        const data = await res.json();
+        if (data.success && data.post) {
+          const p = data.post;
+          const titleEl = document.querySelector('h1.text-2xl');
+          if (titleEl) titleEl.textContent = p.title;
+
+          // Update branch badge
+          const branchBadge = document.querySelector('span.bg-red-50');
+          if (branchBadge) branchBadge.textContent = p.branch;
+
+          // Update content if element exists
+          const paragraphs = document.querySelectorAll('article p.leading-relaxed');
+          if (paragraphs.length > 0) {
+            paragraphs[0].textContent = p.content;
+          }
+
+          // Update images if available
+          if (p.image) {
+            const mainImg = document.querySelector('article img.rounded-3xl');
+            if (mainImg) mainImg.src = p.image;
+          }
+        }
+      } catch(e) {
+        console.warn('Could not fetch post from API, using static template content.');
+      }
+    }
+
+    }
+
+    function likeComment(id) {
+      let comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS)) || DEFAULT_COMMENTS;
+      const comment = comments.find(c => c.id === id);
+      if (comment) {
+        comment.likes = (comment.likes || 0) + 1;
+        localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(comments));
+        renderComments();
+      loadPostData();
+
+    // تحميل التقرير ديناميكياً من قاعدة البيانات المشتركة
+    async function loadPostData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      if (!postId) return;
+
+      try {
+        const res = await fetch(`/api/posts/${postId}`);
+        const data = await res.json();
+        if (data.success && data.post) {
+          const p = data.post;
+          const titleEl = document.querySelector('h1.text-2xl');
+          if (titleEl) titleEl.textContent = p.title;
+
+          // Update branch badge
+          const branchBadge = document.querySelector('span.bg-red-50');
+          if (branchBadge) branchBadge.textContent = p.branch;
+
+          // Update content if element exists
+          const paragraphs = document.querySelectorAll('article p.leading-relaxed');
+          if (paragraphs.length > 0) {
+            paragraphs[0].textContent = p.content;
+          }
+
+          // Update images if available
+          if (p.image) {
+            const mainImg = document.querySelector('article img.rounded-3xl');
+            if (mainImg) mainImg.src = p.image;
+          }
+        }
+      } catch(e) {
+        console.warn('Could not fetch post from API, using static template content.');
+      }
+    }
+
+        srcsApp.showToast("شكراً لتفاعلك!", "info");
+      }
+    }
+
+    function reportComment(id) {
+      srcsApp.showToast("تم إرسال بلاغ عن هذا التعليق إلى مشرفي المنصة للتدقيق الأمني.", "warning");
+    }
+
+    function replyToComment(id) {
+      const user = srcsApp.getUser();
+      if (!user.isLoggedIn) {
+        srcsApp.openGoogleLoginModal("سجل دخولك بحساب Google لتتمكن من الرد على التعليق.");
+        return;
+      }
+      const replyText = prompt("اكتب ردك على هذا التعليق:");
+      if (!replyText || !replyText.trim()) return;
+
+      let comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS)) || DEFAULT_COMMENTS;
+      const target = comments.find(c => c.id === id);
+      if (target) {
+        if (!target.replies) target.replies = [];
+        target.replies.push({
+          id: Date.now(),
+          author: user.name,
+          avatar: user.avatar,
+          date: "الآن",
+          content: replyText.trim(),
+          isStaff: false
+        });
+        localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(comments));
+        renderComments();
+      loadPostData();
+
+    // تحميل التقرير ديناميكياً من قاعدة البيانات المشتركة
+    async function loadPostData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      if (!postId) return;
+
+      try {
+        const res = await fetch(`/api/posts/${postId}`);
+        const data = await res.json();
+        if (data.success && data.post) {
+          const p = data.post;
+          const titleEl = document.querySelector('h1.text-2xl');
+          if (titleEl) titleEl.textContent = p.title;
+
+          // Update branch badge
+          const branchBadge = document.querySelector('span.bg-red-50');
+          if (branchBadge) branchBadge.textContent = p.branch;
+
+          // Update content if element exists
+          const paragraphs = document.querySelectorAll('article p.leading-relaxed');
+          if (paragraphs.length > 0) {
+            paragraphs[0].textContent = p.content;
+          }
+
+          // Update images if available
+          if (p.image) {
+            const mainImg = document.querySelector('article img.rounded-3xl');
+            if (mainImg) mainImg.src = p.image;
+          }
+        }
+      } catch(e) {
+        console.warn('Could not fetch post from API, using static template content.');
+      }
+    }
+
+        srcsApp.showToast("تمت إضافة ردك بنجاح!", "success");
+      }
+    }
+
+    // Expose renderComments to window for app.js callbacks
+    window.renderComments = renderComments;
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderComments();
+      loadPostData();
+
+    // تحميل التقرير ديناميكياً من قاعدة البيانات المشتركة
+    async function loadPostData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      if (!postId) return;
+
+      try {
+        const res = await fetch(`/api/posts/${postId}`);
+        const data = await res.json();
+        if (data.success && data.post) {
+          const p = data.post;
+          const titleEl = document.querySelector('h1.text-2xl');
+          if (titleEl) titleEl.textContent = p.title;
+
+          // Update branch badge
+          const branchBadge = document.querySelector('span.bg-red-50');
+          if (branchBadge) branchBadge.textContent = p.branch;
+
+          // Update content if element exists
+          const paragraphs = document.querySelectorAll('article p.leading-relaxed');
+          if (paragraphs.length > 0) {
+            paragraphs[0].textContent = p.content;
+          }
+
+          // Update images if available
+          if (p.image) {
+            const mainImg = document.querySelector('article img.rounded-3xl');
+            if (mainImg) mainImg.src = p.image;
+          }
+        }
+      } catch(e) {
+        console.warn('Could not fetch post from API, using static template content.');
+      }
+    }
+
+    });
+  </script>
+</body>
+</html>

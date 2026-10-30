@@ -1,0 +1,15 @@
+# Sudanese Red Crescent Society - Northern State Branch
+# Production robots.txt
+
+User-agent: *
+Disallow: /admin.html
+Disallow: /*.json$
+Allow: /
+Allow: /index.html
+Allow: /news-detail.html
+Allow: /404.html
+Allow: /css/
+Allow: /js/
+Allow: /manifest.json
+
+Sitemap: sitemap.xml

@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Developer Attribution & Design Patent Protection -->
+  <meta name="author" content="Yousif Mohammed Ali">
+  <meta name="designer" content="Yousif Mohammed Ali">
+  <meta name="copyright" content="Copyright © 2026 Yousif Mohammed Ali. All rights reserved.">
+  <meta name="contact" content="yousifmohammedali295@gmail.com">
+  <title>جمعية الهلال الأحمر السوداني | فرع الولاية الشمالية - المنصة الإعلامية الرسمية</title>
+  <meta name="description" content="المنصة الإعلامية والإنسانية الرسمية لجمعية الهلال الأحمر السوداني بالولاية الشمالية - منصات تفاعلية للمحليات السبع، تقارير ميدانية موثقة، تواصل طوارئ مباشر، وصندوق شكاوى مشفر.">
+  
+  <!-- Open Graph / Meta for Social Media & WhatsApp Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية">
+  <meta property="og:title" content="جمعية الهلال الأحمر السوداني | فرع الولاية الشمالية - المنصة الرسمية">
+  <meta property="og:description" content="متابعة التدخلات الإنسانية، تقارير طوارئ السيول، المعينات الصحية والإيوائية، وقنوات التواصل المباشر مع محليات الولاية الشمالية السبع.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:locale" content="ar_SD">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="جمعية الهلال الأحمر السوداني | فرع الولاية الشمالية">
+  <meta name="twitter:description" content="المنصة الإعلامية والإنسانية الرسمية لفرع الولاية الشمالية وقنوات الطوارئ الميدانية.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Mobile Theme & PWA Manifest -->
+  <meta name="theme-color" content="#d91b24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json">
+  <!-- Official Red Crescent Favicon -->
+  <link rel="icon" type="image/png" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-crescent.png">
+  <link rel="apple-touch-icon" href="images/srcs-logo.png">
+  <meta property="og:image" content="images/srcs-logo.png">
+  <meta name="twitter:image" content="images/srcs-logo.png">
+
+    <!-- Leaflet Interactive Map CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <!-- Google Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            srcs: {
+              red: '#d91b24',
+              redDark: '#b3141c',
+              redLight: '#ff4d55',
+              soft: '#fef2f2',
+              dark: '#0b1120',
+              sidebar: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    * {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    .dark ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    /* Print Stylesheet for humanitarian field reporting */
+    @media print {
+      aside, nav, header, footer, #global-search-container, #live-ticker-container, .no-print, button {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .page-view {
+        display: block !important;
+      }
+    }
+
+
+    /* Breaking News Ticker Animation */
+    @keyframes ticker {
+      0% { transform: translate3d(100%, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker 35s linear infinite;
+    }
+    .ticker-content:hover {
+      animation-play-state: paused;
+    }
+
+    /* Pulse Emergency Effect */
+    @keyframes emergencyPulse {
+      0% { box-shadow: 0 0 0 0 rgba(217, 27, 36, 0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(217, 27, 36, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(217, 27, 36, 0); }
+    }
+    .pulse-emergency { animation: emergencyPulse 2s infinite; }
+
+    /* Smooth Transitions for Views and Modals */
+    .page-view {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script src="js/api-client.js"></script>
+
+  <!-- Google Translate Official Widget Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ar',
+        includedLanguages: 'en,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200 font-sans relative selection:bg-red-600 selection:text-white">
+
+  <!-- Floating Margin Official Seal Badge (وسام الهامش الرسمي المعتمد) -->
+  <div class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-2 border-red-600 shadow-2xl shadow-red-950/30 text-slate-800 dark:text-slate-100 text-xs font-extrabold select-none hover:scale-105 transition pointer-events-auto">
+    <div class="w-7 h-7 rounded-full bg-white border border-red-500 flex items-center justify-center p-0.5 shadow-sm shrink-0">
+      <img src="images/srcs-crescent.png" style="width: 16px; height: 20px; object-fit: contain;" alt="شعار الهلال الأحمر">
+    </div>
+    <div class="text-right">
+      <div class="text-[11px] font-black leading-tight text-red-600 dark:text-red-400">جمعية الهلال الأحمر السوداني</div>
+      <div class="text-[9px] text-slate-500 dark:text-slate-400 font-bold">فرع الولاية الشمالية • البوابة الرسمية</div>
+    </div>
+    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-1"></span>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION LAYOUT (VERTICAL SIDEBAR + CONTENT) ==================== -->
+  <div class="min-h-screen flex flex-col lg:flex-row">
+    
+    <!-- ==================== VERTICAL SIDEBAR NAVIGATION ==================== -->
+    <aside id="main-sidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-white dark:bg-slate-950 border-l border-slate-200 dark:border-slate-800 flex flex-col justify-between p-5 transform translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none shrink-0 overflow-y-auto">
+      
+      <!-- Top Brand Section -->
+      <div class="space-y-6">
+        
+        <!-- Brand & Close Button for Mobile -->
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div onclick="navigateTo('home')" class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-12 h-12 rounded-2xl bg-white dark:bg-slate-900 border-2 border-red-600 flex items-center justify-center p-1.5 shadow-lg shadow-red-600/30 ring-4 ring-red-500/15 group-hover:scale-105 transition shrink-0">
+              <img src="images/srcs-crescent.png" style="width: 26px; height: 32px; object-fit: contain;" alt="شعار الهلال الأحمر السوداني">
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-red-600 bg-red-100 dark:bg-red-900/40 px-2 py-0.5 rounded-full">المنصة الرسمية المعتمدة</span>
+              <h2 class="text-xs font-black text-slate-900 dark:text-white leading-tight mt-1">جمعية الهلال الأحمر السوداني</h2>
+              <p class="text-[10px] font-bold text-red-600 dark:text-red-400">فرع الولاية الشمالية</p>
+            </div>
+          </div>
+          
+          <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 text-slate-400 hover:text-red-600" title="إغلاق القائمة">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Follower Badge & Quick Follow Button in Sidebar -->
+        <div class="p-4 rounded-2xl bg-red-50/70 dark:bg-slate-900/80 border border-red-100 dark:border-slate-800 text-right space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300">متابعو المنصة:</span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="font-extrabold text-red-600 dark:text-red-400 follower-count-display text-sm">14,850</span>
+            </div>
+          </div>
+          <button onclick="toggleFollow()" id="sidebar-follow-btn" class="w-full py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm bg-red-600 text-white hover:bg-red-700">
+            <i class="fa-solid fa-bell"></i>
+            <span>متابعة المنصة</span>
+          </button>
+        </div>
+
+        <!-- Vertical Navigation Links -->
+        <nav class="space-y-1.5 text-right">
+          
+          <button onclick="navigateTo('home')" id="nav-btn-home" class="sidebar-nav-item active w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-md transition">
+            <i class="fa-solid fa-house w-4 text-center"></i>
+            <span>المنصة الرئيسية</span>
+          </button>
+
+          <!-- Submenu for 7 Localities Platforms -->
+          <div class="pt-1">
+            <button onclick="toggleLocalitySubmenu()" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-layer-group w-4 text-center text-red-600"></i>
+                <span>منصات المحليات (7 محليات)</span>
+              </div>
+              <i id="locality-submenu-arrow" class="fa-solid fa-angle-down text-[10px] text-slate-400 transition-transform"></i>
+            </button>
+            <div id="locality-submenu" class="hidden pr-7 pl-2 py-1 space-y-1 border-r-2 border-red-500/30 mr-3 mt-1 text-xs">
+              <button onclick="openLocalityPlatform('دنقلا')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة دنقلا</button>
+              <button onclick="openLocalityPlatform('مروي')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة مروي</button>
+              <button onclick="openLocalityPlatform('الدبة')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة الدبة</button>
+              <button onclick="openLocalityPlatform('القولد')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة القولد</button>
+              <button onclick="openLocalityPlatform('وادي حلفا')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة وادي حلفا</button>
+              <button onclick="openLocalityPlatform('البرقيق')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة البرقيق</button>
+              <button onclick="openLocalityPlatform('دلقو')" class="w-full text-right py-1.5 px-2 rounded-lg hover:text-red-600 dark:hover:text-red-400 text-slate-600 dark:text-slate-300 font-semibold block transition">منصة دلقو</button>
+            </div>
+          </div>
+
+          <button onclick="navigateTo('post')" id="nav-btn-post" class="sidebar-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 hover:bg-red-50/60 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-newspaper w-4 text-center text-red-500"></i>
+            <span>صفحة النشر وأحدث تقرير</span>
+          </button>
+
+          <button onclick="navigateTo('home', 'gallery-section')" id="nav-btn-gallery" class="sidebar-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 hover:bg-red-50/60 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-photo-film w-4 text-center text-blue-500"></i>
+            <span>معرض الصور والفيديوهات</span>
+          </button>
+
+          <button onclick="navigateTo('home', 'map-section')" id="nav-btn-map" class="sidebar-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 hover:bg-red-50/60 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-map-location-dot w-4 text-center text-indigo-500"></i>
+            <span>خريطة الانتشار ومراكز الطوارئ</span>
+          </button>
+
+          <button onclick="navigateTo('home', 'branches-section')" id="nav-btn-branches" class="sidebar-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 hover:bg-red-50/60 dark:hover:bg-slate-800 transition">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-building-shield w-4 text-center text-emerald-500"></i>
+              <span>فروع وتواصل المحليات</span>
+            </div>
+            <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950 text-emerald-600 px-2 py-0.5 rounded-full font-bold">7 محليات</span>
+          </button>
+
+          <button onclick="navigateTo('about')" id="nav-btn-about" class="sidebar-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 hover:bg-red-50/60 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-hand-holding-heart w-4 text-center text-red-500"></i>
+            <span>عن الجمعية والمبادئ السبعة</span>
+          </button>
+
+          <button onclick="openSuggestionModal()" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/20 hover:bg-amber-100 dark:hover:bg-amber-950/40 transition">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-lock w-4 text-center text-amber-500"></i>
+              <span>صندوق الشكاوى والمقترحات</span>
+            </div>
+            <span class="text-[9px] bg-amber-200/60 dark:bg-amber-900/60 px-1.5 py-0.5 rounded text-amber-800 dark:text-amber-200">سري للمشرفين</span>
+          </button>
+
+            <a href="track-complaint.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 transition">
+              <i class="fa-solid fa-clipboard-check text-red-500"></i>
+              <span>متابعة بلاغ سابق</span>
+            </a>
+
+
+
+        </nav>
+
+      </div>
+
+      <!-- Bottom Profile & Settings Section -->
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800 space-y-3">
+        
+        <!-- User Google Auth Widget -->
+        <div id="user-auth-slot"></div>
+
+        <!-- Controls: Notifications & Theme Toggle -->
+        <div class="flex items-center justify-between pt-2">
+          
+          <!-- Notifications Bell -->
+          <div class="relative">
+            <button onclick="toggleNotificationDropdown()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-600 transition flex items-center gap-2 text-xs font-bold" title="التنبيهات">
+              <i class="fa-solid fa-bell"></i>
+              <span>التنبيهات</span>
+              <span id="notif-badge" class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+            </button>
+
+            <!-- Notifications Drawer -->
+            <div id="notif-dropdown" class="hidden absolute bottom-12 right-0 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-4 z-50 text-right">
+              <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100 dark:border-slate-700">
+                <span class="text-xs font-bold text-slate-900 dark:text-white">مركز التنبيهات الإنسانية</span>
+                <span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">2 جديدة</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="p-2 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-900/30">
+                  <p class="font-bold text-red-700 dark:text-red-300 text-[11px]">🚨 نداء طوارئ بمحلية مروي والدبة</p>
+                  <p class="text-slate-600 dark:text-slate-400 text-[10px] mt-0.5">توزيع المعينات لـ 450 أسرة متضررة.</p>
+                </div>
+                <div class="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/30">
+                  <p class="font-bold text-blue-700 dark:text-blue-300 text-[11px]">📦 قافلة إسناد جديدة لدلقو والبرقيق</p>
+                  <p class="text-slate-600 dark:text-slate-400 text-[10px] mt-0.5">انطلاق شاحنات المستلزمات الطبية والمعينات.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-600 transition text-xs font-bold flex items-center gap-1.5" title="تبديل الوضع الليلي">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+            <span class="text-[11px]">الوضع</span>
+          </button>
+
+        </div>
+
+        <div class="text-[10px] text-center text-slate-400 pt-1">
+          © 2026 جمعية الهلال الأحمر السوداني
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- Mobile Overlay Backdrop -->
+    <div id="mobile-backdrop" onclick="closeMobileSidebar()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- ==================== MAIN CONTENT WORKSPACE ==================== -->
+    <div class="flex-1 flex flex-col min-w-0 lg:mr-72">
+      
+      
+
+      <!-- Emergency Lockdown Banner (Shows when emergency lockdown mode is turned ON in Admin) -->
+      <div id="emergency-lockdown-banner" class="hidden bg-red-700 text-white px-4 py-2.5 text-xs font-black text-center flex items-center justify-center gap-2 border-b border-red-800 shadow-md">
+        <i class="fa-solid fa-triangle-exclamation text-base animate-bounce"></i>
+        <span id="emergency-lockdown-text">وضع الاستجابة الطارئة القصوى مفعل حالياً بفرع الولاية الشمالية. خط الطوارئ الميداني: 02481-22450</span>
+      </div>
+
+      <!-- Top Mobile Header & Search Bar -->
+      <div class="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+        
+        <!-- Mobile Sidebar Hamburger & Top Margin Official Logo -->
+        <div class="flex items-center gap-3">
+          <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" title="فتح القائمة">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+
+          <!-- Top Margin Official Logo & Branch Crest (شعار الهلال الأحمر في أعلى هامش الصفحة) -->
+          <div class="flex items-center gap-2.5 bg-white dark:bg-slate-900 px-3 py-1 rounded-xl border border-red-500/30 shadow-sm shrink-0">
+            <img src="images/srcs-crescent.png" style="height: 28px; width: auto; object-fit: contain;" alt="شعار الهلال الأحمر السوداني">
+            <div class="hidden sm:block border-r border-slate-200 dark:border-slate-700 pr-2 mr-1 text-right">
+              <div class="text-[11px] font-black leading-tight text-slate-900 dark:text-white">جمعية الهلال الأحمر السوداني</div>
+              <span class="inline-block px-1.5 py-0.2 rounded-full text-[9px] font-black bg-red-600 text-white mt-0.5">فرع الولاية الشمالية</span>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="relative w-48 sm:w-72 lg:w-96 text-right">
+            <input type="text" id="global-search-input" onkeyup="handleGlobalSearch(this.value)" placeholder="بحث سريع في الأخبار، التقارير، وفروع المحليات السبع..." class="w-full pr-9 pl-4 py-2 rounded-full text-xs bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 outline-none focus:ring-2 focus:ring-red-500 text-slate-800 dark:text-slate-200 transition">
+            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-2.5 text-slate-400 text-xs"></i>
+          </div>
+        </div>
+
+        <!-- Emergency Top Callout -->
+        <div class="flex items-center gap-2">
+          <a href="tel:0248122450" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 border border-red-200 dark:border-red-900/50 text-xs font-bold hover:bg-red-100 transition">
+            <i class="fa-solid fa-phone-volume text-sm animate-bounce"></i>
+            <span>طوارئ الولاية: 02481-22450</span>
+          </a>
+          <button onclick="openSuggestionModal()" class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center gap-1.5 shadow transition">
+            <i class="fa-solid fa-lock text-xs"></i>
+            <span>صندوق الشكاوى</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Breaking News Ticker -->
+      <div class="bg-red-600 text-white text-xs font-semibold py-2 px-4 flex items-center overflow-hidden shadow-sm">
+        <span class="bg-red-800 text-white text-[11px] font-black px-2.5 py-1 rounded-md shrink-0 flex items-center gap-1.5 ml-3 shadow-inner">
+          <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+          عاجل وميداني
+        </span>
+        <div class="overflow-hidden w-full text-right">
+          <div class="ticker-content space-x-reverse space-x-8 text-xs font-medium">
+            <span>🔴 فرع الولاية الشمالية يسيّر قوافل الإسناد الطبي والإيوائي لمحليات: دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو</span>
+            <span>⚡ تدشين منصات المتابعة الرقمية لمحليات الولاية الشمالية السبع لتسهيل تتبع التدخلات الإنسانية الميدانية</span>
+            <span>💧 توزيع أكثر من 400 ألف قرص تعقيم مياه وكلور لدرء آثار السيول والفيضانات بالولاية</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== VIEW 1: HOME PAGE ==================== -->
+      <main id="view-home" class="page-view flex-1">
+        
+        <!-- Hero Section with Urgent Appeal & Statistics -->
+        <section class="relative bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-950 py-12 sm:py-16 border-b border-slate-200 dark:border-slate-800">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Hero Content -->
+            <div class="lg:col-span-7 text-right space-y-4">
+              <div class="inline-flex items-center gap-2 bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 text-xs font-extrabold px-3.5 py-1 rounded-full border border-red-200 dark:border-red-900/60">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>استجابة إنسانية طارئة - الولاية الشمالية</span>
+              </div>
+              
+              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-tight">
+                في قلب الميدان.. إغاثة وعطاء مستمر لأهلنا في الولاية الشمالية
+              </h1>
+              
+              <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                المنصة الإعلامية والإنسانية الرسمية لجمعية الهلال الأحمر السوداني - فرع الولاية الشمالية، مع ربط منصات مخصصة لكافة محليات الولاية السبع (دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو).
+              </p>
+
+              <!-- CTA Action Buttons -->
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <button onclick="navigateTo('post')" class="px-6 py-3.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-600/30 transition flex items-center gap-2">
+                  <i class="fa-solid fa-newspaper"></i>
+                  <span>قراءة أحدث تقرير ميداني</span>
+                </button>
+                <button onclick="navigateTo('home', 'branches-section')" class="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-red-500 font-bold text-sm shadow-sm transition flex items-center gap-2">
+                  <i class="fa-solid fa-layer-group text-red-600"></i>
+                  <span>منصات المحليات السبع</span>
+                </button>
+                <button onclick="openSuggestionModal()" class="px-5 py-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 font-bold text-sm transition flex items-center gap-2 border border-amber-200 dark:border-amber-800">
+                  <i class="fa-solid fa-lock"></i>
+                  <span>صندوق الشكاوى والمقترحات</span>
+                </button>
+              </div>
+
+              <!-- Quick Badges -->
+              <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-right">
+                <div>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">محليات الولاية</p>
+                  <p id="hero-stat-localities" class="text-xl font-black text-slate-800 dark:text-white">المحليات السبع بالولاية</p>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">إجمالي المتابعين</p>
+                  <p class="text-xl font-black text-red-600 follower-count-display">14,850</p>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">تغطية الطوارئ</p>
+                  <p id="hero-stat-coverage" class="text-xl font-black text-emerald-600">100%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Featured Post Hero Card -->
+            <div class="lg:col-span-5" id="hero-featured-post-container"></div>
+
+          </div>
+        </section>
+
+        <!-- Key Live Statistics -->
+        <section class="py-10 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-red-100 dark:bg-red-950/40 text-red-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <div class="text-3xl font-black text-slate-900 dark:text-white follower-count-display">14,850</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">متابع للمنصة الرسمية</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+              </div>
+              <div class="text-3xl font-black text-slate-900 dark:text-white">84,520</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">مستفيد من المساعدات</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-blue-100 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-person-military-pointing"></i>
+              </div>
+              <div class="text-3xl font-black text-slate-900 dark:text-white">1,480+</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">متطوع ومتطوعة مسجلين</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-amber-100 dark:bg-amber-950/40 text-amber-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-truck-medical"></i>
+              </div>
+              <div class="text-3xl font-black text-slate-900 dark:text-white">312</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">تدخلاً طبياً وإغاثياً</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- News Cards Grid with Dynamic Posts Engine -->
+        <section class="py-16">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 text-right">
+              <div>
+                <span class="text-xs font-bold text-red-600 mb-1 inline-block">أحدث التغطيات والتقارير الميدانية المباشرة</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">أخبار وتقارير جمعية الهلال الأحمر بالولاية الشمالية</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">تقارير موثقة بالصور والفيديوهات من كافة محليات الولاية السبع</p>
+              </div>
+
+              <div id="news-categories-filter-bar" class="flex flex-wrap items-center gap-2">
+                <button onclick="filterNewsCategory('all')" id="cat-btn-all" class="news-cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white shadow-sm transition">الكل</button>
+                <!-- Populated dynamically via renderNewsCategoryFilters() -->
+              </div>
+            </div>
+
+            <!-- Dynamic News Grid Container -->
+            <div id="news-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-right"></div>
+
+          </div>
+        </section>
+
+        <!-- Multimedia Gallery Section -->
+        <section id="gallery-section" class="py-16 bg-slate-900 text-white">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 text-right">
+              <div>
+                <span class="text-xs font-bold text-red-500 bg-red-950/60 px-3 py-1 rounded-full">معرض الوسائط التفاعلي</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">توثيق الأنشطة الميدانية بالصور والفيديوهات</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">مشاهد حية لجهود الهلال الأحمر السوداني في كافة محليات الولاية الشمالية</p>
+              </div>
+              
+              <div class="flex items-center gap-2">
+                <button onclick="filterGallery('all')" class="gallery-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-red-600 text-white">الكل</button>
+                <button onclick="filterGallery('photo')" class="gallery-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">الصور الميدانية</button>
+                <button onclick="filterGallery('video')" class="gallery-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">فيديوهات توثيقية</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              
+              <!-- Photo 1 -->
+              <div data-type="photo" class="gallery-item relative rounded-2xl overflow-hidden group h-52 sm:h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80', 'متطوعو الهلال الأحمر يجهزون خيام الإيواء للمتضررين')">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="خيام الإيواء">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3.5 text-right opacity-90 group-hover:opacity-100 transition">
+                  <span class="text-[10px] bg-red-600 w-fit px-2 py-0.5 rounded text-white font-bold mb-1">صورة ميدانية</span>
+                  <p class="text-xs font-bold text-white">تجهيز معينات الإيواء بمحلية دنقلا</p>
+                </div>
+              </div>
+
+              <!-- Video 2 -->
+              <div data-type="video" class="gallery-item relative rounded-2xl overflow-hidden group h-52 sm:h-64 cursor-pointer" onclick="openVideoPlayer('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80', 'فيديو توثيقي: وصول قافلة الإسناد لمروي والدبة')">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="قافلة إسناد مروي">
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 flex items-center justify-center transition">
+                  <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-lg shadow-xl group-hover:scale-125 transition">
+                    <i class="fa-solid fa-play translate-x-[-1px]"></i>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 text-right">
+                  <span class="text-[10px] bg-blue-600 px-2 py-0.5 rounded text-white font-bold">فيديو توثيقي (03:15)</span>
+                  <p class="text-xs font-bold text-white mt-1">قافلة إسناد محلية مروي</p>
+                </div>
+              </div>
+
+              <!-- Photo 3 -->
+              <div data-type="photo" class="gallery-item relative rounded-2xl overflow-hidden group h-52 sm:h-64 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80', 'كشف طبي مجاني وتوزيع أدوية للأطفال والمسنين')">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="العيادة الطبية">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3.5 text-right opacity-90 group-hover:opacity-100 transition">
+                  <span class="text-[10px] bg-emerald-600 w-fit px-2 py-0.5 rounded text-white font-bold mb-1">صورة صحية</span>
+                  <p class="text-xs font-bold text-white">العيادة الطبية المتنقلة - القولد</p>
+                </div>
+              </div>
+
+              <!-- Video 4 -->
+              <div data-type="video" class="gallery-item relative rounded-2xl overflow-hidden group h-52 sm:h-64 cursor-pointer" onclick="openVideoPlayer('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80', 'فيديو توثيقي: تدريب متطوعي وادي حلفا ودلقو')">
+                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="تدريب المتطوعين">
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 flex items-center justify-center transition">
+                  <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-lg shadow-xl group-hover:scale-125 transition">
+                    <i class="fa-solid fa-play translate-x-[-1px]"></i>
+                  </div>
+                </div>
+                <div class="absolute bottom-3 right-3 text-right">
+                  <span class="text-[10px] bg-blue-600 px-2 py-0.5 rounded text-white font-bold">فيديو تدريب (02:45)</span>
+                  <p class="text-xs font-bold text-white mt-1">تأهيل متطوعي دلقو ووادي حلفا</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+              <!-- ==================== INTERACTIVE GEOGRAPHIC MAP ==================== -->
+      <section id="map-section" class="py-12 bg-white dark:bg-slate-900 border-t border-b border-slate-200 dark:border-slate-800 text-right">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+                <span class="text-xs font-black text-red-600 dark:text-red-400">نظام تحديد المواقع وغرف الاستجابة الميدانية</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+                خريطة الانتشار الميداني ومراكز الطوارئ بالولاية الشمالية
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                خريطة جغرافية تفاعلية تحدد مواقع غرف الطوارئ ومكاتب جمعية الهلال الأحمر السوداني في المحليات السبع.
+              </p>
+            </div>
+
+            <!-- Full State View Reset Button -->
+            <button onclick="resetMapView()" class="self-start md:self-auto px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-arrows-to-dot text-red-600"></i>
+              <span>عرض كامل الولاية</span>
+            </button>
+          </div>
+
+          <!-- Quick Locality Filter Bar -->
+          <div class="flex flex-wrap items-center gap-2 mb-4 pb-1 overflow-x-auto text-xs">
+            <span class="text-slate-400 font-bold ml-1">الانتقال السريع:</span>
+            <button onclick="focusLocalityMap('دنقلا')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">دنقلا (الرئاسة)</button>
+            <button onclick="focusLocalityMap('مروي')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">مروي</button>
+            <button onclick="focusLocalityMap('الدبة')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">الدبة</button>
+            <button onclick="focusLocalityMap('القولد')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">القولد</button>
+            <button onclick="focusLocalityMap('وادي حلفا')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">وادي حلفا</button>
+            <button onclick="focusLocalityMap('البرقيق')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">البرقيق</button>
+            <button onclick="focusLocalityMap('دلقو')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white transition font-bold text-slate-700 dark:text-slate-300">دلقو</button>
+          </div>
+
+          <!-- Interactive Map Canvas Container -->
+          <div id="srcs-interactive-map" class="w-full h-96 sm:h-[460px] rounded-3xl border border-slate-200 dark:border-slate-800 relative overflow-hidden shadow-inner z-0"></div>
+
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-3">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-600 inline-block"></span> مراكز الطوارئ الميدانية النشطة 24/7</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> فرق الاستجابة والإسعاف الميداني</span>
+            </div>
+            <span>انقر على أي نقطة على الخريطة للاتصال الفوري أو فتح منصة المحلية الخاصة</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== LOCALITIES DIRECTORY & SUB-PLATFORMS ==================== -->
+        <section id="branches-section" class="py-16 bg-slate-100 dark:bg-slate-800/50 text-right">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-12">
+              <span class="text-xs font-bold text-red-600 bg-red-100 dark:bg-red-950 px-3 py-1 rounded-full">الانتشار الميداني ومنصات المحليات</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
+                منصات ومكاتب محليات الولاية الشمالية (المحليات السبع بالولاية)
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">
+                يمكنك الدخول لأي منصة محلية لمتابعة تقاريرها الميدانية الحصرية، التواصل المباشر مع طوارئها، أو إرسال بلاغ خاص بها
+              </p>
+            </div>
+
+            <!-- 7 Separated Locality Cards -->
+            <div id="localities-directory-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ==================== VIEW 2: POST & PUBLICATION PAGE (DYNAMIC) ==================== -->
+      <main id="view-post" class="page-view flex-1 hidden py-8 sm:py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-right">
+          
+          <!-- Back to home -->
+          <div class="mb-4">
+            <button onclick="navigateTo('home')" class="text-xs font-bold text-slate-500 hover:text-red-600 flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-arrow-right"></i> العودة إلى المنصة الرئيسية
+            </button>
+          </div>
+
+          <!-- Follower Callout Box -->
+          <div class="mb-8 p-5 rounded-3xl bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shrink-0">
+                <i class="fa-solid fa-bullhorn"></i>
+              </div>
+              <div>
+                <span class="bg-white/20 text-[10px] font-black px-2 py-0.5 rounded-full">إشعار المتابعة الحية</span>
+                <h4 class="text-base sm:text-lg font-black mt-0.5">
+                  يتابع هذه المنصة الرسمية حالياً <span class="underline decoration-yellow-400 follower-count-display font-extrabold text-xl">14,850</span> متابع
+                </h4>
+              </div>
+            </div>
+            <button onclick="toggleFollow()" class="px-5 py-2.5 rounded-xl bg-white text-red-600 font-black text-xs hover:bg-red-50 transition shadow">
+              متابعة المنصة الآن
+            </button>
+          </div>
+
+          <!-- Dynamic Post Article Container -->
+          <article id="dynamic-post-content" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-700 shadow-sm"></article>
+
+          <!-- Comments Section -->
+          <section class="mt-10 bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex items-center justify-between pb-4 mb-6 border-b">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-comments text-red-600"></i>
+                <span>تعليقات المتابعين</span>
+                <span id="comments-count" class="bg-red-100 text-red-600 text-xs px-2.5 py-0.5 rounded-full font-bold">2</span>
+              </h3>
+              <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-shield-check ml-1"></i> إشراف نشط</span>
+            </div>
+
+            <div id="comment-auth-form" class="mb-8"></div>
+            <div id="comments-feed" class="space-y-4"></div>
+          </section>
+
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 3: DEDICATED LOCALITY PLATFORM VIEW ==================== -->
+      <main id="view-locality" class="page-view flex-1 hidden py-8 sm:py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-right">
+          
+          <!-- Back button -->
+          <div class="mb-6 flex items-center justify-between">
+            <button onclick="navigateTo('home', 'branches-section')" class="text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-red-600 flex items-center gap-2 transition bg-white dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>العودة لكافة محليات الولاية الشمالية</span>
+            </button>
+            <span id="locality-badge-top" class="text-xs font-bold text-red-600 bg-red-100 dark:bg-red-950/60 px-3 py-1 rounded-full"></span>
+          </div>
+
+          <!-- Locality Platform Header Banner -->
+          <div id="locality-platform-header" class="p-6 sm:p-10 rounded-3xl bg-slate-900 text-white border border-slate-800 shadow-xl mb-10 relative overflow-hidden"></div>
+
+          <!-- Locality Specific News & Reports Feed -->
+          <div class="mb-12">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200 dark:border-slate-800">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white" id="locality-feed-title">تقارير وأخبار المحلية</h3>
+                <p class="text-xs text-slate-500 mt-1">تغطيات حية لأنشطة الإغاثة والرعاية الصحية الميدانية داخل حدود المحلية</p>
+              </div>
+            </div>
+            <div id="locality-news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+          </div>
+
+        </div>
+      </main>
+
+      
+      <!-- ==================== VIEW 4: ABOUT SRCS & 7 FUNDAMENTAL PRINCIPLES ==================== -->
+      <main id="view-about" class="page-view flex-1 hidden py-8 sm:py-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-right">
+
+          <!-- Back Button & Breadcrumbs -->
+          <div class="mb-6 flex items-center justify-between">
+            <button onclick="goBack()" class="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-red-600 flex items-center gap-2 transition bg-white dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>العودة خطوة للخلف</span>
+            </button>
+            <div class="flex items-center gap-2 text-xs text-slate-400">
+              <span class="cursor-pointer hover:underline" onclick="navigateTo('home')">الرئيسية</span>
+              <i class="fa-solid fa-angle-left text-[10px]"></i>
+              <span class="text-red-600 font-bold">عن الجمعية والمبادئ السبعة</span>
+            </div>
+          </div>
+
+          <!-- Official Legal Mandate & Verification Banner -->
+          <div class="p-6 rounded-3xl bg-emerald-950/20 border border-emerald-800/40 text-emerald-900 dark:text-emerald-300 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-500 flex items-center justify-center text-xl shrink-0 mt-0.5">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-black text-emerald-700 dark:text-emerald-400">المنصة الرسمية المعتمدة لجمعية الهلال الأحمر السوداني - فرع الولاية الشمالية</h3>
+                <p id="about-legal-notice" class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  جمعية وطنية إنسانية مستقلة، جهة مساعدة ومساندة للسلطات العامة في المجال الإنساني بموجب قانون الجمعية واتفاقيات جنيف الدولية.
+                </p>
+              </div>
+            </div>
+            <span class="self-start sm:self-auto px-3 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-black rounded-full border border-emerald-500/30 whitespace-nowrap">
+              وثيقة معتمدة
+            </span>
+          </div>
+
+          <!-- Branch Profile Overview Card -->
+          <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm mb-8 relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+              <div class="flex-1 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-950 text-red-600 text-xs font-bold">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                  <span>الملف التعريفي والإنساني للفرع</span>
+                </div>
+                <h1 id="about-main-title" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white leading-tight">
+                  جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية
+                </h1>
+                <p id="about-main-desc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+                  تأسس فرع الولاية الشمالية لجمعية الهلال الأحمر السوداني ليكون الذراع الإنساني الأول والرائد في الاستجابة للكوارث والأزمات ودعم المجتمعات الأشد ضعفاً على امتداد محليات الولاية الشمالية السبع (دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو).
+                </p>
+              </div>
+              <div class="w-full lg:w-72 shrink-0">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md">
+              </div>
+            </div>
+          </div>
+
+          <!-- Vision & Mission Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white">الرؤية الإنسانية (Vision)</h3>
+              <p id="about-vision-text" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                مجتمعات محلية آمنة ومتمكنة في الولاية الشمالية، قادرة على الصمود والاستجابة الفورية للكوارث والأوبئة والأزمات الإنسانية بكرامة وحيادية.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-600 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white">الرسالة الإنسانية (Mission)</h3>
+              <p id="about-mission-text" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                تخفيف المعاناة الإنسانية وحماية أرواح وكرامة المتضررين من النزاعات والسيول والكوارث الطبيعية دون تمييز، ونشر مبادئ القانون الدولي الإنساني وتفعيل طاقات الشباب والمتطوعين في كافة ربوع الولاية الشمالية.
+              </p>
+            </div>
+          </div>
+
+          <!-- The 7 Fundamental Principles Section -->
+          <div class="p-8 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm mb-12">
+            <div class="text-center max-w-xl mx-auto mb-8">
+              <span class="text-xs font-bold text-red-600 bg-red-100 dark:bg-red-950 px-3 py-1 rounded-full">دستور الحركة الإنسانية</span>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-2">
+                المبادئ السبعة الأساسية للحركة الدولية للصليب الأحمر والهلال الأحمر
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                تعمل جمعية الهلال الأحمر السوداني في كافة المحليات استناداً إلى هذه المبادئ السبعة الراسخة
+              </p>
+            </div>
+
+            <div id="about-principles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+        </div>
+      </main>
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="bg-slate-900 text-slate-300 pt-10 pb-6 border-t border-slate-800 text-right mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-xs">
+            <div>
+              <h4 class="font-bold text-white text-sm mb-2">جمعية الهلال الأحمر السوداني</h4>
+              <p class="text-slate-400 leading-relaxed">فرع الولاية الشمالية - دنقلا. منصة إعلامية وإنسانية شاملة تغطي محليات: دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو.</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-sm mb-2">منصات المحليات السبع</h4>
+              <div class="grid grid-cols-2 gap-1.5 text-slate-400">
+                <button onclick="openLocalityPlatform('دنقلا')" class="text-right hover:text-red-400">منصة دنقلا</button>
+                <button onclick="openLocalityPlatform('مروي')" class="text-right hover:text-red-400">منصة مروي</button>
+                <button onclick="openLocalityPlatform('الدبة')" class="text-right hover:text-red-400">منصة الدبة</button>
+                <button onclick="openLocalityPlatform('القولد')" class="text-right hover:text-red-400">منصة القولد</button>
+                <button onclick="openLocalityPlatform('وادي حلفا')" class="text-right hover:text-red-400">منصة وادي حلفا</button>
+                <button onclick="openLocalityPlatform('البرقيق')" class="text-right hover:text-red-400">منصة البرقيق</button>
+                <button onclick="openLocalityPlatform('دلقو')" class="text-right hover:text-red-400">منصة دلقو</button>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-sm mb-2">المتابعة المباشرة</h4>
+              <p class="text-slate-400">يتابعنا أكثر من <strong class="text-white follower-count-display">14,850</strong> متابع مسجل عبر حسابات Google.</p>
+              <button onclick="toggleFollow()" class="mt-2.5 px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-xs">متابعة المنصة</button>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+            <span>© 2026 جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية. جميع الحقوق محفوظة.</span>
+            <span class="text-[11px] text-slate-600">بوابة الإنسانية والسلام • الولاية الشمالية</span>
+          </div>
+
+          <!-- ==================== حقوق الملكية الفكرية وبراءة التصميم المعتمدة ==================== -->
+          <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs bg-slate-950/80 p-5 rounded-2xl border border-red-500/30 shadow-xl shadow-black/40">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-red-600/40 shrink-0 border border-red-500/40">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div class="text-right">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <span class="font-bold text-slate-300 text-xs">تصميم وتطوير وبرمجة وهندسة:</span>
+                  <span class="text-red-400 font-black text-sm tracking-wide">المهندس Yousif Mohammed Ali</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-red-950/90 border border-red-700 text-[10px] text-red-300 font-bold flex items-center gap-1 shadow-sm">
+                    <i class="fa-solid fa-certificate text-red-400"></i>
+                    <span>براءة التصميم والملكية الفكرية محفوظة</span>
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-400 leading-relaxed">
+                  جميع حقوق التصميم والواجهات البرمجية وتطوير المنصة والأنظمة التفاعلية التابعة لفرع الولاية الشمالية محفوظة ومسجلة قانونياً باسم المالك والمطور: <strong class="text-white font-bold">Yousif Mohammed Ali © 2026</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+              <a href="mailto:yousifmohammedali295@gmail.com" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-red-600/30" title="مراسلة المالك والمطور المعتمد">
+                <i class="fa-solid fa-envelope text-white text-sm"></i>
+                <span class="font-mono text-xs font-bold">yousifmohammedali295@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- 1. Suggestions & Complaints Modal -->
+  <div id="suggestion-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-6 text-right relative shadow-2xl">
+      <button onclick="closeModals()" class="absolute top-4 left-4 text-slate-400 hover:text-black dark:hover:text-white text-lg">&times;</button>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full mb-2">
+        <i class="fa-solid fa-lock ml-1"></i> صندوق سري للمشرفين فقط
+      </span>
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white">إرسال مقترح أو شكوى ميدانية</h3>
+      <p class="text-xs text-slate-500 mb-4">هذه الرسالة تظهر للمشرفين والمسؤولين فقط بصورة مشفرة ومحمية ولا تظهر في الموقع العام إطلاقاً.</p>
+
+      <form onsubmit="handleSuggestionSubmit(event)" class="space-y-3">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-bold mb-1">نوع المراسلة *</label>
+            <select id="sug-type" class="w-full p-2.5 text-xs rounded-xl border dark:bg-slate-700 dark:border-slate-600">
+              <option value="اقتراح">اقتراح تطويري</option>
+              <option value="شكوى / بلاغ">شكوى أو بلاغ إنساني</option>
+              <option value="استفسار">استفسار ميداني</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">المحلية المعنية *</label>
+            <select id="sug-branch" class="w-full p-2.5 text-xs rounded-xl border dark:bg-slate-700 dark:border-slate-600 font-bold">
+              <option value="دنقلا">محلية دنقلا</option>
+              <option value="مروي">محلية مروي</option>
+              <option value="الدبة">محلية الدبة</option>
+              <option value="القولد">محلية القولد</option>
+              <option value="وادي حلفا">محلية وادي حلفا</option>
+              <option value="البرقيق">محلية البرقيق</option>
+              <option value="دلقو">محلية دلقو</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1">الموضوع *</label>
+          <input type="text" id="sug-subject" required placeholder="عنوان المقترح أو الشكوى..." class="w-full p-2.5 text-xs rounded-xl border dark:bg-slate-700 dark:border-slate-600">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1">التفاصيل *</label>
+          <textarea id="sug-content" required rows="3" placeholder="اكتب التفاصيل هنا بوضوح وسرية..." class="w-full p-2.5 text-xs rounded-xl border dark:bg-slate-700 dark:border-slate-600"></textarea>
+        </div>
+
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700/60 text-xs">
+          <span>إرسال بدون كشف هويتي (مجهول)</span>
+          <input type="checkbox" id="sug-anon" class="w-4 h-4 text-red-600 rounded">
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl transition shadow">
+          إرسال البلاغ / المقترح للمشرفين بأمان
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Google Login Modal -->
+  <div id="google-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-sm w-full p-6 text-center relative shadow-2xl">
+      <button onclick="closeModals()" class="absolute top-4 left-4 text-slate-400 hover:text-black dark:hover:text-white text-lg">&times;</button>
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xl">
+        <i class="fa-brands fa-google"></i>
+      </div>
+      <h3 class="text-base font-bold mb-1">تسجيل الدخول والتفاعل</h3>
+      <p class="text-xs text-slate-500 mb-5">سجل دخولك بحساب Google للمتابعة، التعليق، والمشاركة بأمان.</p>
+      <button onclick="loginGoogle()" class="w-full py-3 border-2 border-slate-200 dark:border-slate-700 hover:border-red-500 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold transition">
+        <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>المتابعة عبر حساب Google</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Lightbox Photo Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md" onclick="closeLightbox()">
+    <button class="absolute top-6 left-6 text-white text-3xl hover:text-red-500" onclick="closeLightbox()">&times;</button>
+    <div class="max-w-4xl max-h-[85vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" class="max-w-full max-h-[75vh] rounded-2xl object-contain shadow-2xl border border-white/20" alt="صورة مكبرة">
+      <p id="lightbox-caption" class="text-white text-sm font-semibold mt-4 text-center max-w-xl"></p>
+    </div>
+  </div>
+
+  <!-- 4. Video Player Modal -->
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md" onclick="closeVideoPlayer()">
+    <div class="max-w-3xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl relative" onclick="event.stopPropagation()">
+      <button class="absolute top-4 left-4 text-white text-2xl hover:text-red-500 z-10" onclick="closeVideoPlayer()">&times;</button>
+      <div class="aspect-video bg-black flex flex-col items-center justify-center text-white p-8 text-center relative">
+        <img id="video-poster-img" src="" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="ملصق الفيديو">
+        <div class="relative z-10 flex flex-col items-center">
+          <i class="fa-solid fa-circle-play text-red-600 text-6xl mb-4 animate-pulse"></i>
+          <h3 id="video-title" class="text-lg font-bold mb-2">مشغل الفيديو التوثيقي - الهلال الأحمر بالولاية الشمالية</h3>
+          <p class="text-xs text-slate-300 max-w-md">جاري تشغيل البث الموثق للأعمال الميدانية لفرع الولاية الشمالية.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Social Share Popup Modal -->
+  <div id="share-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 text-right relative shadow-2xl">
+      <button onclick="closeModals()" class="absolute top-4 left-4 text-slate-400 hover:text-black dark:hover:text-white">&times;</button>
+      <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">مشاركة المنشور الإنساني</h3>
+      <p id="share-modal-title" class="text-xs text-slate-500 mb-4 line-clamp-1"></p>
+      
+      <div class="grid grid-cols-2 gap-2 text-xs font-bold text-white mb-4">
+        <a id="share-wa" href="#" target="_blank" class="p-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-base"></i> واتساب</a>
+        <a id="share-fb" href="#" target="_blank" class="p-3 rounded-xl bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2"><i class="fa-brands fa-facebook-f text-base"></i> فيسبوك</a>
+        <a id="share-tw" href="#" target="_blank" class="p-3 rounded-xl bg-black hover:bg-slate-800 flex items-center justify-center gap-2"><i class="fa-brands fa-x-twitter text-base"></i> تويتر</a>
+        <a id="share-tg" href="#" target="_blank" class="p-3 rounded-xl bg-sky-500 hover:bg-sky-600 flex items-center justify-center gap-2"><i class="fa-brands fa-telegram text-base"></i> تيليجرام</a>
+      </div>
+
+      <button onclick="copyCurrentLink()" class="w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-link"></i> نسخ رابط المنشور
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT STATE & LOCALITY ENGINE ==================== -->
+  <script>
+    const STORAGE = {
+      POSTS: 'srcs_state_posts',
+      FOLLOWERS: 'srcs_state_followers',
+      IS_FOLLOWING: 'srcs_state_following',
+      USER: 'srcs_state_user',
+      SUGGESTIONS: 'srcs_state_suggestions',
+      COMMENTS: 'srcs_state_comments',
+      THEME: 'srcs_state_theme'
+    };
+
+    // 7 Localities Master Metadata
+    function getLocalitiesData() {
+      const saved = localStorage.getItem('srcs_localities_data');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            return parsed;
+          }
+        } catch(e) {}
+      }
+      return DEFAULT_LOCALITIES_DATA;
+    }
+    const DEFAULT_LOCALITIES_DATA = {
+      "دنقلا": {
+        name: "محلية دنقلا",
+        tagline: "رئاسة الفرع وحاضرة الولاية الشمالية",
+        address: "حي المطار - جوار مبنى التأمين الصحي الرئيسي",
+        volunteers: 320,
+        phone: "02481-22450",
+        phoneRaw: "0248122450",
+        wa: "249912345678",
+        desc: "تضم رئاسة فرع الولاية الشمالية وغرفة العمليات والطوارئ المركزية، وتنسق التدخلات لكافة محليات الولاية.",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
+      },
+      "مروي": {
+        name: "محلية مروي",
+        tagline: "قطاع السدود والفيضانات ومستشفى مروي",
+        address: "مدينة كريمة - جوار الميدان الشرقي ومكتب الإسعاف",
+        volunteers: 260,
+        phone: "02481-44120",
+        phoneRaw: "0248144120",
+        wa: "249912345678",
+        desc: "نقطة استجابة حيوية لطوارئ الفيضانات والسيول والتدخلات الطبية والإيوائية بمناطق السدود وضفتي النيل.",
+        image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=80"
+      },
+      "الدبة": {
+        name: "محلية الدبة",
+        tagline: "شريان الإغاثة الإنسانية ومركز العبور",
+        address: "وسط المدينة - بالقرب من المستشفى الريفي",
+        volunteers: 210,
+        phone: "02481-33190",
+        phoneRaw: "0248133190",
+        wa: "249912345678",
+        desc: "مركز حيوي لاستقبال وإغاثة الوافدين وتوزيع السلال الغذائية وتسيير القوافل المشتركة.",
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80"
+      },
+      "القولد": {
+        name: "محلية القولد",
+        tagline: "الاستجابة الصحية والعيادات المتنقلة",
+        address: "الشارع الرئيسي - جوار الوحدة الصحية الميدانية",
+        volunteers: 180,
+        phone: "02481-22890",
+        phoneRaw: "0248122890",
+        wa: "249912345678",
+        desc: "تغطية صحية متقدمة وتطهير مصادر مياه الشرب والعيادات المتنقلة لقرى وجزر القولد.",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
+      },
+      "وادي حلفا": {
+        name: "محلية وادي حلفا",
+        tagline: "بوابة السودان الشمالية والمعابر الحدودية",
+        address: "منطقة المعبر الحدودي ووسط المدينة",
+        volunteers: 190,
+        phone: "02481-55210",
+        phoneRaw: "0248155210",
+        wa: "249912345678",
+        desc: "استقبال العالقين والمسافرين، تقديم الرعاية الطبية والإسعافية بمعبري أرقين وإشكيت الحدودي وميناء الشهيد الزبير.",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1000&q=80"
+      },
+      "البرقيق": {
+        name: "محلية البرقيق",
+        tagline: "حضارة كرمة ودعم المجتمعات الزراعية",
+        address: "كرمة النزل والبرقيق - جوار المستشفى الريفي",
+        volunteers: 140,
+        phone: "02481-77140",
+        phoneRaw: "0248177140",
+        wa: "249912345678",
+        desc: "مركز استجابة متكامل يغطي مناطق كرمة والبرقيق، وتدريب فرق الإسعاف الأولي ودعم المراكز الصحية الريفية.",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1000&q=80"
+      },
+      "دلقو": {
+        name: "محلية دلقو",
+        tagline: "دلقو المحس ومناطق التعدين وطوارئ النيل",
+        address: "دلقو المحس - جوار المركز الصحي وسوق دلقو",
+        volunteers: 120,
+        phone: "02481-88210",
+        phoneRaw: "0248188210",
+        wa: "249912345678",
+        desc: "مركز استجابة متكامل يعنى بالتدخلات الصحية وطوارئ السيول بمحلية دلقو، وتطهير مياه الشرب وتوزيع الناموسيات.",
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80"
+      }
+    };
+    let LOCALITIES_DATA = getLocalitiesData();
+
+    // Seed Posts
+    const SEED_POSTS = [
+      {
+        id: 1,
+        title: "استجابة طوارئ السيول وتوزيع المعينات الإيوائية والصحية لـ 2,400 أسرة بمحلية مروي والدبة",
+        branch: "مروي",
+        category: "relief",
+        categoryLabel: "إغاثة وطوارئ",
+        date: "25 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        video: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        summary: "تسيير قافلة المعينات الشتوية والإيوائية ومواد تعقيم المياه ومشاركة العيادات المتنقلة لدعم متضرري السيول بمحلية مروي والدبة.",
+        content: `في إطار الاستجابة المستمرة للكوارث الطبيعية ودعم الأسر المتأثرة بالسيول الأخيرة والوافدين في مناطق شمال السودان، سيّر فرع جمعية الهلال الأحمر السوداني بالولاية الشمالية قافلة مساعدات إنسانية متكاملة استهدفت القرى والتجمعات السكنية الأكثر تضرراً بمحليتي مروي والدبة.
+
+أهم معطيات الاستجابة الميدانية:
+• توزيع 1,200 خيمة إيواء و4,800 مشمع وبطانية شتوية للأسر المتضررة.
+• توزيع 200,000 قرص كلور لتعقيم مصادر المياه المنزلية والآبار.
+• تشغيل عيادتين متنقلتين وفحص 1,840 مريضاً ومريضة.
+• مرابطة غرف الطوارئ في كافة المحليات السبع لتلقي نداءات الإغاثة.`,
+        views: 2380,
+        likes: 142,
+        status: "منشور"
+      },
+      {
+        id: 2,
+        title: "تنفيذ أيام علاجية مجانية وتوزيع أدوية للأمراض المزمنة بمراكز إيواء الوافدين بدنقلا",
+        branch: "دنقلا",
+        category: "health",
+        categoryLabel: "رعاية صحية",
+        date: "24 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+        video: "",
+        summary: "استفاد أكثر من 1,800 مريض من الكشوفات الطبية والفحوصات والأدوية الأساسية المنقذة للحياة بمحلية دنقلا.",
+        content: `نفذت الإدارة الطبية لجمعية الهلال الأحمر السوداني بفرع الولاية الشمالية أياماً علاجية مجانية شملت مراكز الإيواء والمجتمعات المضيفة بمدينة دنقلا.
+
+تم خلالها توفير الفحوصات المعملية، أدوية الأمراض المزمنة (الضغط والسكري)، وتقديم الإرشادات الصحية ومحاضرات الوقاية من الأمراض المنقولة بالمياه.`,
+        views: 980,
+        likes: 89,
+        status: "منشور"
+      },
+      {
+        id: 3,
+        title: "تخريج 60 متطوعاً جديداً في دورات الإسعاف الأولي المتقدم والاستجابة السريعة بمحلية البرقيق",
+        branch: "البرقيق",
+        category: "youth",
+        categoryLabel: "متطوعون وتدريب",
+        date: "22 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
+        video: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
+        summary: "تأهيل وتدريب فرق الاستجابة المجتمعية السريعة للتعامل مع حوادث الطوارئ والإسعافات الميدانية بمحلية البرقيق.",
+        content: `احتفلت إدارة الشباب والمتطوعين بتخريج دفعة جديدة من متطوعي ومتطوعات الهلال الأحمر السوداني بمحلية البرقيق بعد اجتيازهم دورة الإسعاف الأولي المتقدم والإنعاش القلبي الرئوي والإخلاء في أوقات الكوارث في كرمة النزل.`,
+        views: 1240,
+        likes: 215,
+        status: "منشور"
+      },
+      {
+        id: 4,
+        title: "حملة إصحاح بيئي وتطهير مصادر المياه وتوزيع الناموسيات المشبعة بمحلية دلقو المحس",
+        branch: "دلقو",
+        category: "health",
+        categoryLabel: "رعاية صحية",
+        date: "21 أكتوبر 2026",
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+        video: "",
+        summary: "فرق طوارئ الهلال الأحمر تنفذ حملة وقائية كبرى في دلقو لمكافحة نواقل الأمراض وتأمين مياه الشرب النقية.",
+        content: `استجابة للبلاغات الميدانية من محلية دلقو، نظمت جمعية الهلال الأحمر السوداني حملة إصحاح بيئي شاملة ورش ضبابي لمكافحة توالد البعوض، مع توزيع 1,500 ناموسية مشبعة بالأدوية للأسر والأطفال وكبار السن، وتطهير محطات المياه والآبار في منطقة دلقو المحس.`,
+        views: 890,
+        likes: 110,
+        status: "منشور"
+      }
+    ];
+
+    // Data Accessors
+    function getPosts() {
+      try {
+        const stored = localStorage.getItem(STORAGE.POSTS);
+        if (stored) return JSON.parse(stored);
+      } catch(e) {}
+      localStorage.setItem(STORAGE.POSTS, JSON.stringify(SEED_POSTS));
+      return SEED_POSTS;
+    }
+    function getFollowers() { return parseInt(localStorage.getItem(STORAGE.FOLLOWERS) || 14850); }
+    function getUser() {
+      try { return JSON.parse(localStorage.getItem(STORAGE.USER)) || { isLoggedIn: false, name: "زائر" }; }
+      catch(e) { return { isLoggedIn: false, name: "زائر" }; }
+    }
+    function getComments() {
+      try { return JSON.parse(localStorage.getItem(STORAGE.COMMENTS)) || [
+        { id: 1, postId: 1, author: "د. مجاهد الفاتح", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80", text: "بوركت جهود متطوعي فرع الولاية الشمالية، استجابة سريعة وميدانية ملموسة في مروي.", likes: 14 },
+        { id: 2, postId: 1, author: "إشراقة عثمان كرمة", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80", text: "فخورة بجهود فريق الإسعاف الأولي وتوزيع السلال الغذائية للأسر الوافدة إلى دنقلا والبرقيق.", likes: 8 }
+      ]; } catch(e) { return []; }
+    }
+
+    // --- Navigation Engine ---
+    let currentViewingPostId = 1;
+    let currentViewingLocality = null;
+
+    
+    // ==================== BRANCH PROFILE & 7 PRINCIPLES ENGINE ====================
+    const DEFAULT_PROFILE = {
+      aboutTitle: "جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية",
+      aboutDesc: "جمعية الهلال الأحمر السوداني هي جمعية وطنية إنسانية مستقلة، تأسست وفق مرسوم وقانون رسمي صادر من الدولة السودانية، وتعمل كجهة مساعدة ومساندة للسلطات العامة في المجال الإنساني استناداً إلى اتفاقيات جنيف الدولية. يبسط فرع الولاية الشمالية ومقره مدينة دنقلا نشاطه الإنساني والتطوعي ليشمل كافة المحليات السبع على امتداد النيل والصحراء لخدمة الأسر المتضررة والوافدة وتعزيز الصمود المجتمعي.",
+      vision: "مجتمعات محلية آمنة ومتمكنة في الولاية الشمالية، قادرة على الصمود والاستجابة الفورية للكوارث والأوبئة والأزمات الإنسانية بكرامة وحيادية.",
+      mission: "تخفيف المعاناة الإنسانية وحماية أرواح وكرامة المتضررين من النزاعات والسيول والكوارث الطبيعية دون تمييز، ونشر مبادئ القانون الدولي الإنساني وتفعيل طاقات الشباب والمتطوعين في كافة ربوع الولاية الشمالية.",
+      legalNotice: "المنصة الرقمية الرسمية المعتمدة لفرع الولاية الشمالية - الجمعية عضو في الحركة الدولية للصليب الأحمر والهلال الأحمر ومعترف بها من اللجنة الدولية للصليب الأحمر (ICRC) والاتحاد الدولي (IFRC).",
+      principles: [
+        { name: "الإنسانية", icon: "fa-solid fa-heart", desc: "الرغبة في تقديم العون للمصابين وتخفيف المعاناة وحماية الحياة والصحة وضمان الاحترام للإنسان في كل الظروف." },
+        { name: "عدم التحيز", icon: "fa-solid fa-scale-balanced", desc: "تقديم المساعدة دون أي تمييز قائم على الجنسية أو العرق أو الدين أو الانتماء السياسي، وتوجيه الإغاثة للأكثر احتياجاً." },
+        { name: "الحياد", icon: "fa-solid fa-hand-holding-hand", desc: "الامتناع عن الاشتراك في الأعمال العدائية أو الجدالات ذات الطابع السياسي أو العسكري لكسب ثقة الجميع." },
+        { name: "الاستقلال", icon: "fa-solid fa-shield-halved", desc: "الحفاظ على استقلالية الجمعية الذاتية للعمل طبقاً لمبادئ الحركة الإنسانية حتى وهي تؤدي دورها المساعد للدولة." },
+        { name: "الخدمة التطوعية", icon: "fa-solid fa-users", desc: "حركة تطوعية لا تبغي الربح ولا تحركها الرغبة في تحقيق أي مكاسب مادية." },
+        { name: "الوحدة", icon: "fa-solid fa-handshake", desc: "لا يمكن أن توجد إلا جمعية هلال أحمر سوداني واحدة في السودان، مفتوحة للجميع وتبسط نشاطها الإنساني على كامل القطر." },
+        { name: "العالمية", icon: "fa-solid fa-globe", desc: "حركة دولية تتمتع فيها جميع الجمعيات بحقوق متساوية وتلتزم بواجب مساعدة بعضها البعض." }
+      ]
+    };
+
+    function getBranchProfile() {
+      const stored = localStorage.getItem('srcs_branch_profile');
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) { console.error(e); }
+      }
+      return DEFAULT_PROFILE;
+    }
+
+    function renderBranchProfile() {
+      const profile = getBranchProfile();
+      const titleEl = document.getElementById('about-main-title');
+      const descEl = document.getElementById('about-main-desc');
+      const visionEl = document.getElementById('about-vision-text');
+      const missionEl = document.getElementById('about-mission-text');
+      const noticeEl = document.getElementById('about-legal-notice');
+      const container = document.getElementById('about-principles-container');
+
+      if (titleEl) titleEl.textContent = profile.aboutTitle;
+      if (descEl) descEl.textContent = profile.aboutDesc;
+      if (visionEl) visionEl.textContent = profile.vision;
+      if (missionEl) missionEl.textContent = profile.mission;
+      if (noticeEl) noticeEl.textContent = profile.legalNotice;
+
+      if (container && profile.principles) {
+        container.innerHTML = profile.principles.map((pr, idx) => `
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 hover:border-red-500/40 transition">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-red-600/10 text-red-600 flex items-center justify-center text-sm font-bold">
+                <i class="${pr.icon || 'fa-solid fa-heart'}"></i>
+              </span>
+              <div>
+                <span class="text-[10px] text-slate-400 font-bold">المبدأ ${idx + 1}</span>
+                <h4 class="text-sm font-black text-slate-900 dark:text-white">${pr.name}</h4>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed text-justify">${pr.desc}</p>
+          </div>
+        `).join('');
+      }
+    }
+
+    // ==================== INTERACTIVE LEAFLET MAP ENGINE ====================
+    let mapInstance = null;
+    let mapMarkers = {};
+
+    function initNorthernStateMap() {
+      if (typeof L === 'undefined') {
+        console.warn('Leaflet library is loading...');
+        return;
+      }
+      const mapEl = document.getElementById('srcs-interactive-map');
+      if (!mapEl || mapInstance) return;
+
+      try {
+        mapInstance = L.map('srcs-interactive-map', {
+          scrollWheelZoom: false
+        }).setView([19.2, 30.8], 6.5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap | SRCS Northern State',
+          maxZoom: 18
+        }).addTo(mapInstance);
+
+        const redCrescentIcon = L.divIcon({
+          className: 'custom-srcs-pin',
+          html: `<div style="background-color: white; border: 2.5px solid #d91b24; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(217, 27, 36, 0.4);"><img src="images/srcs-crescent.png" style="width: 20px; height: 24px; object-fit: contain;" alt="مركز طوارئ"></div>`,
+          iconSize: [34, 34],
+          iconAnchor: [17, 17],
+          popupAnchor: [0, -18]
+        });
+
+        const locations = [
+          { key: "دنقلا", name: "محلية دنقلا (رئاسة الفرع)", coords: [19.175, 30.473], address: "حي المطار - جوار مبنى التأمين الصحي الرئيسي", phone: "02481-22450" },
+          { key: "مروي", name: "محلية مروي", coords: [18.483, 31.817], address: "مدينة كريمة - جوار الميدان الشرقي ومكتب الإسعاف", phone: "02481-44120" },
+          { key: "الدبة", name: "محلية الدبة", coords: [18.050, 30.950], address: "وسط المدينة - بالقرب من المستشفى الريفي", phone: "02481-33190" },
+          { key: "القولد", name: "محلية القولد", coords: [18.433, 30.700], address: "الشارع الرئيسي - جوار الوحدة الصحية الميدانية", phone: "02481-22890" },
+          { key: "وادي حلفا", name: "محلية وادي حلفا", coords: [21.800, 31.350], address: "منطقة المعبر الحدودي ووسط المدينة", phone: "02481-55210" },
+          { key: "البرقيق", name: "محلية البرقيق", coords: [19.333, 30.483], address: "كرمة النزل والبرقيق - جوار المستشفى الريفي", phone: "02481-77140" },
+          { key: "دلقو", name: "محلية دلقو", coords: [20.100, 30.567], address: "دلقو المحس - جوار المركز الصحي وسوق دلقو", phone: "02481-88210" }
+        ];
+
+        locations.forEach(loc => {
+          const marker = L.marker(loc.coords, { icon: redCrescentIcon }).addTo(mapInstance);
+          const popupContent = `
+            <div style="direction: rtl; text-align: right; font-family: 'Cairo', sans-serif; font-size: 12px; min-width: 200px; padding: 4px;">
+              <h4 style="font-weight: 800; font-size: 13px; margin: 0 0 4px; color: #d91b24;">${loc.name}</h4>
+              <p style="margin: 0 0 8px; color: #475569; font-size: 11px;">${loc.address}</p>
+              <div style="display: flex; gap: 6px; margin-top: 6px;">
+                <a href="tel:${loc.phone}" style="display: inline-block; padding: 4px 8px; background: #d91b24; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 11px;">طوارئ: ${loc.phone}</a>
+                <button onclick="openLocalityPlatform('${loc.key}')" style="padding: 4px 8px; background: #0f172a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px;">فتح المنصة</button>
+              </div>
+            </div>
+          `;
+          marker.bindPopup(popupContent);
+          mapMarkers[loc.key] = marker;
+        });
+
+        // Invalidate map size after small delay for correct rendering
+        setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 300);
+      } catch (err) {
+        console.error("Map initialization error:", err);
+      }
+    }
+
+    function focusLocalityMap(locKey) {
+      if (!mapInstance) initNorthernStateMap();
+      if (!mapInstance || !mapMarkers[locKey]) return;
+      const marker = mapMarkers[locKey];
+      mapInstance.setView(marker.getLatLng(), 11, { animate: true });
+      marker.openPopup();
+      const mapSection = document.getElementById('map-section');
+      if (mapSection) mapSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetMapView() {
+      if (!mapInstance) return;
+      mapInstance.setView([19.2, 30.8], 6.5, { animate: true });
+    }
+
+    // ==================== BACK NAVIGATION ====================
+    function goBack() {
+      if (window.history.length > 1 && window.location.search) {
+        window.history.back();
+      } else {
+        navigateTo('home');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function navigateTo(viewId, targetSectionId = null) {
+      document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('.sidebar-nav-item').forEach(b => {
+        b.classList.remove('active', 'bg-red-600', 'text-white', 'shadow-md');
+        b.classList.add('text-slate-600', 'dark:text-slate-300');
+      });
+
+      const activeView = document.getElementById(`view-${viewId}`);
+      if (activeView) activeView.classList.remove('hidden');
+      if (viewId === 'about') renderBranchProfile();
+      if (targetSectionId === 'map-section') setTimeout(initNorthernStateMap, 200);
+
+      let btnId = `nav-btn-${viewId}`;
+      if (targetSectionId === 'gallery-section') btnId = 'nav-btn-gallery';
+      if (targetSectionId === 'branches-section') btnId = 'nav-btn-branches';
+      
+      const activeBtn = document.getElementById(btnId);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-red-600', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+      }
+
+      if (targetSectionId) {
+        setTimeout(() => {
+          const el = document.getElementById(targetSectionId);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      closeMobileSidebar();
+    }
+
+    // --- Open Locality Dedicated Platform ---
+    function openLocalityPlatform(locKey, pushToHistory = true) {
+      const loc = LOCALITIES_DATA[locKey];
+      if (!loc) return;
+
+      currentViewingLocality = locKey;
+      navigateTo('locality');
+      if (pushToHistory) {
+        history.pushState({ view: 'locality', locality: locKey }, '', `?locality=${encodeURIComponent(locKey)}`);
+      }
+
+      document.getElementById('locality-badge-top').textContent = `منصة ${loc.name} الرسمية`;
+
+      // Render Header
+      const headerEl = document.getElementById('locality-platform-header');
+      headerEl.innerHTML = `
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-8 space-y-3">
+            <span class="inline-block px-3 py-1 rounded-full bg-red-600 text-white font-bold text-xs shadow">منصة محلية معتمدة</span>
+            <h2 class="text-2xl sm:text-4xl font-black">${loc.name}</h2>
+            <p class="text-sm text-red-200 font-semibold">${loc.tagline}</p>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${loc.desc}</p>
+            <p class="text-xs text-slate-400"><i class="fa-solid fa-map-pin ml-1 text-red-400"></i> المقر الميداني: ${loc.address}</p>
+            
+            <div class="flex flex-wrap items-center gap-3 pt-3">
+              <a href="tel:${loc.phoneRaw}" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs flex items-center gap-2 shadow transition">
+                <i class="fa-solid fa-phone"></i>
+                <span>طوارئ ${locKey}: ${loc.phone}</span>
+              </a>
+              <a href="https://wa.me/${loc.wa}?text=طوارئ+الهلال+الأحمر+-+منصة+${encodeURIComponent(locKey)}" target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-2 shadow transition">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>واتساب طوارئ ${locKey}</span>
+              </a>
+              <button onclick="openSuggestionModal('${locKey}')" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center gap-1.5 shadow transition">
+                <i class="fa-solid fa-lock text-xs"></i>
+                <span>إرسال بلاغ خاص بالمحلية</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 grid grid-cols-2 gap-3 text-center">
+            <div class="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <i class="fa-solid fa-users text-red-500 text-lg mb-1"></i>
+              <p class="text-2xl font-black text-white">${loc.volunteers}</p>
+              <p class="text-[10px] text-slate-400">متطوع مسجل</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+              <i class="fa-solid fa-heart-pulse text-emerald-500 text-lg mb-1"></i>
+              <p class="text-2xl font-black text-white">100%</p>
+              <p class="text-[10px] text-slate-400">جاهزية الإسعاف</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render Locality News
+      document.getElementById('locality-feed-title').textContent = `تقارير وأخبار ${loc.name}`;
+      const allPosts = getPosts();
+      const locPosts = allPosts.filter(p => p.status === 'منشور' && (p.branch.includes(locKey) || p.branch.includes('كافة المحليات')));
+      const gridEl = document.getElementById('locality-news-grid');
+
+      if (locPosts.length === 0) {
+        gridEl.innerHTML = `
+          <div class="col-span-full p-8 rounded-2xl bg-white dark:bg-slate-800 border text-center text-slate-500 text-xs">
+            <i class="fa-solid fa-newspaper text-3xl mb-2 text-slate-400 block"></i>
+            لا توجد تقارير منشورة حالياً لمحلية ${locKey}. يمكنك متابعة أخبار المنصة الرئيسية أو نشر تقرير جديد من لوحة المشرفين.
+          </div>
+        `;
+      } else {
+        gridEl.innerHTML = locPosts.map(p => `
+          <article class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition flex flex-col group">
+            <div class="relative overflow-hidden h-48">
+              <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${p.title}">
+              <span class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">${p.categoryLabel || 'تقرير'}</span>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
+                <span class="flex items-center gap-1"><img src="images/srcs-crescent.png" style="width: 12px; height: 14px; object-fit: contain;" alt="الهلال الأحمر"> <span>${p.branch}</span></span>
+                <span>${p.date}</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-2 leading-snug cursor-pointer hover:text-red-600 transition" onclick="openPostView(${p.id})">${p.title}</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mb-4">${p.summary}</p>
+              <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs">
+                <span class="text-slate-400"><i class="fa-regular fa-eye ml-1"></i> ${p.views || 0}</span>
+                <button onclick="openPostView(${p.id})" class="text-xs font-bold text-red-600 hover:text-red-700">قراءة التقرير ←</button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+      }
+    }
+
+    // --- Dynamic Posts Renderer (Home & Posts Feed) ---
+    function renderDynamicPosts() {
+      const posts = getPosts().filter(p => p.status === 'منشور');
+      const grid = document.getElementById('news-grid-container');
+      const heroContainer = document.getElementById('hero-featured-post-container');
+
+      if (!grid) return;
+
+      // 1. Featured Post in Hero
+      if (heroContainer && posts.length > 0) {
+        const topPost = posts[0];
+        heroContainer.innerHTML = `
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 group">
+            <img src="${topPost.image}" alt="${topPost.title}" class="w-full h-96 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 text-white text-right">
+              <span class="inline-flex items-center gap-1.5 bg-red-600 text-white text-[11px] font-bold px-3 py-1 rounded-full w-fit mb-2 shadow">
+                <img src="images/srcs-crescent.png" style="width: 14px; height: 16px; object-fit: contain;" alt="الهلال الأحمر">
+                <span>تقرير ميداني مميز • ${topPost.branch}</span>
+              </span>
+              <h3 class="text-base sm:text-lg font-bold mb-1 leading-snug">${topPost.title}</h3>
+              <div class="flex items-center justify-between pt-2">
+                <button onclick="openVideoPlayer('${topPost.image}', '${topPost.title}')" class="text-xs text-white bg-red-600/90 hover:bg-red-600 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-play text-xs"></i> مشاهدة التوثيق
+                </button>
+                <button onclick="openPostView(${topPost.id})" class="text-xs text-red-400 hover:text-white font-bold flex items-center gap-1">
+                  قراءة التقرير بالكامل ←
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2. Main News Grid Cards
+      grid.innerHTML = posts.map(p => `
+        <article data-category="${p.category}" class="news-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition flex flex-col group text-right">
+          <div class="relative overflow-hidden h-52">
+            <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${p.title}">
+            <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow flex items-center gap-1.5"><img src="images/srcs-crescent.png" style="width: 13px; height: 15px; object-fit: contain;" alt="الهلال الأحمر"> ${p.categoryLabel || 'إغاثة وطوارئ'}</span>
+            <span class="absolute top-4 left-4 bg-white/95 dark:bg-slate-900/95 text-slate-700 dark:text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 flex items-center gap-1"><img src="images/srcs-crescent.png" style="width: 11px; height: 13px; object-fit: contain;"> الشمالية</span>
+            <button onclick="openLightbox('${p.image}', '${p.title}')" class="absolute bottom-3 left-3 bg-black/60 hover:bg-black text-white p-2 rounded-xl text-xs backdrop-blur-sm" title="تكبير الصورة">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+              <span class="flex items-center gap-1"><img src="images/srcs-crescent.png" style="width: 12px; height: 14px; object-fit: contain;" alt="الهلال الأحمر"> <span>${p.branch}</span></span>
+              <span>${p.date}</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug cursor-pointer hover:text-red-600 transition" onclick="openPostView(${p.id})">
+              ${p.title}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mb-4 leading-relaxed">
+              ${p.summary}
+            </p>
+            
+            <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-slate-500">
+              <div class="flex items-center gap-3">
+                <button onclick="togglePostLike(${p.id})" id="like-btn-${p.id}" class="flex items-center gap-1 hover:text-red-600 font-bold transition">
+                  <i class="fa-regular fa-heart"></i> <span id="like-count-${p.id}">${p.likes || 0}</span>
+                </button>
+                <button onclick="openShareModal('${p.title}')" class="hover:text-blue-500 transition" title="مشاركة">
+                  <i class="fa-solid fa-share-nodes"></i>
+                </button>
+              </div>
+              <button onclick="openPostView(${p.id})" class="text-xs font-bold text-red-600 hover:text-red-700">تفاصيل التقرير ←</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // --- Render 7 Localities Directory Cards ---
+    function renderLocalitiesDirectory() {
+      const container = document.getElementById('localities-directory-grid');
+      if (!container) return;
+
+      const keys = Object.keys(LOCALITIES_DATA);
+      container.innerHTML = keys.map(k => {
+        const loc = LOCALITIES_DATA[k];
+        const isHQ = k === 'دنقلا';
+        return `
+          <div class="locality-card bg-white dark:bg-slate-800 p-6 rounded-3xl ${isHQ ? 'border-2 border-red-500 shadow-md' : 'border border-slate-200 dark:border-slate-700 shadow-sm'} flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-1.5">
+                  <img src="images/srcs-crescent.png" style="width: 14px; height: 16px; object-fit: contain;" alt="الهلال الأحمر">
+                  <span class="text-[10px] ${isHQ ? 'bg-red-100 text-red-700' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'} px-2.5 py-0.5 rounded-full font-bold">
+                    ${isHQ ? 'رئاسة الفرع' : 'فرع محلية'}
+                  </span>
+                </div>
+                <span class="text-xs text-slate-400"><i class="fa-solid fa-users ml-1"></i> ${loc.volunteers} متطوعاً</span>
+              </div>
+              <h4 class="text-base font-extrabold text-slate-900 dark:text-white">${loc.name}</h4>
+              <p class="text-xs text-slate-500 mt-1 mb-4 line-clamp-2">${loc.address}</p>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-700">
+              
+              <!-- Direct Sub-platform Button -->
+              <button onclick="openLocalityPlatform('${k}')" class="w-full py-2.5 px-3 rounded-xl bg-red-50 dark:bg-red-950/40 hover:bg-red-100 text-red-600 dark:text-red-400 text-xs font-bold flex items-center justify-center gap-2 border border-red-200 dark:border-red-900/50 transition">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>دخول منصة ${loc.name}</span>
+              </button>
+
+              <a href="tel:${loc.phoneRaw}" class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-800 dark:text-white text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-phone text-red-600"></i>
+                <span>طوارئ: ${loc.phone}</span>
+              </a>
+
+              <a href="https://wa.me/${loc.wa}?text=طوارئ+الهلال+الأحمر+-+${encodeURIComponent(loc.name)}" target="_blank" class="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>واتساب طوارئ ${k}</span>
+              </a>
+
+              <button onclick="openSuggestionModal('${k}')" class="w-full py-2 px-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 text-amber-700 dark:text-amber-400 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                <i class="fa-solid fa-shield-halved text-xs"></i>
+                <span>إرسال بلاغ لمشرف ${k}</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Dynamic Post View Page ---
+    function openPostView(postId, pushToHistory = true) {
+      const posts = getPosts();
+      const p = posts.find(x => x.id === postId) || posts[0];
+      if (!p) return;
+
+      currentViewingPostId = p.id;
+      navigateTo('post');
+      if (pushToHistory) {
+        history.pushState({ view: 'post', postId: p.id }, '', `?post=${encodeURIComponent(p.id)}`);
+      }
+
+      const container = document.getElementById('dynamic-post-content');
+      container.innerHTML = `
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="inline-flex items-center gap-1.5 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm"><img src="images/srcs-crescent.png" style="width: 14px; height: 16px; object-fit: contain;"> <span>${p.categoryLabel || 'تقرير ميداني'}</span></span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-xs px-3 py-1 rounded-full font-bold">${p.branch}</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white leading-tight mb-4">
+          ${p.title}
+        </h1>
+
+        <div class="flex items-center justify-between text-xs text-slate-400 pb-4 mb-6 border-b">
+          <span>فريق الإعلام والتواصل الإنساني • فرع الولاية الشمالية • ${p.date}</span>
+          <div class="flex items-center gap-3">
+            <span class="font-bold"><i class="fa-regular fa-eye ml-1"></i> ${p.views || 0} مشاهدة</span>
+            <button onclick="togglePostLike(${p.id})" class="text-red-500 font-bold flex items-center gap-1">
+              <i class="fa-solid fa-heart"></i> <span id="post-view-likes">${p.likes || 0}</span>
+            </button>
+          </div>
+        </div>
+
+        <img src="${p.image}" class="w-full h-[380px] object-cover rounded-3xl mb-6 shadow cursor-pointer" onclick="openLightbox('${p.image}', '${p.title}')" alt="${p.title}">
+
+        <div class="space-y-4 text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <p class="whitespace-pre-line">${p.content || p.summary}</p>
+        </div>
+
+        <!-- Social Media Share Section -->
+        <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-share-nodes text-red-600"></i> مشاركة هذا التقرير عبر وسائل التواصل:
+          </span>
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(p.title + ' | الهلال الأحمر السوداني - الولاية الشمالية')}" target="_blank" class="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold flex items-center gap-1">
+              <i class="fa-brands fa-whatsapp"></i> واتساب
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1">
+              <i class="fa-brands fa-facebook-f"></i> فيسبوك
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(p.title)}" target="_blank" class="px-3 py-1.5 rounded-xl bg-black hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1">
+              <i class="fa-brands fa-x-twitter"></i> تويتر
+            </a>
+            <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(p.title)}" target="_blank" class="px-3 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold flex items-center gap-1">
+              <i class="fa-brands fa-telegram"></i> تيليجرام
+            </a>
+            <button onclick="copyCurrentLink()" class="px-3 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-xs font-bold flex items-center gap-1">
+              <i class="fa-solid fa-link"></i> نسخ الرابط
+            </button>
+          </div>
+        </div>
+      `;
+
+      renderComments();
+    }
+
+    // --- Post Likes ---
+    function togglePostLike(postId) {
+      let posts = getPosts();
+      const p = posts.find(x => x.id === postId);
+      if (p) {
+        p.likes = (p.likes || 0) + 1;
+        localStorage.setItem(STORAGE.POSTS, JSON.stringify(posts));
+        
+        const countEl = document.getElementById(`like-count-${postId}`);
+        if (countEl) countEl.textContent = p.likes;
+        
+        const viewLikesEl = document.getElementById('post-view-likes');
+        if (viewLikesEl && currentViewingPostId === postId) viewLikesEl.textContent = p.likes;
+
+        const btn = document.getElementById(`like-btn-${postId}`);
+        if (btn) btn.classList.add('text-red-600');
+      }
+    }
+
+    // --- Submenu Toggle for Localities in Sidebar ---
+    function toggleLocalitySubmenu() {
+      const sub = document.getElementById('locality-submenu');
+      const arrow = document.getElementById('locality-submenu-arrow');
+      sub.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    }
+
+    // --- Follower System ---
+    function toggleFollow() {
+      const user = getUser();
+      if (!user.isLoggedIn) {
+        openGoogleModal();
+        return;
+      }
+      let count = getFollowers();
+      let isFollowing = localStorage.getItem(STORAGE.IS_FOLLOWING) === 'true';
+
+      if (isFollowing) {
+        count = Math.max(0, count - 1);
+        localStorage.setItem(STORAGE.IS_FOLLOWING, 'false');
+        alert("تم إلغاء المتابعة.");
+      } else {
+        count += 1;
+        localStorage.setItem(STORAGE.IS_FOLLOWING, 'true');
+        alert("شكراً لمتابعتك لجمعية الهلال الأحمر السوداني - فرع الولاية الشمالية ❤️");
+      }
+
+      localStorage.setItem(STORAGE.FOLLOWERS, count);
+      updateFollowerDisplays();
+    }
+
+    function updateFollowerDisplays() {
+      const count = getFollowers();
+      const isFollowing = localStorage.getItem(STORAGE.IS_FOLLOWING) === 'true';
+
+      document.querySelectorAll('.follower-count-display').forEach(el => {
+        el.textContent = count.toLocaleString('ar-EG');
+      });
+
+      const btn = document.getElementById('sidebar-follow-btn');
+      if (btn) {
+        if (isFollowing) {
+          btn.innerHTML = `<i class="fa-solid fa-check ml-1.5 text-emerald-300"></i> <span>مُتابع</span>`;
+          btn.classList.replace('bg-red-600', 'bg-emerald-600');
+        } else {
+          btn.innerHTML = `<i class="fa-solid fa-bell ml-1.5"></i> <span>متابعة المنصة</span>`;
+          btn.classList.replace('bg-emerald-600', 'bg-red-600');
+        }
+      }
+    }
+
+    // --- Google Auth Simulation ---
+    function loginGoogle() {
+      const profile = {
+        isLoggedIn: true,
+        name: "محمد عبد الله دنقلاوي",
+        email: "m.abdallah@gmail.com",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+      };
+      localStorage.setItem(STORAGE.USER, JSON.stringify(profile));
+      closeModals();
+      updateAuthSlot();
+      if (!document.getElementById('view-post').classList.contains('hidden')) renderComments();
+      alert(`مرحباً بك يا ${profile.name}! تم تسجيل دخولك بنجاح عبر حساب Google.`);
+    }
+
+    function logout() {
+      localStorage.setItem(STORAGE.USER, JSON.stringify({ isLoggedIn: false, name: "زائر" }));
+      localStorage.setItem(STORAGE.IS_FOLLOWING, 'false');
+      updateAuthSlot();
+      updateFollowerDisplays();
+      if (!document.getElementById('view-post').classList.contains('hidden')) renderComments();
+    }
+
+    function updateAuthSlot() {
+      const user = getUser();
+      const slot = document.getElementById('user-auth-slot');
+      if (!slot) return;
+
+      if (user.isLoggedIn) {
+        slot.innerHTML = `
+          <div class="flex items-center justify-between p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
+            <div class="flex items-center gap-2">
+              <img src="${user.avatar}" class="w-7 h-7 rounded-full border border-red-500 object-cover" alt="${user.name}">
+              <div class="text-right">
+                <p class="font-bold text-slate-800 dark:text-white text-[11px]">${user.name}</p>
+                <p class="text-[9px] text-emerald-600 font-semibold">حساب Google موثق</p>
+              </div>
+            </div>
+            <button onclick="logout()" class="text-red-500 hover:text-red-700 text-xs p-1" title="تسجيل الخروج"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+          </div>
+        `;
+      } else {
+        slot.innerHTML = `
+          <button onclick="openGoogleModal()" class="w-full py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-red-500 text-xs font-bold text-slate-700 dark:text-slate-200 transition flex items-center justify-center gap-2 bg-slate-50 dark:bg-slate-900">
+            <i class="fa-brands fa-google text-red-500"></i>
+            <span>دخول Google للمتابعة والتعليق</span>
+          </button>
+        `;
+      }
+    }
+
+    // --- Search Engine ---
+    function handleGlobalSearch(query) {
+      const q = query.trim().toLowerCase();
+      const newsCards = document.querySelectorAll('.news-card');
+      newsCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(q)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      const localityCards = document.querySelectorAll('.locality-card');
+      localityCards.forEach(loc => {
+        const text = loc.textContent.toLowerCase();
+        if (text.includes(q)) {
+          loc.classList.remove('hidden');
+        } else {
+          loc.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- Category Filter ---
+    
+    // ==================== DYNAMIC CATEGORIES ENGINE ====================
+    const DEFAULT_CATEGORIES = [
+      { id: "relief", label: "إغاثة وطوارئ" },
+      { id: "health", label: "رعاية صحية وطبية" },
+      { id: "youth", label: "متطوعون وتدريب" },
+      { id: "wash", label: "مياه وإصحاح بيئي" },
+      { id: "protection", label: "حماية ودعم نفسي" },
+      { id: "rfl", label: "إعادة الروابط العائلية" },
+      { id: "food", label: "أمن غذائي وسبل عيش" },
+      { id: "logistics", label: "إسناد لوجستي وعمليات" }
+    ];
+
+    function getCategories() {
+      const stored = localStorage.getItem('srcs_state_categories');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch (e) { console.error(e); }
+      }
+      return DEFAULT_CATEGORIES;
+    }
+
+    function renderNewsCategoryFilters() {
+      const bar = document.getElementById('news-categories-filter-bar');
+      if (!bar) return;
+      const cats = getCategories();
+      bar.innerHTML = `
+        <button onclick="filterNewsCategory('all')" id="cat-btn-all" class="news-cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white shadow-sm transition">الكل</button>
+        ${cats.map(c => `
+          <button onclick="filterNewsCategory('${c.id}')" id="cat-btn-${c.id}" class="news-cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-red-500/50 transition">
+            ${c.label}
+          </button>
+        `).join('')}
+      `;
+    }
+
+    function filterNewsCategory(cat) {
+      document.querySelectorAll('.news-cat-btn').forEach(b => {
+        b.classList.remove('bg-red-600', 'text-white');
+        b.classList.add('bg-white', 'text-slate-700');
+      });
+      const activeBtn = document.getElementById(`cat-btn-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-red-600', 'text-white');
+        activeBtn.classList.remove('bg-white', 'text-slate-700');
+      }
+
+      const cards = document.querySelectorAll('.news-card');
+      cards.forEach(c => {
+        if (cat === 'all' || c.getAttribute('data-category') === cat) {
+          c.classList.remove('hidden');
+        } else {
+          c.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- Gallery Filter ---
+    function filterGallery(type) {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(it => {
+        if (type === 'all' || it.getAttribute('data-type') === type) {
+          it.classList.remove('hidden');
+        } else {
+          it.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- Lightbox & Video Player ---
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      const m = document.getElementById('lightbox-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.getElementById('lightbox-modal').classList.remove('flex');
+    }
+
+    function openVideoPlayer(posterSrc, title) {
+      document.getElementById('video-poster-img').src = posterSrc;
+      document.getElementById('video-title').textContent = title;
+      const m = document.getElementById('video-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeVideoPlayer() {
+      document.getElementById('video-modal').classList.add('hidden');
+      document.getElementById('video-modal').classList.remove('flex');
+    }
+
+    // --- Share Modal ---
+    function openShareModal(title) {
+      document.getElementById('share-modal-title').textContent = title;
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(title + " | الهلال الأحمر السوداني - الولاية الشمالية");
+
+      document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+      document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      document.getElementById('share-tw').href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+      document.getElementById('share-tg').href = `https://t.me/share/url?url=${url}&text=${text}`;
+
+      const m = document.getElementById('share-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    // --- Comments Engine ---
+    function renderComments() {
+      const user = getUser();
+      const authForm = document.getElementById('comment-auth-form');
+      const feed = document.getElementById('comments-feed');
+      const allComments = getComments();
+      const comments = allComments.filter(c => c.postId === currentViewingPostId || !c.postId);
+
+      document.getElementById('comments-count').textContent = comments.length;
+
+      if (user.isLoggedIn) {
+        authForm.innerHTML = `
+          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-700/40 border dark:border-slate-600">
+            <p class="text-xs font-bold text-slate-800 dark:text-white mb-2">التعليق باسم: ${user.name} (حساب Google موثق)</p>
+            <textarea id="comm-input" rows="2" placeholder="اكتب تعليقك باحترام ومسؤولية إنسانية..." class="w-full p-2.5 rounded-xl border text-xs dark:bg-slate-800 dark:border-slate-600 outline-none"></textarea>
+            <button onclick="submitComment()" class="mt-2 px-4 py-2 bg-red-600 text-white font-bold text-xs rounded-xl hover:bg-red-700 shadow">إرسال التعليق</button>
+          </div>
+        `;
+      } else {
+        authForm.innerHTML = `
+          <div class="p-5 rounded-2xl bg-red-50 dark:bg-slate-700/40 border border-red-200 dark:border-slate-700 text-center">
+            <p class="text-xs font-bold text-slate-800 dark:text-white mb-2">هل تود المشاركة والتعليق على هذا التقرير؟</p>
+            <button onclick="openGoogleModal()" class="px-5 py-2 rounded-xl bg-red-600 text-white font-bold text-xs hover:bg-red-700 transition shadow">
+              تسجيل الدخول بـ Google للتعليق
+            </button>
+          </div>
+        `;
+      }
+
+      feed.innerHTML = comments.map(c => `
+        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border dark:border-slate-700 flex items-start justify-between gap-3 text-right">
+          <div class="flex items-start gap-3">
+            <img src="${c.avatar}" class="w-8 h-8 rounded-full object-cover" alt="${c.author}">
+            <div>
+              <p class="text-xs font-bold text-slate-900 dark:text-white">${c.author} <span class="text-[10px] text-emerald-600 font-semibold">✓ متابع موثق</span></p>
+              <p class="text-xs text-slate-700 dark:text-slate-300 mt-1">${c.text}</p>
+            </div>
+          </div>
+          <button onclick="likeComment(${c.id})" class="text-xs text-slate-400 hover:text-red-600 flex items-center gap-1 font-bold">
+            <i class="fa-regular fa-heart"></i> <span>${c.likes || 0}</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function submitComment() {
+      const input = document.getElementById('comm-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const user = getUser();
+      let comments = getComments();
+      comments.unshift({
+        id: Date.now(),
+        postId: currentViewingPostId,
+        author: user.name,
+        avatar: user.avatar,
+        text: val,
+        likes: 0
+      });
+      localStorage.setItem(STORAGE.COMMENTS, JSON.stringify(comments));
+      input.value = '';
+      renderComments();
+      alert("تم نشر تعليقك بنجاح!");
+    }
+
+    function likeComment(id) {
+      let comments = getComments();
+      const target = comments.find(c => c.id === id);
+      if (target) {
+        target.likes = (target.likes || 0) + 1;
+        localStorage.setItem(STORAGE.COMMENTS, JSON.stringify(comments));
+        renderComments();
+      }
+    }
+
+    // --- Suggestions & Complaints Modal ---
+    function openSuggestionModal(preselectedBranch = null) {
+      const m = document.getElementById('suggestion-modal');
+      if (preselectedBranch) {
+        const sel = document.getElementById('sug-branch');
+        if (sel) sel.value = preselectedBranch;
+      }
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    async function handleSuggestionSubmit(e) {
+      e.preventDefault();
+      const type = document.getElementById('sug-type').value;
+      const branch = document.getElementById('sug-branch').value;
+      const subject = document.getElementById('sug-subject').value;
+      const content = document.getElementById('sug-content').value;
+      const isAnon = document.getElementById('sug-anon').checked;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال والأرشفة...';
+      }
+
+      try {
+        const payload = {
+          type,
+          branch,
+          subject,
+          content,
+          isAnon,
+          sender_name: isAnon ? 'فاعل خير (مجهول)' : 'مواطن'
+        };
+
+        const res = await fetch('/api/suggestions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        closeModals();
+        if (data.success) {
+          alert(`✅ تم إرسال بلاغك وحفظه بنجاح في قاعدة البيانات المركزية لفرع الولاية الشمالية.\n\nرقم المتابعة الخاص بك هو: [ ${data.trackingNumber} ]\n\nيرجى الاحتفاظ بهذا الرقم لمتابعة حالة بلاغك وإفادة إدارة الفرع عبر صفحة "متابعة البلاغات".`);
+        } else {
+          alert(data.message || 'حدث خطأ أثناء إرسال البلاغ.');
+        }
+      } catch(err) {
+        closeModals();
+        alert('تم تسجيل بلاغك وسينقل فور عودة الاتصال بالخادم المركزي.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>إرسال البلاغ بأمان</span>';
+        }
+      }
+    }
+
+    // --- Sidebar & Modals Controls ---
+    function toggleMobileSidebar() {
+      const sb = document.getElementById('main-sidebar');
+      const bd = document.getElementById('mobile-backdrop');
+      const isOpen = !sb.classList.contains('translate-x-full');
+      if (isOpen) {
+        closeMobileSidebar();
+      } else {
+        sb.classList.remove('translate-x-full');
+        bd.classList.remove('hidden');
+      }
+    }
+
+    function closeMobileSidebar() {
+      const sb = document.getElementById('main-sidebar');
+      const bd = document.getElementById('mobile-backdrop');
+      if (sb) sb.classList.add('translate-x-full');
+      if (bd) bd.classList.add('hidden');
+    }
+
+    function toggleNotificationDropdown() {
+      const dd = document.getElementById('notif-dropdown');
+      dd.classList.toggle('hidden');
+    }
+
+    function openGoogleModal() {
+      document.getElementById('google-modal').classList.remove('hidden');
+      document.getElementById('google-modal').classList.add('flex');
+    }
+
+    function closeModals() {
+      document.querySelectorAll('#suggestion-modal, #google-modal, #share-modal').forEach(m => {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      });
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem(STORAGE.THEME, isDark ? 'dark' : 'light');
+      document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("تم نسخ رابط المنصة إلى الحافظة بنجاح!");
+    }
+
+    
+    // ==================== DYNAMIC SITE CMS & SETTINGS ====================
+    const DEFAULT_SITE_SETTINGS = {
+      branchPhone: "02481-22450",
+      branchPhoneRaw: "0248122450",
+      branchEmail: "info@srcs-northern.org",
+      statLocalities: "المحليات السبع بالولاية",
+      statBeneficiaries: "14,850",
+      statEmergencyCoverage: "100%",
+      statVolunteers: "1,280+",
+      statFoodKits: "35,400+",
+      statWaterChlorine: "400,000+",
+      lockdownMode: false,
+      lockdownMessage: "وضع الاستجابة الطارئة القصوى مفعل حالياً بفرع الولاية الشمالية. خط الطوارئ الميداني: 02481-22450"
+    };
+
+    function getSiteSettings() {
+      const saved = localStorage.getItem('srcs_site_settings');
+      if (saved) {
+        try { return { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(saved) }; } catch(e) {}
+      }
+      return DEFAULT_SITE_SETTINGS;
+    }
+
+    const DEFAULT_TICKERS = [
+      "🔴 فرع الولاية الشمالية يسيّر قوافل الإسناد الطبي والإيوائي لمحليات: دنقلا، مروي، الدبة، القولد، وادي حلفا، البرقيق، ودلقو",
+      "⚡ تدشين منصات المتابعة الرقمية لمحليات الولاية الشمالية السبع لتسهيل تتبع التدخلات الإنسانية الميدانية",
+      "💧 توزيع أكثر من 400 ألف قرص تعقيم مياه وكلور لدرء آثار السيول والفيضانات بالولاية"
+    ];
+
+    function getTickerItems() {
+      const saved = localStorage.getItem('srcs_ticker_items');
+      if (saved) {
+        try {
+          const arr = JSON.parse(saved);
+          if (Array.isArray(arr) && arr.length > 0) return arr;
+        } catch(e) {}
+      }
+      return DEFAULT_TICKERS;
+    }
+
+    function renderDynamicTicker() {
+      const container = document.querySelector('.ticker-content');
+      if (!container) return;
+      const items = getTickerItems();
+      container.innerHTML = items.map(it => `<span>${it}</span>`).join('');
+    }
+
+    function applySiteSettings() {
+      const settings = getSiteSettings();
+      
+      // Emergency Lockdown Banner
+      const lockdownBanner = document.getElementById('emergency-lockdown-banner');
+      const lockdownText = document.getElementById('emergency-lockdown-text');
+      if (lockdownBanner && settings.lockdownMode) {
+        lockdownBanner.classList.remove('hidden');
+        if (lockdownText && settings.lockdownMessage) {
+          lockdownText.textContent = settings.lockdownMessage;
+        }
+      } else if (lockdownBanner) {
+        lockdownBanner.classList.add('hidden');
+      }
+
+      // Update Hero Statistics
+      const elLocalities = document.getElementById('hero-stat-localities');
+      if (elLocalities && settings.statLocalities) elLocalities.textContent = settings.statLocalities;
+      
+      const elBeneficiaries = document.getElementById('hero-stat-beneficiaries');
+      if (elBeneficiaries && settings.statBeneficiaries) elBeneficiaries.textContent = settings.statBeneficiaries;
+      
+      const elCoverage = document.getElementById('hero-stat-coverage');
+      if (elCoverage && settings.statEmergencyCoverage) elCoverage.textContent = settings.statEmergencyCoverage;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applySiteSettings();
+      renderDynamicTicker();
+      LOCALITIES_DATA = getLocalitiesData();
+      if (localStorage.getItem(STORAGE.THEME) === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+      }
+      updateFollowerDisplays();
+      updateAuthSlot();
+      renderDynamicPosts();
+      renderNewsCategoryFilters();
+      renderLocalitiesDirectory();
+
+      // Real-time synchronization across browser tabs
+      window.addEventListener('storage', (e) => {
+        if (e.key === STORAGE.POSTS) renderDynamicPosts();
+      renderNewsCategoryFilters();
+        if (e.key === STORAGE.FOLLOWERS) updateFollowerDisplays();
+        if (e.key === STORAGE.THEME) {
+          if (e.newValue === 'dark') {
+            document.documentElement.classList.add('dark');
+            const icon = document.getElementById('theme-icon');
+            if (icon) icon.className = 'fa-solid fa-sun';
+          } else {
+            document.documentElement.classList.remove('dark');
+            const icon = document.getElementById('theme-icon');
+            if (icon) icon.className = 'fa-solid fa-moon';
+          }
+        }
+      });
+
+      // Browser history & phone back button handling
+      window.addEventListener('popstate', (e) => {
+        const state = e.state;
+        if (state && state.view === 'locality') {
+          openLocalityPlatform(state.locality, false);
+        } else if (state && state.view === 'post') {
+          openPostView(state.postId, false);
+        } else {
+          navigateTo('home');
+        }
+      });
+
+      // Deep link support via URL parameters
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postParam = urlParams.get('post');
+        const locParam = urlParams.get('locality');
+        if (postParam) {
+          openPostView(Number(postParam) || postParam);
+        } else if (locParam) {
+          const locMap = {
+            'dongola': 'دنقلا',
+            'merowe': 'مروي',
+            'dabbah': 'الدبة',
+            'gould': 'القولد',
+            'halfa': 'وادي حلفا',
+            'burgaig': 'البرقيق',
+            'dalgo': 'دلقو'
+          };
+          const targetLoc = LOCALITIES_DATA[locParam] ? locParam : locMap[locParam.toLowerCase()];
+          if (targetLoc) openLocalityPlatform(targetLoc);
+        }
+      } catch (e) {
+        console.error('Deep link error:', e);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "جمعية الهلال الأحمر السوداني - فرع الولاية الشمالية",
+  "short_name": "الهلال الأحمر الشمالية",
+  "description": "المنصة الإنسانية والإعلامية الرسمية لجمعية الهلال الأحمر السوداني - فرع الولاية الشمالية (7 محليات)",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#d91b24",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "images/srcs-crescent.png",
+      "sizes": "474x474 192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
